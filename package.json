@@ -1,0 +1,43 @@
+{
+  "name": "overbrook-website",
+  "version": "1.0.0",
+  "description": "A website for a residential home building company. Featuring the Goggle Maps API to show houses on a google map interface.",
+  "main": "client-server.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node server.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/heyduckd/overbrook-website.git"
+  },
+  "keywords": [
+    "Angular",
+    "MEAN",
+    "MongoDB",
+    "Express",
+    "Javascript"
+  ],
+  "author": "David Heyduck <heyduckd@gmail.com> (http://davidheyduck.com)",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/heyduckd/overbrook-website/issues"
+  },
+  "homepage": "https://github.com/heyduckd/overbrook-website#readme",
+  "dependencies": {
+    "angular": "^1.5.5",
+    "angular-route": "^1.5.5",
+    "body-parser": "^1.15.1",
+    "css-loader": "^0.23.1",
+    "express": "^4.13.4",
+    "mongoose": "^4.4.16",
+    "style-loader": "^0.13.1"
+  },
+  "devDependencies": {
+    "del": "^2.2.0",
+    "gulp": "^3.9.1",
+    "gulp-rename": "^1.2.2",
+    "gulp-sass": "^2.3.1",
+    "gulp-webpack": "^1.5.0"
+  }
+}
