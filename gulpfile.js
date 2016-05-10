@@ -8,19 +8,19 @@ let sass = require('gulp-sass');
 //PATHS
 let jsPaths = ['*.js', 'app/**/*.js'];
 let viewPaths = ['app/**/*.html'];
-let sylePaths = ['app/style/*.scss'];
+let stylePaths = ['app/style/*.scss'];
 let mediaPaths = ['app/img/*'];
 //OUTPUT LOCATION
 let output = __dirname + '/public/';
 
 gulp.task('del-public', () => {
-  return gel.sync([
+  return del.sync([
     output + '*'
   ])
 });
 
 gulp.task('copy-html', () => {
-  gulp.src(htmlPaths)
+  gulp.src(viewPaths)
     .pipe(rename({dirname: ''}))
     .pipe(gulp.dest(output));
 });
@@ -50,7 +50,7 @@ gulp.task('sass', function() {
 gulp.task('watch', () =>{
   gulp.watch(stylePaths, ['sass']);
   gulp.watch(jsPaths, ['webpack']);
-  gulp.watch(viewsPaths, ['copy-html']);
+  gulp.watch(viewPaths, ['copy-html']);
   gulp.watch(mediaPaths, ['copy-media']);
 });
 
