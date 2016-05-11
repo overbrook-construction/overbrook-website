@@ -76,6 +76,30 @@
     letter-spacing: 2px;
     font-family: serif; }
 
+.contactImg {
+  background: url("../media/2434-016.jpg") no-repeat center center;
+  -webkit-background-size: cover;
+  -moz-background-size: cover;
+  -o-background-size: cover;
+  background-size: cover;
+  height: 750px;
+  margin-top: -16px; }
+
+.contactText {
+  width: 50%;
+  height: 630px;
+  margin-top: -16px;
+  background-color: black;
+  opacity: .8; }
+  .contactText div p {
+    color: white;
+    padding-left: 80px;
+    padding-top: 30px;
+    padding-bottom: 0px;
+    color: white;
+    letter-spacing: 2px;
+    font-family: serif; }
+
 .footer {
   text-align: center; }
 

@@ -54,10 +54,10 @@
 	__webpack_require__(5);
 	// require('./components/map/map-controller.js');
 	// require('./components/gallery/galler-controller.js');
-	// require('./components/contact/contact-controller.js');
-	__webpack_require__(6)
-	__webpack_require__(7);
-	__webpack_require__(10);
+	__webpack_require__(6);
+	__webpack_require__(7)
+	__webpack_require__(8);
+	__webpack_require__(11);
 
 
 /***/ },
@@ -30989,6 +30989,18 @@
 
 	'use strict';
 
+	angular.module('ContactModule', [])
+	  .controller('contactController', function() {
+	    
+	  })
+
+
+/***/ },
+/* 7 */
+/***/ function(module, exports) {
+
+	'use strict';
+
 	angular.module('FooterModule', [])
 	  .controller('FooterController', function() {
 
@@ -31002,12 +31014,12 @@
 
 
 /***/ },
-/* 7 */
+/* 8 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
 
-	angular.module('RouteModule', [__webpack_require__(8)])
+	angular.module('RouteModule', [__webpack_require__(9)])
 	  .config(['$routeProvider', function(route) {
 	    route
 	      .when('/home', {
@@ -31034,15 +31046,15 @@
 
 
 /***/ },
-/* 8 */
+/* 9 */
 /***/ function(module, exports, __webpack_require__) {
 
-	__webpack_require__(9);
+	__webpack_require__(10);
 	module.exports = 'ngRoute';
 
 
 /***/ },
-/* 9 */
+/* 10 */
 /***/ function(module, exports) {
 
 	/**
@@ -32073,7 +32085,7 @@
 
 
 /***/ },
-/* 10 */
+/* 11 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -32082,7 +32094,7 @@
 
 	(function() {
 	  //INSERT MODULE NAMES IN ARRAY
-	  angular.module('App', ['RouteModule', 'NavModule', 'HomeModule', 'FooterModule', 'AboutModule'])
+	  angular.module('App', ['RouteModule', 'NavModule', 'HomeModule', 'FooterModule', 'AboutModule', 'ContactModule'])
 	})();
 
 
