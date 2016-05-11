@@ -1,10 +1,10 @@
+//NAVIGATION
 .NavSecton {
   background-color: none;
   border: dotted;
 }
 
 .navDiv {
-  // border: dotted;
   background-color: white;
   opacity: .8;
   display: flex;
@@ -17,7 +17,6 @@
 }
 
 .logoDiv {
-  // border: dotted;
   background-color: white;
   opacity: .8;
   display: flex;
@@ -27,25 +26,19 @@
   height: 60px;
   align-items: center;
   vertical-align: center;
+  margin-top: 16px;
   p {
     font-family: serif;
     font-size: 45px;
     padding-top: 20px;
     padding-bottom: -5px;
+    color: #414042;
   }
 }
 
-// HOME PAGE
-// .homePage {
-//   // background-color: red;
-//   width: 100%;
-//   height: 100%;
-//   // color: red;
-// }
-
 .navItem {
   text-decoration: none;
-  color: black;
+  color: #414042;
   letter-spacing: 2px;
   padding: 0px 40px 0px 40px;
   font-family: serif;
@@ -53,23 +46,56 @@
 
 .homeTab {
   text-decoration: none;
-  color: black;
+  color: #414042;
   letter-spacing: 2px;
   padding: 0px 40px 0px 0px;
   font-family: serif;
 }
 
+//HOME BACKGROUND IMAGE
 .homeImg {
-  // background-image: url('../media/630-001.jpg');
   background: url('../media/630-001.jpg') no-repeat center center;
   -webkit-background-size: cover;
   -moz-background-size: cover;
   -o-background-size: cover;
   background-size: cover;
-  height: 900px;
+  height: 750px;
   margin-top: -16px;
-  // width: 100%;
-  // repeat: none;
+}
 
+//ABOUT
+.aboutImg {
+  background: url('../media/8102-004.jpg') no-repeat center center;
+  -webkit-background-size: cover;
+  -moz-background-size: cover;
+  -o-background-size: cover;
+  background-size: cover;
+  height: 750px;
+  margin-top: -16px;
+}
 
+.aboutText {
+  width: 50%;
+  height: 630px;
+  margin-top: -16px;
+  // margin-bottom: -16px;
+  background-color: black;
+  opacity: .8;
+  p {
+    color: white;
+    padding: 20px;
+    color: white;
+    letter-spacing: 2px;
+    font-family: serif;
+  }
+}
+
+//FOOTER
+.footer {
+  // position: fixed;
+  text-align: center;
+}
+
+.footerText:before {
+  content: "\00a9"
 }

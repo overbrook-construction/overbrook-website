@@ -51,13 +51,13 @@
 	// require('./components/header/header-controller.js');
 	__webpack_require__(3);
 	__webpack_require__(4);
-	// require('./components/about/about-controller.js');
+	__webpack_require__(5);
 	// require('./components/map/map-controller.js');
 	// require('./components/gallery/galler-controller.js');
 	// require('./components/contact/contact-controller.js');
-	// require('./components/footer/footer-controller.js')
-	__webpack_require__(5);
-	__webpack_require__(8);
+	__webpack_require__(6)
+	__webpack_require__(7);
+	__webpack_require__(10);
 
 
 /***/ },
@@ -30969,29 +30969,45 @@
 	  .controller('HomeController', function() {
 
 	  })
-	  // .directive('backImg', function() {
-	  //   return function(scope, element, attrs) {
-	  //     var url = attrs.backImg;
-	  //     element.css({
-	  //       'background-image': 'url(' + url + ')',
-	  //       'background-size': 'cover'
-	  //     });
-	  //   };
-	  //   // return {
-	  //   //   restrict: 'E',
-	  //   //   template: '<h1>ALL DAY</h1>'
-	  //   //
-	  //   // }
-	  // })
 
 
 /***/ },
 /* 5 */
+/***/ function(module, exports) {
+
+	'use strict';
+
+	angular.module('AboutModule', [])
+	  .controller('aboutController', function() {
+	    
+	  })
+
+
+/***/ },
+/* 6 */
+/***/ function(module, exports) {
+
+	'use strict';
+
+	angular.module('FooterModule', [])
+	  .controller('FooterController', function() {
+
+	  })
+	  .directive('footerDirective', function() {
+	    return{
+	      restrict: 'E',
+	      templateUrl: './footer-view.html'
+	    }
+	  });
+
+
+/***/ },
+/* 7 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
 
-	angular.module('RouteModule', [__webpack_require__(6)])
+	angular.module('RouteModule', [__webpack_require__(8)])
 	  .config(['$routeProvider', function(route) {
 	    route
 	      .when('/home', {
@@ -31018,15 +31034,15 @@
 
 
 /***/ },
-/* 6 */
+/* 8 */
 /***/ function(module, exports, __webpack_require__) {
 
-	__webpack_require__(7);
+	__webpack_require__(9);
 	module.exports = 'ngRoute';
 
 
 /***/ },
-/* 7 */
+/* 9 */
 /***/ function(module, exports) {
 
 	/**
@@ -32057,7 +32073,7 @@
 
 
 /***/ },
-/* 8 */
+/* 10 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -32066,7 +32082,7 @@
 
 	(function() {
 	  //INSERT MODULE NAMES IN ARRAY
-	  angular.module('App', ['RouteModule', 'NavModule', 'HomeModule'])
+	  angular.module('App', ['RouteModule', 'NavModule', 'HomeModule', 'FooterModule', 'AboutModule'])
 	})();
 
 
