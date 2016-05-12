@@ -12,7 +12,9 @@ angular.module('RouteModule', [require('angular-route')])
         templateUrl: './about-view.html'
       })
       .when('/map', {
-        templateUrl: './map-view.html'
+        templateUrl: './map-view.html',
+        controller: 'MapController',
+        controllerAs: 'mapCtrl'
       })
       .when('/gallery', {
         templateUrl: './gallery-view.html'

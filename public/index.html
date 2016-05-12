@@ -5,13 +5,23 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="./css/base.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/normalize/4.1.1/normalize.css">
+    <style media="screen">
+      #map {
+        width: 600px;
+        height: 400px;
+        border: dotted;
+      }
+    </style>
+
     <title>Overbrook Construction Inc</title>
+
   </head>
   <body ng-app="App">
-    <!-- <nav-directive></nav-directive> -->
     <main id="viewContainer" class="container" ng-view>
     </main>
     <footer-directive></footer-directive>
     <script type="text/javascript" src="bundle.js"></script>
+    <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBBv4Sc8DwDft9TdcwDmS9d01SBmrCJFXA" async defer></script>
+
   </body>
 </html>
