@@ -85,10 +85,13 @@
   height: 750px;
   margin-top: -16px; }
 
+.contactPage {
+  display: flex; }
+
 .contactText {
   width: 50%;
-  height: 630px;
-  margin-top: -16px;
+  min-height: 630px;
+  margin-top: 0px;
   background-color: black;
   opacity: .8; }
   .contactText div p {
@@ -99,6 +102,43 @@
     color: white;
     letter-spacing: 2px;
     font-family: serif; }
+
+.emailBox {
+  display: flex;
+  justify-content: center;
+  background-color: none;
+  width: 50%; }
+
+.emailForm {
+  align-self: center; }
+  .emailForm div {
+    width: 303px;
+    background-color: black;
+    opacity: .8;
+    color: white;
+    text-align: center;
+    font-family: sans-serif;
+    letter-spacing: 3px;
+    font-size: 20px;
+    padding: 1px 5px 1px 5px;
+    margin: 20px 0px 0px 0px; }
+  .emailForm input {
+    display: block;
+    padding: 10px 5px 10px 5px;
+    margin: 20px 0px 0px 0px;
+    width: 300px; }
+  .emailForm textarea {
+    display: block;
+    padding: 10px 5px 10px 5px;
+    margin: 20px 0px 0px 0px;
+    width: 301px; }
+  .emailForm button {
+    width: 312px;
+    padding: 10px 5px 10px 5px;
+    margin: 5px 0px 0px 0px;
+    background-color: black;
+    opacity: .8;
+    color: white; }
 
 .footer {
   text-align: center; }

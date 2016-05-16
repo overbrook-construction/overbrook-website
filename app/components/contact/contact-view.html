@@ -1,42 +1,47 @@
 <div class="contactImg">
+
     <nav-directive></nav-directive>
-  <div class="contactText">
-    <div>
-      <p>
-        Eric Whiting
-      </p>
-      <p>
-        <span><img src="./media/cell-icon.png"></span>
-        425.531.0166
-      </p>
 
-      <p>
-        <span><img src="./media/work-icon.png"></span>
-        425.450.1591
-      </p>
+  <div class="contactPage">
 
-      <p>
-        <span><img src="./media/mail-icon.png"></span>
-        P.O. Box 85, Bellevue, WA 98009-0085
-      </p>
+    <div class="contactText">
+      <div>
+        <p>
+          Eric Whiting
+        </p>
+        <p>
+          <span><img src="./media/cell-icon.png"></span>
+          425.531.0166
+        </p>
 
-      <p>
-        <span><img src="./media/email-icon.png"></span>
-        ericwhiting@comcast.net
-      </p>
+        <p>
+          <span><img src="./media/work-icon.png"></span>
+          425.450.1591
+        </p>
+
+        <p>
+          <span><img src="./media/mail-icon.png"></span>
+          P.O. Box 85, Bellevue, WA 98009-0085
+        </p>
+
+        <p>
+          <span><img src="./media/email-icon.png"></span>
+          ericwhiting@comcast.net
+        </p>
+      </div>
     </div>
+
     <div class="emailBox">
       <form class="emailForm" ng-submit="contactCtrl.sendEmail(user)">
-
+        <div><p>Email Us!</p></div>
         <input type="text" placeholder="Your Name" ng-model="user.name">
         <input type="text" placeholder="Your Email Address" ng-model="user.email">
-        <input type="text" placeholder="Your Message" ng-model="user.message">
+        <textarea cols="37" rows="10" type="text" placeholder="Your Message" ng-model="user.message"></textarea>
+        <br>
         <button type="submit">Send Email</button>
-
       </form>
     </div>
 
   </div>
-
 
 </div>
