@@ -31039,11 +31039,47 @@
 /***/ function(module, exports) {
 
 	'use strict';
+	//
+	// var nodeMailer = require('nodemailer');
+	// var smtpTransport = require('nodemailer-smtp-transport');
 
+	// var emailService = require(__dirname + '/../../../services/email-service');
+	//
 	angular.module('ContactModule', [])
-	  .controller('contactController', function() {
-	    
-	  })
+	  .controller('contactController', ['$http', function($http) {
+	    // var transporter = nodeMailer.createTransport('smtps://info.overbrook@gmail.com:overbrook425@smtp.gmail.com');
+	    var emailRoute = 'http://localhost:3000/email'
+	    this.sendEmail = function(user) {
+	      console.log('USER FROM FORM IS : ', user);
+	      $http.post(emailRoute, user)
+	        .success(function(data, status, headers, config) {
+	          console.log('SUCCESSFULL EMAIL FROM CONTROLLER');
+	        })
+	        .error(function(data, status, headers, config) {
+	          console.log('ERROR SENDING EMAIL');
+	        })
+	    }
+
+	    // this.sendEmail = function(user) {
+	    //   console.log('SEND EMAIL FUNCTION HAS BEEN HIT');
+	    //   var mailer = {};
+	    //   var mailOptions = {
+	    //     from: user.email,
+	    //     to: '<heyduckd@gmail.com>',
+	    //     sender: user.name,
+	    //     subject: 'Email from Overbook contact form',
+	    //     text: user.message
+	    //   }
+	    //   // transporter.sendMail(mailOptions, function(error, info) {
+	    //   //   console.log('TRANSPORTER SEND EMAIL');
+	    //   //   if (error) return error;
+	    //   //   console.log('INFO FROM SEND EMAIL : ', info);
+	    //   //   // return mailer;
+	    //   // })
+	    // }
+
+
+	  }])
 
 
 /***/ },
@@ -31090,7 +31126,9 @@
 	        templateUrl: './gallery-view.html'
 	      })
 	      .when('/contact', {
-	        templateUrl: './contact-view.html'
+	        templateUrl: './contact-view.html',
+	        controller: 'contactController',
+	        controllerAs: 'contactCtrl'
 	      })
 	      .otherwise({
 	        redirectTo: '/home'

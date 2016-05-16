@@ -25,26 +25,18 @@
         ericwhiting@comcast.net
       </p>
     </div>
+    <div class="emailBox">
+      <form class="emailForm" ng-submit="contactCtrl.sendEmail(user)">
+
+        <input type="text" placeholder="Your Name" ng-model="user.name">
+        <input type="text" placeholder="Your Email Address" ng-model="user.email">
+        <input type="text" placeholder="Your Message" ng-model="user.message">
+        <button type="submit">Send Email</button>
+
+      </form>
+    </div>
 
   </div>
+
 
 </div>
-
-
-
-
-
-<!-- <div class="contactImg">
-    <nav-directive></nav-directive>
-  <div class="contactDiv">
-    <div class="contactText">
-      <p>
-        Eric Whiting
-        <br>
-        <br>
-        <br>
-        <br>
-      </p>
-    </div>
-  </div>
-</div> -->

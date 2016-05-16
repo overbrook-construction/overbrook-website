@@ -20,7 +20,9 @@ angular.module('RouteModule', [require('angular-route')])
         templateUrl: './gallery-view.html'
       })
       .when('/contact', {
-        templateUrl: './contact-view.html'
+        templateUrl: './contact-view.html',
+        controller: 'contactController',
+        controllerAs: 'contactCtrl'
       })
       .otherwise({
         redirectTo: '/home'
