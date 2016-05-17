@@ -140,8 +140,43 @@
     opacity: .8;
     color: white; }
 
+.galleryImg {
+  background: url("../media/defaultbg2.jpg") no-repeat center center;
+  -webkit-background-size: cover;
+  -moz-background-size: cover;
+  -o-background-size: cover;
+  background-size: cover;
+  height: 750px;
+  margin-top: -16px; }
+
+.galleryContainer {
+  overflow: hidden;
+  width: 100%; }
+
+.galleryDiv {
+  margin: -1%;
+  padding: 40px 20px 20px 20px; }
+
+.thumbnail {
+  float: left;
+  margin: 1%; }
+  .thumbnail img {
+    width: 350px;
+    height: 250px; }
+
+.mapImg {
+  background: url("../media/mapbg.jpg") no-repeat center center;
+  -webkit-background-size: cover;
+  -moz-background-size: cover;
+  -o-background-size: cover;
+  background-size: cover;
+  height: 750px;
+  margin-top: -16px; }
+
 .footer {
-  text-align: center; }
+  display: block;
+  text-align: center;
+  height: 20px; }
 
 .footerText:before {
   content: "\00a9"; }

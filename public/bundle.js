@@ -47,17 +47,16 @@
 	'use strict';
 
 	const angular = __webpack_require__(1);
-	//
-	// require('./components/header/header-controller.js');
+
 	__webpack_require__(3);
 	__webpack_require__(4);
 	__webpack_require__(5);
 	__webpack_require__(6);
-	// require('./components/gallery/galler-controller.js');
 	__webpack_require__(7);
-	__webpack_require__(8)
-	__webpack_require__(9);
-	__webpack_require__(12);
+	__webpack_require__(8);
+	__webpack_require__(9)
+	__webpack_require__(10);
+	__webpack_require__(13);
 
 
 /***/ },
@@ -31039,6 +31038,19 @@
 /***/ function(module, exports) {
 
 	'use strict';
+
+	angular.module('GalleryModule', [])
+	  .controller('GalleryController', function() {
+	    this.imgSrc = ['./media/630-001.jpg', './media/2432-001.jpg', './media/2434-001.jpg', './media/7720-001.jpg', './media/7728-001.jpg', './media/8102-001.jpg'];
+
+	  })
+
+
+/***/ },
+/* 8 */
+/***/ function(module, exports) {
+
+	'use strict';
 	//
 	// var nodeMailer = require('nodemailer');
 	// var smtpTransport = require('nodemailer-smtp-transport');
@@ -31062,7 +31074,7 @@
 
 
 /***/ },
-/* 8 */
+/* 9 */
 /***/ function(module, exports) {
 
 	'use strict';
@@ -31080,12 +31092,12 @@
 
 
 /***/ },
-/* 9 */
+/* 10 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
 
-	angular.module('RouteModule', [__webpack_require__(10)])
+	angular.module('RouteModule', [__webpack_require__(11)])
 	  .config(['$routeProvider', function(route) {
 	    route
 	      .when('/home', {
@@ -31102,7 +31114,9 @@
 	        controllerAs: 'mapCtrl'
 	      })
 	      .when('/gallery', {
-	        templateUrl: './gallery-view.html'
+	        templateUrl: './gallery-view.html',
+	        controller: 'GalleryController',
+	        controllerAs: 'galleryCtrl'
 	      })
 	      .when('/contact', {
 	        templateUrl: './contact-view.html',
@@ -31116,15 +31130,15 @@
 
 
 /***/ },
-/* 10 */
+/* 11 */
 /***/ function(module, exports, __webpack_require__) {
 
-	__webpack_require__(11);
+	__webpack_require__(12);
 	module.exports = 'ngRoute';
 
 
 /***/ },
-/* 11 */
+/* 12 */
 /***/ function(module, exports) {
 
 	/**
@@ -32155,7 +32169,7 @@
 
 
 /***/ },
-/* 12 */
+/* 13 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -32164,17 +32178,8 @@
 
 	(function() {
 	  //INSERT MODULE NAMES IN ARRAY
-	  angular.module('App', ['RouteModule', 'NavModule', 'HomeModule', 'FooterModule', 'AboutModule', 'ContactModule', 'MapModule'])
+	  angular.module('App', ['RouteModule', 'NavModule', 'HomeModule', 'FooterModule', 'AboutModule', 'ContactModule', 'MapModule', 'GalleryModule'])
 	})();
-
-
-
-	// const angular = require('angular');
-	//
-	// (function() {
-	//   //INSERT MODULE NAMES IN ARRAY
-	//   angular.module('App', []);
-	// })();
 
 
 /***/ }

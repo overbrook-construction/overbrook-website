@@ -17,7 +17,9 @@ angular.module('RouteModule', [require('angular-route')])
         controllerAs: 'mapCtrl'
       })
       .when('/gallery', {
-        templateUrl: './gallery-view.html'
+        templateUrl: './gallery-view.html',
+        controller: 'GalleryController',
+        controllerAs: 'galleryCtrl'
       })
       .when('/contact', {
         templateUrl: './contact-view.html',

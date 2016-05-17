@@ -1,1 +1,12 @@
-<nav-directive></nav-directive>
+<div class="galleryImg">
+  <nav-directive></nav-directive>
+  <div class="galleryMasterDiv">
+    <div class="galleryContainer">
+      <div class="galleryDiv">
+        <section ng-repeat="imgSrc in galleryCtrl.imgSrc" class="thumbnail">
+          <img src="{{imgSrc}}">
+        </section>
+      </div>
+    </div>
+  </div>
+</div>
