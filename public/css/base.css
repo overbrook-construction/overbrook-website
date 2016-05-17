@@ -149,20 +149,19 @@
   height: 750px;
   margin-top: -16px; }
 
-.galleryContainer {
-  overflow: hidden;
-  width: 100%; }
-
-.galleryDiv {
-  margin: -1%;
-  padding: 40px 20px 20px 20px; }
+.galleryMasterDiv {
+  text-align: center;
+  width: 100%;
+  height: auto; }
 
 .thumbnail {
-  float: left;
-  margin: 1%; }
-  .thumbnail img {
-    width: 350px;
-    height: 250px; }
+  width: 350px;
+  height: 250px;
+  margin-top: 30px;
+  margin-left: 10px;
+  margin-right: 10px;
+  margin-bottom: 10px;
+  box-shadow: 3px 3px 3px gray; }
 
 .mapImg {
   background: url("../media/mapbg.jpg") no-repeat center center;

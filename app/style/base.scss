@@ -183,27 +183,22 @@
   margin-top: -16px;
 }
 
-.galleryContainer {
-  overflow: hidden;
+.galleryMasterDiv {
+  text-align: center;
+  // background-color: purple;
   width: 100%;
-  // padding-left: 10%;
-  // padding-right: 10%;
-  // margin-left: 10%;
-  // margin-right: 10%;
-}
-
-.galleryDiv {
-  margin: -1%;
-  padding: 40px 20px 20px 20px;
+  height: auto;
+  // justify-content: center;
 }
 
 .thumbnail {
-  float: left;
-  margin: 1%;
-  img {
     width: 350px;
     height: 250px;
-  }
+    margin-top: 30px;
+    margin-left: 10px;
+    margin-right: 10px;
+    margin-bottom: 10px;
+    box-shadow: 3px 3px 3px gray;
 }
 
 //MAP
@@ -216,9 +211,6 @@
   height: 750px;
   margin-top: -16px;
 }
-
-
-
 
 //FOOTER
 .footer {
