@@ -1,3 +1,7 @@
+// body {
+//   background-color: black;
+// }
+
 //NAVIGATION
 .NavSecton {
   background-color: none;
@@ -78,7 +82,6 @@
   width: 50%;
   height: 630px;
   margin-top: -16px;
-  // margin-bottom: -16px;
   background-color: black;
   opacity: .8;
   p {
@@ -109,7 +112,6 @@
 
 .contactText {
   width: 50%;
-  // max-height: 620px;
   min-height: 630px;
   margin-top: 0px;
   background-color: black;
@@ -170,21 +172,61 @@
   }
 }
 
-// .messageBox {
-//   // display: block;
-//   padding: 10px 0px 10px 0px;
-//   margin: 40px 0px 40px 0px;
-//   // text-align: center;
-//   width: 300px;
-//   height: 200px;
-// }
+//GALLERY
+.galleryImg {
+  background: url('../media/defaultbg2.jpg') no-repeat center center;
+  -webkit-background-size: cover;
+  -moz-background-size: cover;
+  -o-background-size: cover;
+  background-size: cover;
+  height: 750px;
+  margin-top: -16px;
+}
+
+.galleryContainer {
+  overflow: hidden;
+  width: 100%;
+  // padding-left: 10%;
+  // padding-right: 10%;
+  // margin-left: 10%;
+  // margin-right: 10%;
+}
+
+.galleryDiv {
+  margin: -1%;
+  padding: 40px 20px 20px 20px;
+}
+
+.thumbnail {
+  float: left;
+  margin: 1%;
+  img {
+    width: 350px;
+    height: 250px;
+  }
+}
+
+//MAP
+.mapImg {
+  background: url('../media/mapbg.jpg') no-repeat center center;
+  -webkit-background-size: cover;
+  -moz-background-size: cover;
+  -o-background-size: cover;
+  background-size: cover;
+  height: 750px;
+  margin-top: -16px;
+}
+
 
 
 
 //FOOTER
 .footer {
   // position: fixed;
+  display: block;
   text-align: center;
+  // align-content: center;
+  height: 20px;
 }
 
 .footerText:before {
