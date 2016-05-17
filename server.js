@@ -3,8 +3,14 @@ var express = require('express');
 var app = express();
 var apiRouter = express.Router();
 var bodyParser = require('body-parser');
+var mongoose = require('mongoose');
+var mongoURI = process.env.MONGOLAB_URI;
+require('dotenv').config();
 
-require('./routes/email-route')(apiRouter)
+mongoose.connect(process.env.MONGOLAB_URI);
+
+require('./routes/email-route')(apiRouter);
+require('./routes/addHomes-route')(apiRouter);
 
 app.use((req, res, next) => {
   res.header('Access-Control-Allow-Origin', 'http://localhost:8080');

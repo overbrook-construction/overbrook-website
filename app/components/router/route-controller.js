@@ -26,6 +26,11 @@ angular.module('RouteModule', [require('angular-route')])
         controller: 'contactController',
         controllerAs: 'contactCtrl'
       })
+      .when('/admin', {
+        templateUrl: './admin-view.html',
+        controller: 'AdminController',
+        controllerAs: 'adminCtrl'
+      })
       .otherwise({
         redirectTo: '/home'
       })

@@ -1,8 +1,4 @@
 'use strict';
-//info.overbrook@gmail.com:overbrook425@smtp.gmail.com'
-// var transporter = nodeMailer.createTransport('smtps://info.overbrook@gmail.com:overbrook425@smtp.gmail.com');
-// var transporter = nodeMailer.createTransport('smtps://info.overbrook@gmail.com:overbrook425@smtp.gmail.com');
-// var transporter = nodeMailer.createTransport();
 
 var nodeMailer = require('nodemailer');
 var transporter = nodeMailer.createTransport({

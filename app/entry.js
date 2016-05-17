@@ -9,5 +9,6 @@ require('./components/map/map-controller.js');
 require('./components/gallery/gallery-controller.js');
 require('./components/contact/contact-controller.js');
 require('./components/footer/footer-controller.js')
+require('./components/admin/admin-controller.js');
 require('./components/router/route-controller.js');
 require('./entry-module');
