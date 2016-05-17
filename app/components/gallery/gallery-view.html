@@ -1,12 +1,11 @@
 <div class="galleryImg">
   <nav-directive></nav-directive>
-  <section class="galleryMasterDiv">
-    <!-- <div class="galleryContainer"> -->
-      <!-- <div class="galleryDiv"> -->
-        <!-- <section class="thumbnail"> -->
-          <img ng-repeat="imgSrc in galleryCtrl.imgSrc" src="{{imgSrc}}" class="thumbnail">
-        <!-- </section> -->
-      <!-- </div> -->
-    <!-- </div> -->
+  <section class="galleryMasterDiv" ng-hide="galleryCtrl.showInfo == true">
+          <img ng-repeat="imgSrc in galleryCtrl.imgSrc" src="{{imgSrc}}" class="thumbnail" ng-click="galleryCtrl.showInfo = true">
   </section>
+
+  <section ng-show="galleryCtrl.showInfo == true">
+    <button type="button" ng-click="galleryCtrl.showInfo = false">-x-</button>
+  </section>
+
 </div>

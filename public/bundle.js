@@ -56,7 +56,8 @@
 	__webpack_require__(8);
 	__webpack_require__(9)
 	__webpack_require__(10);
-	__webpack_require__(13);
+	__webpack_require__(11);
+	__webpack_require__(14);
 
 
 /***/ },
@@ -31043,6 +31044,8 @@
 	  .controller('GalleryController', function() {
 	    this.imgSrc = ['./media/630-001.jpg', './media/2432-001.jpg', './media/2434-001.jpg', './media/7720-001.jpg', './media/7728-001.jpg', './media/8102-001.jpg'];
 
+	    this.showInfo = false;
+
 	  })
 
 
@@ -31093,11 +31096,31 @@
 
 /***/ },
 /* 10 */
+/***/ function(module, exports) {
+
+	
+	angular.module('AdminModule', [])
+	  .controller('AdminController', ['$http', function($http) {
+	    var adminRoute = 'http://localhost:3000/addHomes'
+	    this.submitHouse = function(newHouse) {
+	      $http.post(adminRoute, newHouse)
+	      .success(function(data, status, headers, config) {
+	        console.log('ADDED HOUSE FROM ADMIN CTRL');
+	      })
+	      .error(function(data, status, headers, config) {
+	        console.log('ERROR SAVING HOUSE FROM ADMIN CTRL');
+	      })
+	    }
+	  }])
+
+
+/***/ },
+/* 11 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
 
-	angular.module('RouteModule', [__webpack_require__(11)])
+	angular.module('RouteModule', [__webpack_require__(12)])
 	  .config(['$routeProvider', function(route) {
 	    route
 	      .when('/home', {
@@ -31123,6 +31146,11 @@
 	        controller: 'contactController',
 	        controllerAs: 'contactCtrl'
 	      })
+	      .when('/admin', {
+	        templateUrl: './admin-view.html',
+	        controller: 'AdminController',
+	        controllerAs: 'adminCtrl'
+	      })
 	      .otherwise({
 	        redirectTo: '/home'
 	      })
@@ -31130,15 +31158,15 @@
 
 
 /***/ },
-/* 11 */
+/* 12 */
 /***/ function(module, exports, __webpack_require__) {
 
-	__webpack_require__(12);
+	__webpack_require__(13);
 	module.exports = 'ngRoute';
 
 
 /***/ },
-/* 12 */
+/* 13 */
 /***/ function(module, exports) {
 
 	/**
@@ -32169,7 +32197,7 @@
 
 
 /***/ },
-/* 13 */
+/* 14 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -32178,7 +32206,7 @@
 
 	(function() {
 	  //INSERT MODULE NAMES IN ARRAY
-	  angular.module('App', ['RouteModule', 'NavModule', 'HomeModule', 'FooterModule', 'AboutModule', 'ContactModule', 'MapModule', 'GalleryModule'])
+	  angular.module('App', ['RouteModule', 'NavModule', 'HomeModule', 'FooterModule', 'AboutModule', 'ContactModule', 'MapModule', 'GalleryModule', 'AdminModule'])
 	})();
 
 
