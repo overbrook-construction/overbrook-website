@@ -53,7 +53,7 @@
 	__webpack_require__(5);
 	__webpack_require__(6);
 	__webpack_require__(7);
-	__webpack_require__(!(function webpackMissingModule() { var e = new Error("Cannot find module \"./components/info/info-controller.js\""); e.code = 'MODULE_NOT_FOUND'; throw e; }()));
+	__webpack_require__(8);
 	__webpack_require__(9);
 	__webpack_require__(10)
 	__webpack_require__(11);
@@ -31088,7 +31088,18 @@
 
 
 /***/ },
-/* 8 */,
+/* 8 */
+/***/ function(module, exports) {
+
+	'use strict';
+
+	angular.module('InfoModule', [])
+	  .controller('InfoController', function() {
+
+	  })
+
+
+/***/ },
 /* 9 */
 /***/ function(module, exports) {
 

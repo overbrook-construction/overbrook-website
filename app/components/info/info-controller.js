@@ -1,6 +1,6 @@
-'use strict'
+'use strict';
 
-angular.module('InfoModule', []);
+angular.module('InfoModule', [])
   .controller('InfoController', function() {
-    
+
   })
