@@ -1,19 +1,27 @@
 <div class="mapImg">
   <nav-directive></nav-directive>
-  <section>
+  <section class="mapPageSection">
     <!-- <section ng-init="mapCtrl.initMap()"> -->
-
 
     <div id="map" ng-init="mapCtrl.getData(mapCtrl.completedHomes)">
 
     </div>
-    <!-- <button type="button" ng-click="mapCtrl.initMap()">Map</button>
-    <button type="button" ng-click="mapCtrl.geocode()">Geocode</button>
-    <button type="button" ng-click="mapCtrl.getData()">getData</button> -->
-    <!-- <button type="button" ng-click="mapCtrl.getData()">Under Construction</button>  -->
-    <button type="button" ng-click="mapCtrl.getData(mapCtrl.underConstruction)">Under Construction</button>
-    <!-- <button type="button" ng-click="mapCtrl.getData(mapCtrl.completedHomes, mapCtrl.completedHomesGeocode)">Completed Homes</button> -->
-    <button type="button" ng-click="mapCtrl.getData(mapCtrl.completedHomes)">Completed Homes</button>
+
+    <div class="addressSidebar">
+      <div class="filterButtonDiv">
+        <button class="completed" type="button" ng-click="mapCtrl.getData(mapCtrl.completedHomes)">Completed</button>
+        <button class="current" type="button" ng-click="mapCtrl.getData(mapCtrl.underConstruction)">Current</button>
+        <button class="future" type="button" ng-click="mapCtrl.getData(mapCtrl.underConstruction)">Future</button>
+      </div>
+      <div class="scrollContainer">
+        <div class="addressDiv" ng-repeat="houses in mapCtrl.realMockArray">
+          <p class="addressText">
+            {{houses}}
+          </p>
+          <p class="viewDetailsButton" ng-click="mapCtrl.viewChangeToGallery()">View Details</p>
+        </div>
+      </div>
+    </div>
 
 
   </section>

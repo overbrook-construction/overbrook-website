@@ -1,11 +1,11 @@
 <div class="galleryImg">
   <nav-directive></nav-directive>
   <section class="galleryMasterDiv" ng-hide="galleryCtrl.showInfo == true">
-          <img ng-repeat="imgSrc in galleryCtrl.imgSrc" src="{{imgSrc}}" class="thumbnail" ng-click="galleryCtrl.showInfo = true">
+          <img ng-repeat="imgSrc in galleryCtrl.imgSrc" src="{{imgSrc}}" class="thumbnail" id="thumbnail" ng-click="galleryCtrl.showInfo = true">
   </section>
 
   <section ng-show="galleryCtrl.showInfo == true">
-    <button type="button" ng-click="galleryCtrl.showInfo = false">-x-</button>
+    <button class="xButton" type="button" ng-click="galleryCtrl.showInfo = false">-x-</button>
   </section>
 
 </div>
