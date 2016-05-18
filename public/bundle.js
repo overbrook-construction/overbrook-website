@@ -30997,21 +30997,34 @@
 	    var geotags = [];
 	    var markerData = [];
 
-	    this.getData = function() {
-	      $http.get('./data/homes.json')
+	    this.completedHomes = './data/homes.json';
+	    this.underConstruction = './data/homesTwo.json'
+
+	    // this.completedHomesGeocode = [];
+	    // this.underConstructionHomesGeocode = [];
+
+	    this.getData = function(route) {
+
+	      markerData = [];
+	      geotags = [];
+
+	      $http.get(route)
 	      .then(function successCallback(response) {
 	        markerData = response.data
 	        function geocode() {
 	          for (var i = 0; i < markerData.length; i++){
 	            var geocoder = new google.maps.Geocoder();
 	            geocoder.geocode({'address': markerData[i].address}, function(results, status) {
+	              console.log(results);
+	              console.log(status);
 	              results.forEach(function(obj){
-	                geotags.push(obj.geometry.location)
+	                geotags.push(obj.geometry.location);
+	                // this.completedHomesGeocode.push(obj.geometry.location);
 	              })
 	            })
 	          }
 	        }
-	        
+
 	        function initMap() {
 	          function map() {
 	          var mapDiv = document.getElementById('map');
@@ -31033,7 +31046,7 @@
 	      }
 	        geocode();
 	        initMap();
-	        console.log(markerData);
+	        // console.log(markerData);
 	      }, function errorCallback(response) {
 	      })
 	      // cb()
