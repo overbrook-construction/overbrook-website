@@ -6,4 +6,11 @@ angular.module('GalleryModule', [])
 
     this.showInfo = false;
 
+    this.j = function() {
+      $('.thumbnail').click(function(){
+        $('.xButton').fadeIn("slow", function() {
+          //FADE ANIMATION
+        })
+      })
+    }
   })

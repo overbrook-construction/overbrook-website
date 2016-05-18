@@ -30993,15 +30993,26 @@
 	const angular = __webpack_require__(1);
 
 	angular.module('MapModule', [])
-	  .controller('MapController', ['$http', function($http) {
+	  .controller('MapController', ['$http', '$location', function($http, $location) {
+
+	    var mockHouseArray = [];
+	    this.realMockArray = mockHouseArray;
+
+	    // $('.viewDetailsButton').click(function(){
+	    //   $('.mapPageSection').wipeUp("slow", function() {
+	    //     //FADE ANIMATION
+	    //   })
+	    // })
+
+	    this.viewChangeToGallery = function() {
+	      $location.path('/gallery');
+	    }
+
 	    var geotags = [];
 	    var markerData = [];
 
 	    this.completedHomes = './data/homes.json';
 	    this.underConstruction = './data/homesTwo.json'
-
-	    // this.completedHomesGeocode = [];
-	    // this.underConstructionHomesGeocode = [];
 
 	    this.getData = function(route) {
 
@@ -31011,6 +31022,10 @@
 	      $http.get(route)
 	      .then(function successCallback(response) {
 	        markerData = response.data
+	          for (var i = 0; i <markerData.length; i++){
+	            mockHouseArray.push(markerData[i].address)
+	          }
+	        console.log(markerData);
 	        function geocode() {
 	          for (var i = 0; i < markerData.length; i++){
 	            var geocoder = new google.maps.Geocoder();
@@ -31019,7 +31034,6 @@
 	              console.log(status);
 	              results.forEach(function(obj){
 	                geotags.push(obj.geometry.location);
-	                // this.completedHomesGeocode.push(obj.geometry.location);
 	              })
 	            })
 	          }
@@ -31046,7 +31060,6 @@
 	      }
 	        geocode();
 	        initMap();
-	        // console.log(markerData);
 	      }, function errorCallback(response) {
 	      })
 	      // cb()
@@ -31097,6 +31110,13 @@
 
 	    this.showInfo = false;
 
+	    this.j = function() {
+	      $('.thumbnail').click(function(){
+	        $('.xButton').fadeIn("slow", function() {
+	          //FADE ANIMATION
+	        })
+	      })
+	    }
 	  })
 
 
