@@ -53,11 +53,12 @@
 	__webpack_require__(5);
 	__webpack_require__(6);
 	__webpack_require__(7);
-	__webpack_require__(8);
-	__webpack_require__(9)
-	__webpack_require__(10);
+	__webpack_require__(!(function webpackMissingModule() { var e = new Error("Cannot find module \"./components/info/info-controller.js\""); e.code = 'MODULE_NOT_FOUND'; throw e; }()));
+	__webpack_require__(9);
+	__webpack_require__(10)
 	__webpack_require__(11);
-	__webpack_require__(14);
+	__webpack_require__(12);
+	__webpack_require__(15);
 
 
 /***/ },
@@ -31087,7 +31088,8 @@
 
 
 /***/ },
-/* 8 */
+/* 8 */,
+/* 9 */
 /***/ function(module, exports) {
 
 	'use strict';
@@ -31114,7 +31116,7 @@
 
 
 /***/ },
-/* 9 */
+/* 10 */
 /***/ function(module, exports) {
 
 	'use strict';
@@ -31132,7 +31134,7 @@
 
 
 /***/ },
-/* 10 */
+/* 11 */
 /***/ function(module, exports) {
 
 	
@@ -31152,12 +31154,12 @@
 
 
 /***/ },
-/* 11 */
+/* 12 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
 
-	angular.module('RouteModule', [__webpack_require__(12)])
+	angular.module('RouteModule', [__webpack_require__(13)])
 	  .config(['$routeProvider', function(route) {
 	    route
 	      .when('/home', {
@@ -31178,6 +31180,11 @@
 	        controller: 'GalleryController',
 	        controllerAs: 'galleryCtrl'
 	      })
+	      .when('/info', {
+	        templateUrl: './info-view.html',
+	        controller: 'InfoController',
+	        controllerAs: 'infoCtrl'
+	      })
 	      .when('/contact', {
 	        templateUrl: './contact-view.html',
 	        controller: 'contactController',
@@ -31195,15 +31202,15 @@
 
 
 /***/ },
-/* 12 */
+/* 13 */
 /***/ function(module, exports, __webpack_require__) {
 
-	__webpack_require__(13);
+	__webpack_require__(14);
 	module.exports = 'ngRoute';
 
 
 /***/ },
-/* 13 */
+/* 14 */
 /***/ function(module, exports) {
 
 	/**
@@ -32234,7 +32241,7 @@
 
 
 /***/ },
-/* 14 */
+/* 15 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -32243,7 +32250,7 @@
 
 	(function() {
 	  //INSERT MODULE NAMES IN ARRAY
-	  angular.module('App', ['RouteModule', 'NavModule', 'HomeModule', 'FooterModule', 'AboutModule', 'ContactModule', 'MapModule', 'GalleryModule', 'AdminModule'])
+	  angular.module('App', ['RouteModule', 'NavModule', 'HomeModule', 'FooterModule', 'AboutModule', 'ContactModule', 'MapModule', 'GalleryModule', 'AdminModule', 'InfoModule'])
 	})();
 
 

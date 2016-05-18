@@ -21,6 +21,11 @@ angular.module('RouteModule', [require('angular-route')])
         controller: 'GalleryController',
         controllerAs: 'galleryCtrl'
       })
+      .when('/info', {
+        templateUrl: './info-view.html',
+        controller: 'InfoController',
+        controllerAs: 'infoCtrl'
+      })
       .when('/contact', {
         templateUrl: './contact-view.html',
         controller: 'contactController',
