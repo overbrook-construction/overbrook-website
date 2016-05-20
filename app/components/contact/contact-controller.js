@@ -1,10 +1,5 @@
 'use strict';
-//
-// var nodeMailer = require('nodemailer');
-// var smtpTransport = require('nodemailer-smtp-transport');
 
-// var emailService = require(__dirname + '/../../../services/email-service');
-//
 angular.module('ContactModule', [])
 .controller('contactController', ['$http', function($http) {
   var emailRoute = 'http://localhost:3000/email'

@@ -14,7 +14,7 @@ module.exports = (apiRouter) => {
     .post((req, res) => {
       var mailOptions = {
         from: req.body.email,
-        to: '<heyduckd@comcast.net>',
+        to: '<heyduckd@gmail.com>',
         sender: req.body.name,
         subject: 'Email from Overbook contact form',
         text: req.body.message
@@ -22,7 +22,6 @@ module.exports = (apiRouter) => {
       transporter.sendMail(mailOptions, function(error, info) {
         if (error) return error;
         res.json({msg: 'Email has been sent'});
-        // res.json(info);
       });
     });
 }
