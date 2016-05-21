@@ -16,7 +16,7 @@ angular.module('MapModule', [])
     var markerData = [];
 
     this.completedHomes = './data/homes.json';
-    this.underConstruction = './data/homesTwo.json'
+    this.underConstruction = './data/homesTwo.json';
 
     this.getData = function(route) {
 
