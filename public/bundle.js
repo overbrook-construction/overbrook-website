@@ -50,15 +50,15 @@
 
 	__webpack_require__(3);
 	__webpack_require__(4);
-	__webpack_require__(5);
 	__webpack_require__(6);
 	__webpack_require__(7);
 	__webpack_require__(8);
 	__webpack_require__(9);
-	__webpack_require__(10)
-	__webpack_require__(11);
+	__webpack_require__(10);
+	__webpack_require__(11)
 	__webpack_require__(12);
-	__webpack_require__(15);
+	__webpack_require__(13);
+	__webpack_require__(16);
 
 
 /***/ },
@@ -30962,18 +30962,59 @@
 
 /***/ },
 /* 4 */
-/***/ function(module, exports) {
+/***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
 
-	angular.module('HomeModule', [])
-	  .controller('HomeController', function() {
+	__webpack_require__(5);
 
-	  })
+	angular.module('HomeModule', ['AjaxService'])
+
+	  .controller('HomeController', ['ajax', function(ajax) {
+
+	    this.talk = function() {
+	    ajax.sayName();
+
+	    }
+	    this.getData = function() {
+	      ajax.getData();
+	    }
+	  }])
 
 
 /***/ },
 /* 5 */
+/***/ function(module, exports) {
+
+	'use strict';
+
+	var ajaxService = angular.module('AjaxService', []);
+
+	ajaxService.factory('ajax', ['$http', function($http) {
+
+	  var obj = {};
+
+	  obj.sayName = function() {
+	    console.log('DAVID');
+	  }
+
+	  obj.getData = function() {
+	    console.log('GET DATA IS BEING HIT');
+	    $http.get('./data/homes.json')
+	    .then(function successCallback(response) {
+	      // markerData = response.data
+	      console.log(response);
+	    }, function errorCallback(response) {
+	    })
+	  }
+
+	return obj;
+
+	}])
+
+
+/***/ },
+/* 6 */
 /***/ function(module, exports) {
 
 	'use strict';
@@ -30985,7 +31026,7 @@
 
 
 /***/ },
-/* 6 */
+/* 7 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -31006,7 +31047,7 @@
 	    var markerData = [];
 
 	    this.completedHomes = './data/homes.json';
-	    this.underConstruction = './data/homesTwo.json'
+	    this.underConstruction = './data/homesTwo.json';
 
 	    this.getData = function(route) {
 
@@ -31061,7 +31102,7 @@
 
 
 /***/ },
-/* 7 */
+/* 8 */
 /***/ function(module, exports) {
 
 	'use strict';
@@ -31073,7 +31114,7 @@
 
 
 /***/ },
-/* 8 */
+/* 9 */
 /***/ function(module, exports) {
 
 	'use strict';
@@ -31085,7 +31126,7 @@
 
 
 /***/ },
-/* 9 */
+/* 10 */
 /***/ function(module, exports) {
 
 	'use strict';
@@ -31107,7 +31148,7 @@
 
 
 /***/ },
-/* 10 */
+/* 11 */
 /***/ function(module, exports) {
 
 	'use strict';
@@ -31125,7 +31166,7 @@
 
 
 /***/ },
-/* 11 */
+/* 12 */
 /***/ function(module, exports) {
 
 	
@@ -31145,12 +31186,12 @@
 
 
 /***/ },
-/* 12 */
+/* 13 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
 
-	angular.module('RouteModule', [__webpack_require__(13)])
+	angular.module('RouteModule', [__webpack_require__(14)])
 	  .config(['$routeProvider', function(route) {
 	    route
 	      .when('/home', {
@@ -31193,15 +31234,15 @@
 
 
 /***/ },
-/* 13 */
+/* 14 */
 /***/ function(module, exports, __webpack_require__) {
 
-	__webpack_require__(14);
+	__webpack_require__(15);
 	module.exports = 'ngRoute';
 
 
 /***/ },
-/* 14 */
+/* 15 */
 /***/ function(module, exports) {
 
 	/**
@@ -32232,7 +32273,7 @@
 
 
 /***/ },
-/* 15 */
+/* 16 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
