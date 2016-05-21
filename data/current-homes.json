@@ -1,0 +1,15 @@
+{
+  "completed": {
+    "2432": {
+      "address": "2432 Evergreen Point Road Medina, WA 98039",
+      "sqft": "5201 sq. ft.",
+      "bedrooms": "6",
+      "bathrooms": "6",
+      "lotsize": "0.37 acres",
+      "schooldistrict": "Bellevue School District",
+      "status": "Completed",
+      "pics": ["./img/2432-evergreen/2432-001.jpg", "./img/2432-002.jpg", "./img/2432-003.jpg", "./img/2432-004.jpg", "./img/2432-005.jpg"],
+      "mapPic": "./img/2432-evergreen/2432-map-view-pic.png"
+    }
+  }
+}
