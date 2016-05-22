@@ -35,20 +35,22 @@
 </section> -->
 
 
+<section class="galleryInfoMasterSection">
 
-<section class="infoContainer" ng-show="galleryCtrl.showInfo == true">
-  <!-- left half -->
-  <div class="infoImageContainer">
-    <!-- main image -->
-    <img src="{{galleryCtrl.singleHomeData.frontPic}}" class="infoMainImage">
-    <!-- thumbnail slider container -->
-    <div class="infoSliderContainer">
-      <!-- repeated image slider -->
+  <section class="infoContainer" ng-show="galleryCtrl.showInfo == true">
+    <!-- left half -->
+    <div class="infoImageContainer">
+      <!-- main image -->
+      <img src="{{galleryCtrl.singleHomeData.frontPic}}" class="infoMainImage">
+      <!-- thumbnail slider container -->
+      <div class="infoSliderContainer">
+        <!-- repeated image slider -->
         <img ng-repeat="sliderPic in galleryCtrl.singleHomeData.pics" src="{{sliderPic}}" class="infoSliderImage">
+
+      </div>
 
     </div>
 
-  </div>
 
   <!-- WIRED UP FOR GALLERY CONTROLLER  -->
 
@@ -56,16 +58,15 @@
   <!-- house info container -->
   <div class="infoTextContainer">
     <!-- house info -->
-    <p class="infoTextAddress">{{galleryCtrl.singleHomeData.address}}</p>
-    <p class="infoTextSqFt">{{galleryCtrl.singleHomeData.sqft}}</p>
-    <p class="infoTextLotSize">{{galleryCtrl.singleHomeData.lotsize}}</p>
-    <p class="infoTextBedrooms">{{galleryCtrl.singleHomeData.bedrooms}}</p>
-    <p class="infoTextBathrooms">{{galleryCtrl.singleHomeData.bathrooms}}</p>
-    <p class="infoTextElementary">{{}}</p>
-    <p class="infoTextMiddle">{{}}</p>
-    <p class="infoTextHS">{{}}</p>
-    <p class="infoTextStatus">{{galleryCtrl.singleHomeData.status}}</p>
-  </div>
+    <p class="infoText">{{galleryCtrl.singleHomeData.address}}</p>
+    <p class="infoText">{{galleryCtrl.singleHomeData.sqft}}</p>
+    <p class="infoText">{{galleryCtrl.singleHomeData.lotsize}}</p>
+    <p class="infoText">{{galleryCtrl.singleHomeData.bedrooms}}</p>
+    <p class="infoText">{{galleryCtrl.singleHomeData.bathrooms}}</p>
+    <p class="infoText">{{galleryCtrl.singleHomeData.elementary}}</p>
+    <p class="infoText">{{galleryCtrl.singleHomeData.middle}}</p>
+    <p class="infoText">{{galleryCtrl.singleHomeData.hs}}</p>
+    <p class="infoText">{{galleryCtrl.singleHomeData.status}}</p>
   <!-- map pic container -->
   <div class="infoMapImageContainer">
     <!-- MAIN PICTURE -->
@@ -74,9 +75,11 @@
     <img src="{{galleryCtrl.singleHomeData.mapPic}}" class="infoMapImage">
 
   </div>
+</div>
 
 </section>
 
+</section>
 
 
 
