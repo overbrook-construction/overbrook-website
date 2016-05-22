@@ -30992,7 +30992,7 @@
 	  .controller('GalleryController', ['$location', 'ajax', function($location, ajax) {
 
 	  this.getData = ajax.getData();
-	  
+
 	  this.showInfo = false;
 	  this.houseData = ajax.allHomeData;
 
@@ -31013,6 +31013,9 @@
 	      this.singleHomeData.bathrooms = ajax.allHomeData[key].bathrooms;
 	      this.singleHomeData.lotsize = ajax.allHomeData[key].lotsize;
 	      this.singleHomeData.schooldistrict = ajax.allHomeData[key].schooldistrict;
+	      this.singleHomeData.elementary = ajax.allHomeData[key].elementary;
+	      this.singleHomeData.middle = ajax.allHomeData[key].middle;
+	      this.singleHomeData.hs = ajax.allHomeData[key].hs;
 	      this.singleHomeData.status = ajax.allHomeData[key].status;
 	      this.singleHomeData.pics = ajax.allHomeData[key].pics;
 	      this.singleHomeData.mapPic = ajax.allHomeData[key].mapPic;
