@@ -49,10 +49,10 @@
 	const angular = __webpack_require__(1);
 
 	__webpack_require__(3);
-	__webpack_require__(4);
 	__webpack_require__(6);
 	__webpack_require__(7);
 	__webpack_require__(8);
+	__webpack_require__(4);
 	__webpack_require__(9);
 	__webpack_require__(10);
 	__webpack_require__(11)
@@ -30944,14 +30944,34 @@
 
 /***/ },
 /* 3 */
-/***/ function(module, exports) {
+/***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
 
-	angular.module('NavModule', [])
-	  .controller('navController', function() {
+	__webpack_require__(4);
 
-	  })
+	angular.module('NavModule', [])
+	  .controller('navController', ['$controller', function($controller) {
+
+	      // this.changeUp = $controller('GalleryController').changeState()
+
+	      var yup = $controller('GalleryController');
+
+	      // console.log(yup.changeState);
+
+	      // var yup = $controller('GalleryController');
+
+	      // this.changeUp = $controller('GalleryController').changeState();
+	      // this.changeUp = yup.changeState();
+	      // console.log(yup.changeState());
+
+	      this.changeUp = function() {
+	        yup.changeState();
+	      }
+
+
+
+	  }])
 	  .directive('navDirective', function() {
 	    return {
 	      restrict: 'E',
@@ -30968,18 +30988,38 @@
 
 	__webpack_require__(5);
 
-	angular.module('HomeModule', ['AjaxService'])
+	angular.module('GalleryModule', ['AjaxService'])
+	  .controller('GalleryController', ['$location', 'ajax', function($location, ajax) {
 
-	  .controller('HomeController', ['ajax', function(ajax) {
+	  this.getData = ajax.getData();
+	  
+	  this.showInfo = false;
+	  this.houseData = ajax.allHomeData;
 
-	    this.talk = function() {
-	    ajax.sayName();
+	  this.changeState = function(){
+	    console.log('CHANGE STATE IS BEING HIT');
+	    this.showInfo = false;
+	  }
 
+	  this.singleHomeData = {};
+	    this.showInfoView = function() {
+	      $location.path('/info');
 	    }
-	    this.getData = function() {
-	      ajax.getData();
+
+	    this.singleHouseDataLoader = function(key){
+	      this.singleHomeData.address = ajax.allHomeData[key].address;
+	      this.singleHomeData.sqft = ajax.allHomeData[key].sqft;
+	      this.singleHomeData.bedrooms = ajax.allHomeData[key].bedrooms;
+	      this.singleHomeData.bathrooms = ajax.allHomeData[key].bathrooms;
+	      this.singleHomeData.lotsize = ajax.allHomeData[key].lotsize;
+	      this.singleHomeData.schooldistrict = ajax.allHomeData[key].schooldistrict;
+	      this.singleHomeData.status = ajax.allHomeData[key].status;
+	      this.singleHomeData.pics = ajax.allHomeData[key].pics;
+	      this.singleHomeData.mapPic = ajax.allHomeData[key].mapPic;
+	      this.singleHomeData.frontPic = ajax.allHomeData[key].pics[0];
 	    }
-	  }])
+
+	  }]);
 
 
 /***/ },
@@ -31019,6 +31059,28 @@
 
 /***/ },
 /* 6 */
+/***/ function(module, exports, __webpack_require__) {
+
+	'use strict';
+
+	__webpack_require__(5);
+
+	angular.module('HomeModule', ['AjaxService'])
+
+	  .controller('HomeController', ['ajax', function(ajax) {
+
+	    this.talk = function() {
+	    ajax.sayName();
+
+	    }
+	    this.getData = function() {
+	      ajax.getData();
+	    }
+	  }])
+
+
+/***/ },
+/* 7 */
 /***/ function(module, exports) {
 
 	'use strict';
@@ -31030,7 +31092,7 @@
 
 
 /***/ },
-/* 7 */
+/* 8 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -31100,41 +31162,6 @@
 	      })
 	    }
 	  }])
-
-
-/***/ },
-/* 8 */
-/***/ function(module, exports, __webpack_require__) {
-
-	'use strict';
-
-	__webpack_require__(5);
-
-	angular.module('GalleryModule', ['AjaxService'])
-	  .controller('GalleryController', ['$location', 'ajax', function($location, ajax) {
-
-	  this.showInfo = false;
-	  this.houseData = ajax.allHomeData;
-
-	  this.singleHomeData = {};
-	    this.showInfoView = function() {
-	      $location.path('/info');
-	    }
-
-	    this.singleHouseDataLoader = function(key){
-	      this.singleHomeData.address = ajax.allHomeData[key].address;
-	      this.singleHomeData.sqft = ajax.allHomeData[key].sqft;
-	      this.singleHomeData.bedrooms = ajax.allHomeData[key].bedrooms;
-	      this.singleHomeData.bathrooms = ajax.allHomeData[key].bathrooms;
-	      this.singleHomeData.lotsize = ajax.allHomeData[key].lotsize;
-	      this.singleHomeData.schooldistrict = ajax.allHomeData[key].schooldistrict;
-	      this.singleHomeData.status = ajax.allHomeData[key].status;
-	      this.singleHomeData.pics = ajax.allHomeData[key].pics;
-	      this.singleHomeData.mapPic = ajax.allHomeData[key].mapPic;
-	      this.singleHomeData.frontPic = ajax.allHomeData[key].pics[0];
-	    }
-
-	  }]);
 
 
 /***/ },
@@ -31257,9 +31284,9 @@
 	        controller: 'AdminController',
 	        controllerAs: 'adminCtrl'
 	      })
-	      // .otherwise({
-	      //   redirectTo: '/home'
-	      // })
+	      .otherwise({
+	        redirectTo: '/home'
+	      })
 	  }])
 
 

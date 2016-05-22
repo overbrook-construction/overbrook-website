@@ -36,7 +36,7 @@ angular.module('RouteModule', [require('angular-route')])
         controller: 'AdminController',
         controllerAs: 'adminCtrl'
       })
-      // .otherwise({
-      //   redirectTo: '/home'
-      // })
+      .otherwise({
+        redirectTo: '/home'
+      })
   }])

@@ -5,8 +5,15 @@ require(__dirname + '/../../ajax-service/data-service');
 angular.module('GalleryModule', ['AjaxService'])
   .controller('GalleryController', ['$location', 'ajax', function($location, ajax) {
 
+  this.getData = ajax.getData();
+  
   this.showInfo = false;
   this.houseData = ajax.allHomeData;
+
+  this.changeState = function(){
+    console.log('CHANGE STATE IS BEING HIT');
+    this.showInfo = false;
+  }
 
   this.singleHomeData = {};
     this.showInfoView = function() {
