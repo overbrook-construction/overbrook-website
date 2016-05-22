@@ -30992,18 +30992,22 @@
 
 	ajaxService.factory('ajax', ['$http', function($http) {
 
+
 	  var obj = {};
 
+	  obj.allHomeData;
+
 	  obj.sayName = function() {
-	    console.log('DAVID');
 	  }
 
 	  obj.getData = function() {
-	    console.log('GET DATA IS BEING HIT');
-	    $http.get('./data/homes.json')
+	    // console.log('GET DATA IS BEING HIT');
+	    $http.get('./data/new-home-data.json')
 	    .then(function successCallback(response) {
-	      // markerData = response.data
-	      console.log(response);
+	      // console.log('RESPONSE FROM HTTP GET DATA-SERVICE : ', response.data);
+	      obj.allHomeData = response.data;
+	      // SAVE TO SESSION STORAGE
+
 	    }, function errorCallback(response) {
 	    })
 	  }
@@ -31060,13 +31064,10 @@
 	          for (var i = 0; i <markerData.length; i++){
 	            mockHouseArray.push(markerData[i].address)
 	          }
-	        console.log(markerData);
 	        function geocode() {
 	          for (var i = 0; i < markerData.length; i++){
 	            var geocoder = new google.maps.Geocoder();
 	            geocoder.geocode({'address': markerData[i].address}, function(results, status) {
-	              console.log(results);
-	              console.log(status);
 	              results.forEach(function(obj){
 	                geotags.push(obj.geometry.location);
 	              })
@@ -31103,14 +31104,49 @@
 
 /***/ },
 /* 8 */
-/***/ function(module, exports) {
+/***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
 
-	angular.module('GalleryModule', [])
-	  .controller('GalleryController', function() {
-	    this.imgSrc = ['./media/630-001.jpg', './media/2432-001.jpg', './media/2434-001.jpg', './media/7720-001.jpg', './media/7728-001.jpg', './media/8102-001.jpg'];
-	  });
+	__webpack_require__(5);
+
+	angular.module('GalleryModule', ['AjaxService'])
+	  .controller('GalleryController', ['$location', 'ajax', function($location, ajax) {
+	    // this.imgSrc = ['./media/630-001.jpg', './media/2432-001.jpg', './media/2434-001.jpg', './media/7720-001.jpg', './media/7728-001.jpg', './media/8102-001.jpg'];
+
+	  // this.imgSrc = [ajax.allHomeData.twoFourThreeTwo.pics[0],
+	  //                ajax.allHomeData.twoFourThreeFour.pics[0],
+	  //                ajax.allHomeData.sevenSevenTwoZero.pics[0]
+	  // ]
+
+	  this.houseData = ajax.allHomeData;
+
+	  console.log('HOUSE DATA : ', this.houseData);
+
+
+	    // this.imgSrc = ajax.allHomeData.completed.twoFourThreeTwo.pics
+	    // console.log(this.jsonImage = ajax.allHomeData.completed.lucy.pics[0])
+
+	    // this.imgSrc = './media/630-001.jpg';
+
+
+	    this.showInfoView = function() {
+	      $location.path('/info');
+	    }
+
+	    this.showClickedHome = function(clickedHome) {
+	      console.log('CLICKED HOME FUNCTION HAS BEEN HIT WITH : ', clickedHome);
+	      // Some function that grabs appropriate json data based on id
+	      var shd = {};
+	      shd.address = ajax.allHomeData.completed.clickedHome.address;
+	      return shd;
+	    }
+
+	    this.info = 'dog';
+
+	    console.log('INFO VIEW AJAX SERVICE DATA : ', ajax.allHomeData);
+
+	  }]);
 
 
 /***/ },
@@ -31119,10 +31155,16 @@
 
 	'use strict';
 
-	angular.module('InfoModule', [])
-	  .controller('InfoController', function() {
+	// require(__dirname + '/../../ajax-service/data-service');
 
-	  })
+	angular.module('InfoModule', ['AjaxService'])
+	  .controller('InfoController', ['ajax', function(ajax) {
+	    //
+	    // this.info = 'dog';
+	    //
+	    // console.log('INFO VIEW AJAX SERVICE DATA : ', ajax.allHomeData);
+
+	  }])
 
 
 /***/ },
@@ -31214,8 +31256,8 @@
 	      })
 	      .when('/info', {
 	        templateUrl: './info-view.html',
-	        controller: 'InfoController',
-	        controllerAs: 'infoCtrl'
+	        controller: 'GalleryController',
+	        controllerAs: 'galleryCtrl'
 	      })
 	      .when('/contact', {
 	        templateUrl: './contact-view.html',
@@ -31227,9 +31269,9 @@
 	        controller: 'AdminController',
 	        controllerAs: 'adminCtrl'
 	      })
-	      .otherwise({
-	        redirectTo: '/home'
-	      })
+	      // .otherwise({
+	      //   redirectTo: '/home'
+	      // })
 	  }])
 
 

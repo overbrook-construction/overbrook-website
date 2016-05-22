@@ -29,13 +29,10 @@ angular.module('MapModule', [])
           for (var i = 0; i <markerData.length; i++){
             mockHouseArray.push(markerData[i].address)
           }
-        console.log(markerData);
         function geocode() {
           for (var i = 0; i < markerData.length; i++){
             var geocoder = new google.maps.Geocoder();
             geocoder.geocode({'address': markerData[i].address}, function(results, status) {
-              console.log(results);
-              console.log(status);
               results.forEach(function(obj){
                 geotags.push(obj.geometry.location);
               })

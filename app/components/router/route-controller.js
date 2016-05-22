@@ -23,8 +23,8 @@ angular.module('RouteModule', [require('angular-route')])
       })
       .when('/info', {
         templateUrl: './info-view.html',
-        controller: 'InfoController',
-        controllerAs: 'infoCtrl'
+        controller: 'GalleryController',
+        controllerAs: 'galleryCtrl'
       })
       .when('/contact', {
         templateUrl: './contact-view.html',
@@ -36,7 +36,7 @@ angular.module('RouteModule', [require('angular-route')])
         controller: 'AdminController',
         controllerAs: 'adminCtrl'
       })
-      .otherwise({
-        redirectTo: '/home'
-      })
+      // .otherwise({
+      //   redirectTo: '/home'
+      // })
   }])

@@ -1,11 +1,28 @@
 <div class="galleryImg">
   <nav-directive></nav-directive>
-  <section class="galleryMasterDiv" ng-hide="galleryCtrl.showInfo == true">
-          <img ng-repeat="imgSrc in galleryCtrl.imgSrc" src="{{imgSrc}}" class="thumbnail" id="thumbnail" ng-click="galleryCtrl.showInfo = true">
+  <!-- <section class="galleryMasterDiv" ng-hide="galleryCtrl.showInfo == true">
+
+          <img ng-repeat="imgSrc in galleryCtrl.imgSrc" src="{{imgSrc}}" class="thumbnail" id="thumbnail" clickedHome="'one'" ng-click="galleryCtrl.showInfo = true;
+          galleryCtrl.showInfoView();
+          galleryCtrl.showClickedHome(clickedHome)
+          ">
+  </section> -->
+
+  <section class="galleryMasterDiv">
+        <a href="#/info/{{value._id}}" ng-repeat="(eachHome, value) in galleryCtrl.houseData" class="thumbnail">
+            <img src="{{value.pics[0]}}" class="thumbnail" id="thumbnail"
+            ng-click="galleryCtrl.showInfoView()";>
+        </a>
   </section>
 
-  <section ng-show="galleryCtrl.showInfo == true">
+<!-- <section>
+  <img src="{{galleryCtrl.imgSrc}}">
+</section> -->
+
+
+
+<!-- <section ng-show="galleryCtrl.showInfo == true">
     <button class="xButton" type="button" ng-click="galleryCtrl.showInfo = false">-x-</button>
-  </section>
+  </section> -->
 
 </div>
