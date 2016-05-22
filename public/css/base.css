@@ -163,6 +163,10 @@
   margin-bottom: 10px;
   box-shadow: 3px 3px 3px gray; }
 
+.backButton {
+  position: fixed;
+  margin: 10px; }
+
 .galleryInfoMasterSection {
   text-align: center; }
 
@@ -298,9 +302,13 @@
   margin: 0px 0px 0px 5px; }
 
 .footer {
-  display: block;
+  position: fixed;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  padding: 0;
   text-align: center;
-  height: 20px; }
+  background-color: #F0F0F0; }
 
 .footerText:before {
   content: "\00a9"; }
