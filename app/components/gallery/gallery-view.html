@@ -8,11 +8,11 @@
           ">
   </section> -->
 
-  <section class="galleryMasterDiv">
-        <a href="#/info/{{value._id}}" ng-repeat="(eachHome, value) in galleryCtrl.houseData" class="thumbnail">
-            <img src="{{value.pics[0]}}" class="thumbnail" id="thumbnail"
-            ng-click="galleryCtrl.showInfoView()";>
-        </a>
+  <section class="galleryMasterDiv" ng-hide="galleryCtrl.showInfo == true">
+        <img ng-repeat="(eachHome, value) in galleryCtrl.houseData" class="thumbnail" id="thumbnail" src="{{value.pics[0]}}" ng-click=
+         "galleryCtrl.showInfo = true;
+         galleryCtrl.singleHouseDataLoader(eachHome);
+        ">
   </section>
 
 <!-- <section>
@@ -24,5 +24,62 @@
 <!-- <section ng-show="galleryCtrl.showInfo == true">
     <button class="xButton" type="button" ng-click="galleryCtrl.showInfo = false">-x-</button>
   </section> -->
+
+
+<!-- THIS IS THE CODE FOR DOING THE REPEATER IN THE LINK STYLE WITH ID IN URL -->
+<!-- <section class="galleryMasterDiv">
+      <a href="#/info/{{value._id}}" ng-repeat="(eachHome, value) in galleryCtrl.houseData" class="thumbnail">
+          <img src="{{value.pics[0]}}" class="thumbnail" id="thumbnail"
+          ng-click="galleryCtrl.showInfoView()";>
+      </a>
+</section> -->
+
+
+
+<section class="infoContainer" ng-show="galleryCtrl.showInfo == true">
+  <!-- left half -->
+  <div class="infoImageContainer">
+    <!-- main image -->
+    <img src="{{galleryCtrl.singleHomeData.frontPic}}" class="infoMainImage">
+    <!-- thumbnail slider container -->
+    <div class="infoSliderContainer">
+      <!-- repeated image slider -->
+        <img ng-repeat="sliderPic in galleryCtrl.singleHomeData.pics" src="{{sliderPic}}" class="infoSliderImage">
+
+    </div>
+
+  </div>
+
+  <!-- WIRED UP FOR GALLERY CONTROLLER  -->
+
+  <!-- right half -->
+  <!-- house info container -->
+  <div class="infoTextContainer">
+    <!-- house info -->
+    <p class="infoTextAddress">{{galleryCtrl.singleHomeData.address}}</p>
+    <p class="infoTextSqFt">{{galleryCtrl.singleHomeData.sqft}}</p>
+    <p class="infoTextLotSize">{{galleryCtrl.singleHomeData.lotsize}}</p>
+    <p class="infoTextBedrooms">{{galleryCtrl.singleHomeData.bedrooms}}</p>
+    <p class="infoTextBathrooms">{{galleryCtrl.singleHomeData.bathrooms}}</p>
+    <p class="infoTextElementary">{{}}</p>
+    <p class="infoTextMiddle">{{}}</p>
+    <p class="infoTextHS">{{}}</p>
+    <p class="infoTextStatus">{{galleryCtrl.singleHomeData.status}}</p>
+  </div>
+  <!-- map pic container -->
+  <div class="infoMapImageContainer">
+    <!-- MAIN PICTURE -->
+    <img src="" alt="" />
+    <!-- MAP PICTURE -->
+    <img src="{{galleryCtrl.singleHomeData.mapPic}}" class="infoMapImage">
+
+  </div>
+
+</section>
+
+
+
+
+
 
 </div>
