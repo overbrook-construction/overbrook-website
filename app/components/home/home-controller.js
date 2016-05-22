@@ -1,6 +1,6 @@
 'use strict';
 
-require('./data-service');
+require(__dirname + '/../../ajax-service/data-service');
 
 angular.module('HomeModule', ['AjaxService'])
 

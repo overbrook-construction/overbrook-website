@@ -49,10 +49,10 @@
 	const angular = __webpack_require__(1);
 
 	__webpack_require__(3);
-	__webpack_require__(4);
 	__webpack_require__(6);
 	__webpack_require__(7);
 	__webpack_require__(8);
+	__webpack_require__(4);
 	__webpack_require__(9);
 	__webpack_require__(10);
 	__webpack_require__(11)
@@ -30944,14 +30944,34 @@
 
 /***/ },
 /* 3 */
-/***/ function(module, exports) {
+/***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
 
-	angular.module('NavModule', [])
-	  .controller('navController', function() {
+	__webpack_require__(4);
 
-	  })
+	angular.module('NavModule', [])
+	  .controller('navController', ['$controller', function($controller) {
+
+	      // this.changeUp = $controller('GalleryController').changeState()
+
+	      var yup = $controller('GalleryController');
+
+	      // console.log(yup.changeState);
+
+	      // var yup = $controller('GalleryController');
+
+	      // this.changeUp = $controller('GalleryController').changeState();
+	      // this.changeUp = yup.changeState();
+	      // console.log(yup.changeState());
+
+	      this.changeUp = function() {
+	        yup.changeState();
+	      }
+
+
+
+	  }])
 	  .directive('navDirective', function() {
 	    return {
 	      restrict: 'E',
@@ -30962,6 +30982,83 @@
 
 /***/ },
 /* 4 */
+/***/ function(module, exports, __webpack_require__) {
+
+	'use strict';
+
+	__webpack_require__(5);
+
+	angular.module('GalleryModule', ['AjaxService'])
+	  .controller('GalleryController', ['$location', 'ajax', function($location, ajax) {
+
+	  this.getData = ajax.getData();
+	  
+	  this.showInfo = false;
+	  this.houseData = ajax.allHomeData;
+
+	  this.changeState = function(){
+	    console.log('CHANGE STATE IS BEING HIT');
+	    this.showInfo = false;
+	  }
+
+	  this.singleHomeData = {};
+	    this.showInfoView = function() {
+	      $location.path('/info');
+	    }
+
+	    this.singleHouseDataLoader = function(key){
+	      this.singleHomeData.address = ajax.allHomeData[key].address;
+	      this.singleHomeData.sqft = ajax.allHomeData[key].sqft;
+	      this.singleHomeData.bedrooms = ajax.allHomeData[key].bedrooms;
+	      this.singleHomeData.bathrooms = ajax.allHomeData[key].bathrooms;
+	      this.singleHomeData.lotsize = ajax.allHomeData[key].lotsize;
+	      this.singleHomeData.schooldistrict = ajax.allHomeData[key].schooldistrict;
+	      this.singleHomeData.status = ajax.allHomeData[key].status;
+	      this.singleHomeData.pics = ajax.allHomeData[key].pics;
+	      this.singleHomeData.mapPic = ajax.allHomeData[key].mapPic;
+	      this.singleHomeData.frontPic = ajax.allHomeData[key].pics[0];
+	    }
+
+	  }]);
+
+
+/***/ },
+/* 5 */
+/***/ function(module, exports) {
+
+	'use strict';
+
+	var ajaxService = angular.module('AjaxService', []);
+
+	ajaxService.factory('ajax', ['$http', function($http) {
+
+
+	  var obj = {};
+
+	  obj.allHomeData;
+
+	  obj.sayName = function() {
+	  }
+
+	  obj.getData = function() {
+	    // console.log('GET DATA IS BEING HIT');
+	    $http.get('./data/new-home-data.json')
+	    .then(function successCallback(response) {
+	      // console.log('RESPONSE FROM HTTP GET DATA-SERVICE : ', response.data);
+	      obj.allHomeData = response.data;
+	      // SAVE TO SESSION STORAGE
+
+	    }, function errorCallback(response) {
+	    })
+	  }
+
+	return obj;
+
+	}])
+
+
+/***/ },
+/* 6 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -30983,38 +31080,7 @@
 
 
 /***/ },
-/* 5 */
-/***/ function(module, exports) {
-
-	'use strict';
-
-	var ajaxService = angular.module('AjaxService', []);
-
-	ajaxService.factory('ajax', ['$http', function($http) {
-
-	  var obj = {};
-
-	  obj.sayName = function() {
-	    console.log('DAVID');
-	  }
-
-	  obj.getData = function() {
-	    console.log('GET DATA IS BEING HIT');
-	    $http.get('./data/homes.json')
-	    .then(function successCallback(response) {
-	      // markerData = response.data
-	      console.log(response);
-	    }, function errorCallback(response) {
-	    })
-	  }
-
-	return obj;
-
-	}])
-
-
-/***/ },
-/* 6 */
+/* 7 */
 /***/ function(module, exports) {
 
 	'use strict';
@@ -31026,15 +31092,80 @@
 
 
 /***/ },
-/* 7 */
+/* 8 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
 
 	const angular = __webpack_require__(1);
 
-	angular.module('MapModule', [])
-	  .controller('MapController', ['$http', '$location', function($http, $location) {
+	__webpack_require__(5);
+
+	angular.module('MapModule', ['AjaxService'])
+	  .controller('MapController', ['$http', '$location', 'ajax', function($http, $location, ajax) {
+
+	    // NON WORKING MAP CODE
+	    //
+	    // this.houseData = ajax.allHomeData;
+	    // var data = ajax.allHomeData;
+	    // // console.log(data);
+	    //
+	    // this.filterAddresses = [];
+	    //
+	    // var completedHomesAdd = [];
+	    // var futureHomesAdd = [];
+	    // var constructingHomesAdd = [];
+	    //
+	    //  function getAddress() {
+	    //   for (var key in data) {
+	    //     var obj = data[key];
+	    //     // console.log('NEW OBJECT IS : ', obj);
+	    //     for (var status in obj) {
+	    //       if(obj.status === 'Completed') {
+	    //         // console.log(completedHomesAdd);
+	    //         if (completedHomesAdd.indexOf(obj.address) !== obj.address){
+	    //           completedHomesAdd.push(obj.address);
+	    //         }
+	    //       }
+	    //       if(obj[status] === 'Constructing') {
+	    //         futureHomesAdd.push(obj.address);
+	    //       }
+	    //       if(obj[status] === 'Future') {
+	    //         constructingHomesAdd.push(obj.address);
+	    //       }
+	    //     }
+	    //   }
+	    // }
+	    // getAddress();
+	    // console.log(completedHomesAdd);
+
+
+
+
+
+
+
+
+	    // this.showHomes = function(status) {
+	    //   console.log('SHOW HOMES HAS BEEN HIT');
+	    //   for (var key in data) {
+	    //     var obj = data[key];
+	    //     // console.log('NEW OBJECT IS : ', obj);
+	    //     for (var status in obj) {
+	    //       if(obj[status] === 'Completed') {
+	    //         this.completedHomesAdd.push(obj.address);
+	    //       }
+	    //       if(obj[status] === 'Constructing') {
+	    //         this.futureHomesAdd.push(obj.address);
+	    //       }
+	    //       if(obj[status] === 'Future') {
+	    //         this.constructingHomesAdd.push(obj.address);
+	    //       }
+	    //     }
+	    //   }
+	    // }
+
+
 
 	    var mockHouseArray = [];
 	    this.realMockArray = mockHouseArray;
@@ -31060,13 +31191,10 @@
 	          for (var i = 0; i <markerData.length; i++){
 	            mockHouseArray.push(markerData[i].address)
 	          }
-	        console.log(markerData);
 	        function geocode() {
 	          for (var i = 0; i < markerData.length; i++){
 	            var geocoder = new google.maps.Geocoder();
 	            geocoder.geocode({'address': markerData[i].address}, function(results, status) {
-	              console.log(results);
-	              console.log(status);
 	              results.forEach(function(obj){
 	                geotags.push(obj.geometry.location);
 	              })
@@ -31102,27 +31230,21 @@
 
 
 /***/ },
-/* 8 */
-/***/ function(module, exports) {
-
-	'use strict';
-
-	angular.module('GalleryModule', [])
-	  .controller('GalleryController', function() {
-	    this.imgSrc = ['./media/630-001.jpg', './media/2432-001.jpg', './media/2434-001.jpg', './media/7720-001.jpg', './media/7728-001.jpg', './media/8102-001.jpg'];
-	  });
-
-
-/***/ },
 /* 9 */
 /***/ function(module, exports) {
 
 	'use strict';
 
-	angular.module('InfoModule', [])
-	  .controller('InfoController', function() {
+	// require(__dirname + '/../../ajax-service/data-service');
 
-	  })
+	angular.module('InfoModule', ['AjaxService'])
+	  .controller('InfoController', ['ajax', function(ajax) {
+	    //
+	    // this.info = 'dog';
+	    //
+	    // console.log('INFO VIEW AJAX SERVICE DATA : ', ajax.allHomeData);
+
+	  }])
 
 
 /***/ },
@@ -31214,8 +31336,8 @@
 	      })
 	      .when('/info', {
 	        templateUrl: './info-view.html',
-	        controller: 'InfoController',
-	        controllerAs: 'infoCtrl'
+	        controller: 'GalleryController',
+	        controllerAs: 'galleryCtrl'
 	      })
 	      .when('/contact', {
 	        templateUrl: './contact-view.html',
