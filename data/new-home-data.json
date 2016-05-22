@@ -26,7 +26,7 @@
       "middle": "Chinook Middle School",
       "hs": "Bellevue High School",
       "status": "Completed",
-      "pics": ["./data/img/2434-001.jpg", "./data/img/2434-002.jpg", "./data/img/2434-003.jpg", "./data/img/2434-004.jpg", "./data/img/2434-005.jpg"],
+      "pics": ["./data/img/2434-001.jpg", "./data/img/2434-002.jpg", "./data/img/2434-004.jpg", "./data/img/2434-005.jpg"],
       "mapPic": "./data/img/2434-map-view.png"
     },
     "sevenSevenTwoZero": {
@@ -86,7 +86,7 @@
       "middle": "Chinook Middle School",
       "hs": "Bellevue High School",
       "status": "Future",
-      "pics": ["./data/img/8102-001.jpg", "./data/img/8102-002.jpg", "./data/img/8102-003.jpg", "./data/img/8102-004.jpg", "./data/img/8102-005.jpg"],
+      "pics": ["./data/img/8102-001.jpg", "./data/img/8102-002.jpg", "./data/img/8102-003.jpg", "./data/img/8102-004.jpg", "./data/img/8102-006.jpg"],
       "mapPic": "./data/img/8102-map-view.png"
     }
 }

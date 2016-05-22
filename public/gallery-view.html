@@ -61,8 +61,8 @@
     <p class="infoText">{{galleryCtrl.singleHomeData.address}}</p>
     <p class="infoText">{{galleryCtrl.singleHomeData.sqft}}</p>
     <p class="infoText">{{galleryCtrl.singleHomeData.lotsize}}</p>
-    <p class="infoText">{{galleryCtrl.singleHomeData.bedrooms}}</p>
-    <p class="infoText">{{galleryCtrl.singleHomeData.bathrooms}}</p>
+    <p class="infoText">Bedrooms: {{galleryCtrl.singleHomeData.bedrooms}}</p>
+    <p class="infoText">Bathrooms: {{galleryCtrl.singleHomeData.bathrooms}}</p>
     <p class="infoText">{{galleryCtrl.singleHomeData.elementary}}</p>
     <p class="infoText">{{galleryCtrl.singleHomeData.middle}}</p>
     <p class="infoText">{{galleryCtrl.singleHomeData.hs}}</p>
@@ -84,5 +84,5 @@
 
 
 
-<button type="button" name="button" ng-click="galleryCtrl.changeState()"></button>
+<button type="button" name="button" ng-click="galleryCtrl.changeState()" ng-show="galleryCtrl.showInfo == true">Back</button>
 </div>
