@@ -24,16 +24,22 @@ angular.module('MapModule', ['AjaxService'])
     var geoConstructing = [];
     var newShit;
 
-    var geoFunc = function(jsonObject) {
+    this.construct = geoConstructing;
+    this.comp = geoCompleted;
+    this.future = geoFuture;
+
+    var geoFunc = function(jsonObject, geoArray) {
       for (var i = 0; i < 3; i++) {
         var geocoder = new google.maps.Geocoder();
         geocoder.geocode({'address': jsonObject.address}, function(results, status) {
           results.forEach(function(obj) {
-            geoCompleted.push(obj.geometry.location);
+            // geoCompleted.push(obj.geometry.location);
             // var array = [];
             // array.push(obj.geometry.location);
-            // console.log(array);
+            // console.log('CREATED ARRAY : ', array);
             // return array;
+            geoArray.push(obj.geometry.location);
+            console.log('Future : ', geoFuture);
           })
         })
       }
@@ -44,47 +50,65 @@ angular.module('MapModule', ['AjaxService'])
         var obj = data[key];
           if(obj.status === 'Completed') {
             completedHomesAdd.push(obj.address);
-            geoFunc(obj);
-            // console.log(geoCompleted);
-          }
-          if(obj.status === 'Constructing') {
-            futureHomesAdd.push(obj.address);
-            // geoFunc(obj);
+             geoFunc(obj, geoCompleted);
           }
           if(obj.status === 'Future') {
+            futureHomesAdd.push(obj.address);
+            geoFunc(obj, geoFuture);
+          }
+          if(obj.status === 'Constructing') {
             constructingHomesAdd.push(obj.address);
-            // geoFunc(obj);
+            geoFunc(obj, geoConstructing);
           }
       }
     }
+
+      // function getFuture(geoFun) {
+      //   for (var key in data) {
+      //     var obj = data[key];
+      //       if(obj.status === 'Future') {
+      //         futureHomesAdd.push(obj.address);
+      //          geoFunc(obj, geoFuture);
+      //       }
+      //       if(obj.status === 'Completed') {
+      //         completedHomesAdd.push(obj.address);
+      //          geoFunc(obj, geoCompleted);
+      //       }
+      //     }
+      //   }
     getAddress(geoFunc);
-    // console.log(completedHomesAdd);
-    // console.log(futureHomesAdd);
-    // console.log(constructingHomesAdd);
+    // getFuture(geoFunc);
 
-
+    var map = {};
+    map.googleMapEl = document.getElementById('map');
+    map.googleMap;
+    map.markerArray = [];
 
          this.initMap = function() {
           function map() {
-          var mapDiv = document.getElementById('map');
-          var map = new google.maps.Map(mapDiv, {
+            var mapDiv = document.getElementById('map');
+           map.googleMap = new google.maps.Map(mapDiv, {
             center: {lat: 47.629, lng: -122.211},
             zoom: 12
           });
-          for (var j = 0; j < geoCompleted.length; j++){
-            var marker = new google.maps.Marker({
-              map: map,
-              position: geoCompleted[j]
-            });
-            var infowindow = new google.maps.InfoWindow({
-              content: '<p>Marker Location:' + marker.getPosition() + '</p>'
-            });
-          }
         }
         setTimeout(map, 500)
       }
 
-
+      // this.redrawMarkers = function(geoArray) {
+      //   console.log('REDRAW MARKERS HIT with : ', geoArray);
+      //   for (var j = 0; j < geoArray.length; j++){
+      //     var marker = new google.maps.Marker({
+      //       map: map,
+      //       position: geoArray[j]
+      //     });
+      //     var infowindow = new google.maps.InfoWindow({
+      //       content: '<p>Marker Location:' + marker.getPosition() + '</p>'
+      //     });
+      //   }
+      //   console.log('MAP IS ', map);
+      //   marker.setMap(map);
+      // }
 
 
           // function geocode() {
