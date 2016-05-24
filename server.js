@@ -5,7 +5,11 @@ var apiRouter = express.Router();
 var bodyParser = require('body-parser');
 var mongoose = require('mongoose');
 var mongoURI = process.env.MONGOLAB_URI;
+var multer = require('multer');
 require('dotenv').config();
+
+var multiparty = require('connect-multiparty'),
+    multipartyMiddleware = multiparty();
 
 mongoose.connect(process.env.MONGOLAB_URI);
 
@@ -20,7 +24,9 @@ app.use((req, res, next) => {
 });
 
 app.use(bodyParser.json());
+// app.use('/', multipartyMiddleware, apiRouter);
 app.use('/', apiRouter);
+
 
 app.listen(3000, () => {
   console.log('Server started on port 3000');
