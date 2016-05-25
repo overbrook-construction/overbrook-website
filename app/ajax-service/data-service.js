@@ -57,7 +57,7 @@ ajaxService.factory('ajax', ['$http', function($http) {
     // console.log('GET DATA IS BEING HIT');
     $http.get(adminRoute)
     .then(function successCallback(response) {
-      console.log('RESPONSE FROM HTTP GET DATA-SERVICE : ', response.data);
+      // console.log('RESPONSE FROM HTTP GET DATA-SERVICE : ', response.data);
       obj.allHomeData = response.data;
       // SAVE TO SESSION STORAGE
 

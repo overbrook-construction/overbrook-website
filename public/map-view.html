@@ -1,7 +1,7 @@
 
 <!-- NON WORKING MAP CODE -->
 
-<!-- <div class="mapImg" ng-init="mapCtrl.initMap(mapCtrl.comp)">
+<div class="mapImg" ng-init="mapCtrl.getData(); mapCtrl.initMap(mapCtrl.comp); mapCtrl.showSideCompleted('Complete')">
   <nav-directive></nav-directive>
   <section class="mapPageSection">
 
@@ -11,30 +11,32 @@
 
     <div class="addressSidebar">
       <div class="filterButtonDiv">
-        <button class="completed" type="button" ng-click="mapCtrl.redrawMarkers(mapCtrl.comp)">Completed</button>
-        <button class="current" type="button" ng-click="mapCtrl.redrawMarkers(mapCtrl.construct)">Current</button>
-        <button class="future" type="button" ng-click="mapCtrl.initMap(mapCtrl.future)">Future</button>
+        <button class="completed" type="button" ng-click="mapCtrl.showSideCompleted('Complete')">Completed</button>
+        <button class="current" type="button" ng-click="mapCtrl.showSideCompleted('Constructing')">Current</button>
+        <button class="future" type="button" ng-click="mapCtrl.showSideCompleted('Future')">Future</button>
       </div>
       <div class="scrollContainer">
-        <div class="addressDiv" ng-repeat="houses in mapCtrl.realMockArray">
+        <div class="addressDiv" ng-repeat="(eachHome, value) in mapCtrl.clickedAddress">
           <p class="addressText">
-            {{houses}}
+            {{value.address}}
           </p>
-          <p class="viewDetailsButton" ng-click="mapCtrl.viewChangeToGallery()">View Details</p>
+          <!-- Have this button run the galleryCtrlsingleHouseDataLoader(with the key) -->
+          <!-- <p class="viewDetailsButton" ng-click="mapCtrl.viewChangeToGallery()">View Details</p> -->
+          <button class="viewDetailsButton" ng-click="mapCtrl.viewChangeToGallery(value._id)"></button>
         </div>
       </div>
     </div>
 
 
   </section>
-</div> -->
+</div>
 
 
 
 
+<!-- WORKING MAP CODE -->
 
-
- <div class="mapImg">
+ <!-- <div class="mapImg">
   <nav-directive></nav-directive>
   <section class="mapPageSection">
 
@@ -60,4 +62,4 @@
 
 
   </section>
-</div>
+</div> -->

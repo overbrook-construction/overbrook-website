@@ -11,7 +11,7 @@
   <section class="galleryMasterDiv" ng-hide="galleryCtrl.showInfo == true">
         <img ng-repeat="(eachHome, value) in galleryCtrl.houseData" class="thumbnail" id="thumbnail" src="{{value.pics[0]}}" ng-click=
          "galleryCtrl.showInfo = true;
-         galleryCtrl.singleHouseDataLoader(eachHome);
+         galleryCtrl.singleHouseDataLoader(value._id);
         ">
   </section>
 
@@ -35,7 +35,7 @@
 </section> -->
 
 
-<button class="backButton" type="button" name="button" ng-click="galleryCtrl.changeState()" ng-show="galleryCtrl.showInfo == true">Back</button>
+<button class="backButton" type="button" name="button" ng-click="galleryCtrl.changeStateFalse()" ng-show="galleryCtrl.showInfo == true">Back</button>
 <section class="galleryInfoMasterSection">
 
   <section class="infoContainer" ng-show="galleryCtrl.showInfo == true">
