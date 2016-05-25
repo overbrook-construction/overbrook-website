@@ -1,4 +1,12 @@
+<!-- <!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <title></title>
+  </head>
+  <body>
 
+</html> -->
 <section>
   <form ng-submit="adminCtrl.submitHouse(newHouse)">
     <input type="text" name="name" placeholder="address" ng-model="newHouse.address">
@@ -14,6 +22,26 @@
   </form>
 </section>
 
-<form action="http://localhost:3000/addPics" method="post" enctype="multipart/form-data">
-  <input type="file" name="displayImage">
-</form>
+<!-- <form type="multipart/form-data" method="post" name="fileinfo" ng-submit="adminCtrl.submitForm(file)">
+  <input type="file" name="file" id="imgFile" required />
+  <input type="submit" value="Stash the file!" />
+  <button type="submit">submit</button>
+</form> -->
+
+
+<!-- <form class="" action="/addPics" method="post" enctype="multipart/form-data">
+  <input type="file" name="upload" multiple="multiple">
+  <input type="submit" value="Upload File">
+</form> -->
+
+<!-- </body> -->
+
+
+<section>
+  <div ng-repeat="house in adminCtrl.allHouses">
+    <p>
+      {{house}}
+    </p>
+  </div>
+  <button type="submit" ng-click="adminCtrl.getHouseData()"></button>
+</section>

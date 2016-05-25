@@ -23,17 +23,53 @@ module.exports = (apiRouter) => {
       res.json(house);
     })
   })
+  .get((req, res) => {
+    House.find({}, (err, houses) => {
+      if (err) throw err;
+      res.json(houses);
+    });
+  })
 
   apiRouter.route('/addPics')
     .post((req, res) => {
-      console.log('ADD PICTURE ROUTE HAS BEEN HIT WITH : ', req.body);
-      var file = req.files.file;
-      var stream = fs.createReadStream(file.path);
-      return s3fsImpl.writeFile(file.originalFilename, stream).then(function () {
-        fs.unlink(file.path, function(err) {
-          if (err) console.log(err);
-        })
+      var body = [];
+      req.on('data', function(chunk) {
+        body.push(chunk)
+      }).on('end', function() {
+        console.log('JSON STRINGIFY BODY : ', JSON.stringify(body));
+        body = Buffer.concat(body).toString();
+        console.log('BODY IS : ', body);
+
+
+            var s3 = new AWS.S3();
+            var params = {
+              Bucket: 'overbrook-images',
+              // Key: process.env.AWS_ACCESS_KEY_ID,
+              Key: 'h2432/testObjec',
+              ACL: 'public-read-write',
+              Body: JSON.stringify(body)
+            }
+
+            s3.putObject(params, function(err, data) {
+              if (err) console.log(err, err.stack);
+              else     console.log('POSTING TO S3 WITH THIS DATA', data);
+              res.json(data);
+            });
+
+
+
+
+
+
+
       })
+      // var file = req.files.file;
+      // var stream = fs.createReadStream(file.path);
+      // return s3fsImpl.writeFile(file.originalFilename, stream).then(function () {
+      //   fs.unlink(file.path, function(err) {
+      //     if (err) console.log(err);
+      //   })
+      // })
     })
 
 }

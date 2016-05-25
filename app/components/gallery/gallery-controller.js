@@ -32,7 +32,7 @@ angular.module('GalleryModule', ['AjaxService'])
       this.singleHomeData.hs = ajax.allHomeData[key].hs;
       this.singleHomeData.status = ajax.allHomeData[key].status;
       this.singleHomeData.pics = ajax.allHomeData[key].pics;
-      this.singleHomeData.mapPic = ajax.allHomeData[key].mapPic;
+      this.singleHomeData.mapPic = ajax.allHomeData[key].pics[ajax.allHomeData[key].pics.length-1];
       this.singleHomeData.frontPic = ajax.allHomeData[key].pics[0];
     }
 
