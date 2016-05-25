@@ -44,7 +44,8 @@
     "nodemailer": "^2.4.1",
     "querystring": "^0.2.0",
     "s3fs": "^2.4.7",
-    "style-loader": "^0.13.1"
+    "style-loader": "^0.13.1",
+    "url": "^0.11.0"
   },
   "devDependencies": {
     "del": "^2.2.0",

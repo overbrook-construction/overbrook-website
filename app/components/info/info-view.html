@@ -1,0 +1,50 @@
+<div class="galleryImg">
+  <nav-directive></nav-directive>
+  <section class="galleryInfoMasterSection" ng-init="infoCtrl.singleHouseDataLoader(infoCtrl.idUrl)">
+    <!-- <section class="galleryInfoMasterSection" ng-init="infoCtrl.singleHouseDataLoader({{idUrl}})"> -->
+
+  <section class="infoContainer">
+    <!-- left half -->
+    <div class="infoImageContainer">
+      <!-- main image -->
+      <img src="{{infoCtrl.singleHomeData.frontPic}}" class="infoMainImage">
+      <!-- thumbnail slider container -->
+      <div class="infoSliderContainer">
+        <!-- repeated image slider -->
+        <img ng-repeat="sliderPic in infoCtrl.singleHomeData.pics" src="{{sliderPic}}" class="infoSliderImage">
+
+      </div>
+
+    </div>
+
+
+  <!-- WIRED UP FOR GALLERY CONTROLLER  -->
+
+  <!-- right half -->
+  <!-- house info container -->
+  <div class="infoTextContainer">
+    <!-- house info -->
+    <p class="infoText">{{infoCtrl.singleHomeData.address}}</p>
+    <p class="infoText">{{infoCtrl.singleHomeData.sqft}}</p>
+    <p class="infoText">{{infoCtrl.singleHomeData.lotsize}}</p>
+    <p class="infoText">Bedrooms: {{infoCtrl.singleHomeData.bedrooms}}</p>
+    <p class="infoText">Bathrooms: {{infoCtrl.singleHomeData.bathrooms}}</p>
+    <p class="infoText">{{infoCtrl.singleHomeData.elementary}}</p>
+    <p class="infoText">{{infoCtrl.singleHomeData.middle}}</p>
+    <p class="infoText">{{infoCtrl.singleHomeData.hs}}</p>
+    <p class="infoText">Status: {{infoCtrl.singleHomeData.status}}</p>
+  <!-- map pic container -->
+  <div class="infoMapImageContainer">
+    <!-- MAIN PICTURE -->
+    <img src="" alt="" />
+    <!-- MAP PICTURE -->
+    <img src="{{infoCtrl.singleHomeData.mapPic}}" class="infoMapImage">
+
+  </div>
+</div>
+
+</section>
+
+</section>
+
+</div>
