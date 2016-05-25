@@ -30953,21 +30953,21 @@
 	angular.module('NavModule', [])
 	  .controller('navController', ['$controller', function($controller) {
 
-	      // this.changeUp = $controller('GalleryController').changeState()
-
-	      var yup = $controller('GalleryController');
-
-	      // console.log(yup.changeState);
-
+	      // // this.changeUp = $controller('GalleryController').changeState()
+	      //
 	      // var yup = $controller('GalleryController');
+	      //
+	      // // console.log(yup.changeState);
+	      //
+	      // // var yup = $controller('GalleryController');
+	      //
+	      // // this.changeUp = $controller('GalleryController').changeState();
+	      // // this.changeUp = yup.changeState();
+	      // // console.log(yup.changeState());
 
-	      // this.changeUp = $controller('GalleryController').changeState();
-	      // this.changeUp = yup.changeState();
-	      // console.log(yup.changeState());
-
-	      this.changeUp = function() {
-	        yup.changeState();
-	      }
+	      // this.changeUp = function() {
+	      //   yup.changeState();
+	      // }
 
 
 
@@ -30995,32 +30995,83 @@
 
 	  this.showInfo = false;
 	  this.houseData = ajax.allHomeData;
+	  var data = ajax.allHomeData;
 
-	  this.changeState = function(){
-	    console.log('CHANGE STATE IS BEING HIT');
+	  this.changeStateFalse = function(){
+	    // console.log('CHANGE STATE IS BEING HIT');
 	    this.showInfo = false;
 	  }
 
+	  this.changeStateTrue = function() {
+	    this.showInfo = true;
+	  }
+
 	  this.singleHomeData = {};
+
 	    this.showInfoView = function() {
 	      $location.path('/info');
 	    }
 
-	    this.singleHouseDataLoader = function(key){
-	      this.singleHomeData.address = ajax.allHomeData[key].address;
-	      this.singleHomeData.sqft = ajax.allHomeData[key].sqft;
-	      this.singleHomeData.bedrooms = ajax.allHomeData[key].bedrooms;
-	      this.singleHomeData.bathrooms = ajax.allHomeData[key].bathrooms;
-	      this.singleHomeData.lotsize = ajax.allHomeData[key].lotsize;
-	      this.singleHomeData.schooldistrict = ajax.allHomeData[key].schooldistrict;
-	      this.singleHomeData.elementary = ajax.allHomeData[key].elementary;
-	      this.singleHomeData.middle = ajax.allHomeData[key].middle;
-	      this.singleHomeData.hs = ajax.allHomeData[key].hs;
-	      this.singleHomeData.status = ajax.allHomeData[key].status;
-	      this.singleHomeData.pics = ajax.allHomeData[key].pics;
-	      this.singleHomeData.mapPic = ajax.allHomeData[key].mapPic;
-	      this.singleHomeData.frontPic = ajax.allHomeData[key].pics[0];
+	    this.runSingleData = function(id) {
+	      console.log('RUN SINLE DATA HIT FROM MAP CTRL WITH : ', id)
+	      this.singleHouseDataLoader(id);
 	    }
+
+
+	// MAKING CODE THAT DISPLAYS INDIVIUDAL HOME DATA BASED ON ID INSIDE THE OBJECT
+	this.singleHouseDataLoader = function(id){
+	  console.log('ID SENT FROM VIEW : ', id + ' singleHomeDataLoader is called');
+
+	  for (var key in data) {
+	    var obj = data[key]
+	    if (data[key]._id == id) {
+	      // console.log('THIS IS THE MATCHING OBJECT', obj);
+	        this.singleHomeData.address = obj.address;
+	        this.singleHomeData.sqft = obj.sqft;
+	        this.singleHomeData.bedrooms = obj.bedrooms;
+	        this.singleHomeData.bathrooms = obj.bathrooms;
+	        this.singleHomeData.lotsize = obj.lotsize;
+	        this.singleHomeData.schooldistrict = obj.schooldistrict;
+	        this.singleHomeData.elementary = obj.elementary;
+	        this.singleHomeData.middle = obj.middle;
+	        this.singleHomeData.hs = obj.hs;
+	        this.singleHomeData.status = obj.status;
+	        this.singleHomeData.pics = obj.pics;
+	        this.singleHomeData.mapPic = obj.pics[obj.pics.length-1];
+	        this.singleHomeData.frontPic = obj.pics[0];
+	    }
+	  }
+
+	  // for (var id in data) {
+	    // var obj = data[id];
+	    // if(obj._id = id) {
+	      // console.log('OBJECT WITH MATCH ID IS : ', obj);
+	        // this.singleHomeData.address = obj.address;
+	        // this.singleHomeData.sqft = ajax.allHomeData[key].sqft;
+	        // this.singleHomeData.bedrooms = ajax.allHomeData[key].bedrooms;
+	        // this.singleHomeData.bathrooms = ajax.allHomeData[key].bathrooms;
+	        // this.singleHomeData.lotsize = ajax.allHomeData[key].lotsize;
+	    // }
+	  // }
+	}
+
+
+	    // this.singleHouseDataLoader = function(key){
+	    //   console.log('SINGLE HOUSE LOADER HIT FROM MAP CTRL')
+	    //   this.singleHomeData.address = ajax.allHomeData[key].address;
+	    //   this.singleHomeData.sqft = ajax.allHomeData[key].sqft;
+	    //   this.singleHomeData.bedrooms = ajax.allHomeData[key].bedrooms;
+	    //   this.singleHomeData.bathrooms = ajax.allHomeData[key].bathrooms;
+	    //   this.singleHomeData.lotsize = ajax.allHomeData[key].lotsize;
+	    //   this.singleHomeData.schooldistrict = ajax.allHomeData[key].schooldistrict;
+	    //   this.singleHomeData.elementary = ajax.allHomeData[key].elementary;
+	    //   this.singleHomeData.middle = ajax.allHomeData[key].middle;
+	    //   this.singleHomeData.hs = ajax.allHomeData[key].hs;
+	    //   this.singleHomeData.status = ajax.allHomeData[key].status;
+	    //   this.singleHomeData.pics = ajax.allHomeData[key].pics;
+	    //   this.singleHomeData.mapPic = ajax.allHomeData[key].pics[ajax.allHomeData[key].pics.length-1];
+	    //   this.singleHomeData.frontPic = ajax.allHomeData[key].pics[0];
+	    // }
 
 	  }]);
 
@@ -31033,8 +31084,49 @@
 
 	var ajaxService = angular.module('AjaxService', []);
 
+	// RETRIEVING DATA FROM JSON FILE THIS IS THE OLD VERSION
+	// ajaxService.factory('ajax', ['$http', function($http) {
+	//
+	//
+	//   var obj = {};
+	//
+	//   obj.allHomeData;
+	//
+	//   obj.sayName = function() {
+	//   }
+	//
+	//   obj.getData = function() {
+	//     // console.log('GET DATA IS BEING HIT');
+	//     $http.get('./data/new-home-data.json')
+	//     .then(function successCallback(response) {
+	//       // console.log('RESPONSE FROM HTTP GET DATA-SERVICE : ', response.data);
+	//       obj.allHomeData = response.data;
+	//       // SAVE TO SESSION STORAGE
+	//
+	//     }, function errorCallback(response) {
+	//     })
+	//   }
+	//
+	// return obj;
+	//
+	// }])
+
+	// RETRIEVING DATA FROM THE MLAB DATA BASE THIS IS THE NEW VERSION
 	ajaxService.factory('ajax', ['$http', function($http) {
 
+	  var adminRoute = 'http://localhost:3000/addHomes';
+	  // this.getHouseData = function() {
+	  //   console.log('GET REQUEST HAS BEEN RECEIVED');
+	  //   $http.get(adminRoute)
+	  //   .success(function(data, status, headers, config) {
+	  //     console.log('DATA FROM GET IS : ', data);
+	  //     allHouses.push(data);
+	  //     console.log(allHouses);
+	  //   })
+	  //   .error(function(data, status, headers, config) {
+	  //     console.log('CANNONT GET HOUSES');
+	  //   })
+	  // }
 
 	  var obj = {};
 
@@ -31045,7 +31137,7 @@
 
 	  obj.getData = function() {
 	    // console.log('GET DATA IS BEING HIT');
-	    $http.get('./data/new-home-data.json')
+	    $http.get(adminRoute)
 	    .then(function successCallback(response) {
 	      // console.log('RESPONSE FROM HTTP GET DATA-SERVICE : ', response.data);
 	      obj.allHomeData = response.data;
@@ -31101,151 +31193,265 @@
 	'use strict';
 
 	const angular = __webpack_require__(1);
+	__webpack_require__(4);
 
 	__webpack_require__(5);
 
 	angular.module('MapModule', ['AjaxService'])
-	  .controller('MapController', ['$http', '$location', 'ajax', function($http, $location, ajax) {
+	  .controller('MapController', ['$http', '$location', 'ajax', '$controller', function($http, $location, ajax, $controller) {
+
+	    var vm = this;
 
 	    // NON WORKING MAP CODE
-	    //
-	    // this.houseData = ajax.allHomeData;
-	    // var data = ajax.allHomeData;
-	    // // console.log(data);
-	    //
+
+	    // MAKE AJAX REQUEST ONCE COMING TO PAGE / DOES THIS FILL THE houseData with data right away
+	    //  NEED TO MAKE SURE AJAX REQUEST IS AVAILABLE ON ALL PAGES
+	    vm.getData = ajax.getData();
+	    // THIS INFORMATION IS ONLY AVAILABLE IF AJAX REQUEST HAPPENS PRIOR
+
+
+
+	    vm.houseData = ajax.allHomeData;
+	    var data = ajax.allHomeData;
+
+	    // ARRAY TO HOLD THE ADDRESSES BASED ON CLICKED BUTTON
+	    vm.clickedAddress = [];
+
+	    // SHOW SIDE BAR ADDRESS STARTING WITH COMPLETE AND THEN CHANGING ON BUTTON PRESS
+	    // EVENTUALLY HAVE SIDE BAR SHOWING AND MAP SHOW FOR SPECIFIED STATUS HAPPEN ON THE SAME FUNCTION
+	    vm.showSideCompleted = function(clickedValue){
+	      // console.log('SHOW COMPLETED SIDE HIT WITH : ', clickedValue);
+	      vm.clickedAddress = [];
+	      for (var key in data) {
+	        var obj = data[key];
+	          if(obj.status === clickedValue) {
+	            vm.clickedAddress.push(obj);
+	            console.log(vm.clickedAddress);
+	          }
+	        }
+	    }
+
+	    var galleryCtrl = $controller('GalleryController');
+	    vm.viewChangeToGallery = function(id) {
+	      // galleryCtrl.singleHouseDataLoader(eachHome);
+	      // console.log('EACH HOME IN MAP CTRL : ', id);
+	      galleryCtrl.runSingleData(id);
+	      // galleryCtrl.changeStateTrue();
+
+	      $location.path('/gallery');
+	    }
+
+
 	    // this.filterAddresses = [];
 	    //
 	    // var completedHomesAdd = [];
 	    // var futureHomesAdd = [];
 	    // var constructingHomesAdd = [];
 	    //
-	    //  function getAddress() {
+	    // var geoCompleted = [];
+	    // var geoFuture = [];
+	    // var geoConstructing = [];
+	    // var newShit;
+	    //
+	    // this.construct = geoConstructing;
+	    // this.comp = geoCompleted;
+	    // this.future = geoFuture;
+	    //
+	    // var geoFunc = function(jsonObject, geoArray) {
+	    //   for (var i = 0; i < 3; i++) {
+	    //     var geocoder = new google.maps.Geocoder();
+	    //     geocoder.geocode({'address': jsonObject.address}, function(results, status) {
+	    //       results.forEach(function(obj) {
+	    //         // geoCompleted.push(obj.geometry.location);
+	    //         // var array = [];
+	    //         // array.push(obj.geometry.location);
+	    //         // console.log('CREATED ARRAY : ', array);
+	    //         // return array;
+	    //         geoArray.push(obj.geometry.location);
+	    //         console.log('Future : ', geoFuture);
+	    //       })
+	    //     })
+	    //   }
+	    // }
+	    //
+	    //  function getAddress(geoFunc) {
 	    //   for (var key in data) {
 	    //     var obj = data[key];
-	    //     // console.log('NEW OBJECT IS : ', obj);
-	    //     for (var status in obj) {
 	    //       if(obj.status === 'Completed') {
-	    //         // console.log(completedHomesAdd);
-	    //         if (completedHomesAdd.indexOf(obj.address) !== obj.address){
-	    //           completedHomesAdd.push(obj.address);
+	    //         completedHomesAdd.push(obj.address);
+	    //          geoFunc(obj, geoCompleted);
+	    //       }
+	    //       if(obj.status === 'Future') {
+	    //         futureHomesAdd.push(obj.address);
+	    //         geoFunc(obj, geoFuture);
+	    //       }
+	    //       if(obj.status === 'Constructing') {
+	    //         constructingHomesAdd.push(obj.address);
+	    //         geoFunc(obj, geoConstructing);
+	    //       }
+	    //   }
+	    // }
+	    //
+	    //   // function getFuture(geoFun) {
+	    //   //   for (var key in data) {
+	    //   //     var obj = data[key];
+	    //   //       if(obj.status === 'Future') {
+	    //   //         futureHomesAdd.push(obj.address);
+	    //   //          geoFunc(obj, geoFuture);
+	    //   //       }
+	    //   //       if(obj.status === 'Completed') {
+	    //   //         completedHomesAdd.push(obj.address);
+	    //   //          geoFunc(obj, geoCompleted);
+	    //   //       }
+	    //   //     }
+	    //   //   }
+	    // getAddress(geoFunc);
+	    // // getFuture(geoFunc);
+	    //
+	    // var map = {};
+	    // map.googleMapEl = document.getElementById('map');
+	    // map.googleMap;
+	    // map.markerArray = [];
+	    //
+	    //      this.initMap = function() {
+	    //       function map() {
+	    //         var mapDiv = document.getElementById('map');
+	    //        map.googleMap = new google.maps.Map(mapDiv, {
+	    //         center: {lat: 47.629, lng: -122.211},
+	    //         zoom: 12
+	    //       });
+	    //     }
+	    //     setTimeout(map, 500)
+	    //   }
+	    //
+	    //   this.redrawMarkers = function(geoArray) {
+	    //     console.log('REDRAW MARKERS HIT with : ', geoArray);
+	    //     for (var j = 0; j < geoArray.length; j++){
+	    //       var marker = new google.maps.Marker({
+	    //         map: map,
+	    //         position: geoArray[j]
+	    //       });
+	    //       var infowindow = new google.maps.InfoWindow({
+	    //         content: '<p>Marker Location:' + marker.getPosition() + '</p>'
+	    //       });
+	    //     }
+	    //     console.log('MAP IS ', map);
+	    //     marker.setMap(map);
+	    //   }
+	    //
+	    //
+	    //       function geocode() {
+	    //         for (var i = 0; i < markerData.length; i++){
+	    //           var geocoder = new google.maps.Geocoder();
+	    //           geocoder.geocode({'address': markerData[i].address}, function(results, status) {
+	    //             results.forEach(function(obj){
+	    //               geotags.push(obj.geometry.location);
+	    //             })
+	    //           })
 	    //         }
 	    //       }
-	    //       if(obj[status] === 'Constructing') {
-	    //         futureHomesAdd.push(obj.address);
+
+
+
+
+
+
+
+
+
+	// WORKING CODE
+	    //
+	    // this.sideBar = [];
+	    // var sideBar = [];
+	    //
+	    // this.houseData = ajax.allHomeData;
+	    //
+	    // var mockHouseArray = [];
+	    // this.realMockArray = mockHouseArray;
+	    //
+	    // this.viewChangeToGallery = function() {
+	    //   $location.path('/gallery');
+	    // }
+	    //
+	    // var geotags = [];
+	    // var markerData = [];
+	    //
+	    // this.completedHomes = './data/homes.json';
+	    // this.underConstruction = './data/homesTwo.json';
+	    //
+	    // this.getData = function(route) {
+	    //
+	    //   markerData = [];
+	    //   geotags = [];
+	    //
+	    //   $http.get(route)
+	    //   .then(function successCallback(response) {
+	    //     markerData = response.data
+	    //       for (var i = 0; i <markerData.length; i++){
+	    //         mockHouseArray.push(markerData[i].address)
+	    //         sideBar.push(markerData[i].address)
 	    //       }
-	    //       if(obj[status] === 'Future') {
-	    //         constructingHomesAdd.push(obj.address);
+	    //     function geocode() {
+	    //       for (var i = 0; i < markerData.length; i++){
+	    //         var geocoder = new google.maps.Geocoder();
+	    //         geocoder.geocode({'address': markerData[i].address}, function(results, status) {
+	    //           results.forEach(function(obj){
+	    //             geotags.push(obj.geometry.location);
+	    //           })
+	    //         })
 	    //       }
 	    //     }
-	    //   }
-	    // }
-	    // getAddress();
-	    // console.log(completedHomesAdd);
-
-
-
-
-
-
-
-
-	    // this.showHomes = function(status) {
-	    //   console.log('SHOW HOMES HAS BEEN HIT');
-	    //   for (var key in data) {
-	    //     var obj = data[key];
-	    //     // console.log('NEW OBJECT IS : ', obj);
-	    //     for (var status in obj) {
-	    //       if(obj[status] === 'Completed') {
-	    //         this.completedHomesAdd.push(obj.address);
-	    //       }
-	    //       if(obj[status] === 'Constructing') {
-	    //         this.futureHomesAdd.push(obj.address);
-	    //       }
-	    //       if(obj[status] === 'Future') {
-	    //         this.constructingHomesAdd.push(obj.address);
+	    //
+	    //     function initMap() {
+	    //       function map() {
+	    //       var mapDiv = document.getElementById('map');
+	    //       var map = new google.maps.Map(mapDiv, {
+	    //         center: {lat: 47.629, lng: -122.211},
+	    //         zoom: 12
+	    //       });
+	    //       for (var j = 0; j < geotags.length; j++){
+	    //         var marker = new google.maps.Marker({
+	    //           map: map,
+	    //           position: geotags[j]
+	    //         });
+	    //         var infowindow = new google.maps.InfoWindow({
+	    //           content: '<p>Marker Location:' + marker.getPosition() + '</p>'
+	    //         });
 	    //       }
 	    //     }
+	    //     setTimeout(map, 500)
 	    //   }
+	    //     geocode();
+	    //     initMap();
+	    //   }, function errorCallback(response) {
+	    //   })
 	    // }
-
-
-
-	    var mockHouseArray = [];
-	    this.realMockArray = mockHouseArray;
-
-	    this.viewChangeToGallery = function() {
-	      $location.path('/gallery');
-	    }
-
-	    var geotags = [];
-	    var markerData = [];
-
-	    this.completedHomes = './data/homes.json';
-	    this.underConstruction = './data/homesTwo.json';
-
-	    this.getData = function(route) {
-
-	      markerData = [];
-	      geotags = [];
-
-	      $http.get(route)
-	      .then(function successCallback(response) {
-	        markerData = response.data
-	          for (var i = 0; i <markerData.length; i++){
-	            mockHouseArray.push(markerData[i].address)
-	          }
-	        function geocode() {
-	          for (var i = 0; i < markerData.length; i++){
-	            var geocoder = new google.maps.Geocoder();
-	            geocoder.geocode({'address': markerData[i].address}, function(results, status) {
-	              results.forEach(function(obj){
-	                geotags.push(obj.geometry.location);
-	              })
-	            })
-	          }
-	        }
-
-	        function initMap() {
-	          function map() {
-	          var mapDiv = document.getElementById('map');
-	          var map = new google.maps.Map(mapDiv, {
-	            center: {lat: 47.629, lng: -122.211},
-	            zoom: 12
-	          });
-	          for (var j = 0; j < geotags.length; j++){
-	            var marker = new google.maps.Marker({
-	              map: map,
-	              position: geotags[j]
-	            });
-	            var infowindow = new google.maps.InfoWindow({
-	              content: '<p>Marker Location:' + marker.getPosition() + '</p>'
-	            });
-	          }
-	        }
-	        setTimeout(map, 500)
-	      }
-	        geocode();
-	        initMap();
-	      }, function errorCallback(response) {
-	      })
-	    }
 	  }])
 
 
 /***/ },
 /* 9 */
-/***/ function(module, exports) {
+/***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
 
 	// require(__dirname + '/../../ajax-service/data-service');
 
+	__webpack_require__(4);
+
 	angular.module('InfoModule', ['AjaxService'])
-	  .controller('InfoController', ['ajax', function(ajax) {
-	    //
-	    // this.info = 'dog';
-	    //
-	    // console.log('INFO VIEW AJAX SERVICE DATA : ', ajax.allHomeData);
+	  .controller('InfoController', ['ajax', '$controller', function(ajax, $controller) {
+
+	    console.log('IMPORTING CONTROLLER : ', $controller('GalleryController'));
+
+
+
+	  var lucy = $controller('GalleryController');
+
+	  this.puggle = lucy.singleHomeData
+
+	  this.bookie = lucy.singleHouseDataLoader();
+	  console.log('lucy.singleHomeData : ', lucy.singleHomeData);
 
 	  }])
 
@@ -31294,10 +31500,19 @@
 /* 12 */
 /***/ function(module, exports) {
 
-	
+	'use strict';
+
 	angular.module('AdminModule', [])
-	  .controller('AdminController', ['$http', function($http) {
-	    var adminRoute = 'http://localhost:3000/addHomes'
+	  .controller('AdminController', ['$http', '$parse', function($http, $parse) {
+
+
+	    var adminRoute = 'http://localhost:3000/addHomes';
+
+	    var picRoute = 'http://localhost:3000/addPics';
+
+	    var allHouses = [];
+	    this.allHouses = allHouses;
+
 	    this.submitHouse = function(newHouse) {
 	      $http.post(adminRoute, newHouse)
 	      .success(function(data, status, headers, config) {
@@ -31307,6 +31522,75 @@
 	        console.log('ERROR SAVING HOUSE FROM ADMIN CTRL');
 	      })
 	    }
+
+	    this.getHouseData = function() {
+	      console.log('GET REQUEST HAS BEEN RECEIVED');
+	      $http.get(adminRoute)
+	      .success(function(data, status, headers, config) {
+	        console.log('DATA FROM GET IS : ', data);
+	        allHouses.push(data);
+	        console.log(allHouses);
+	      })
+	      .error(function(data, status, headers, config) {
+	        console.log('CANNONT GET HOUSES');
+	      })
+	    }
+
+	    // function upload(response, request){
+	    //   console.log('Request handler "upload" was called');
+	    //   var form = new formidable.IncomingForm();
+	    //   console.log('about to parse');
+	    //   form.parse(request, function(error, fields, files){
+	    //     console.log('parsing done');
+	    //
+	    //   fs.rename(files.upload.path, './tmp/test.png', function(error){
+	    //     if (error){
+	    //       fs.unlink('./tmp/test.png');
+	    //       fs.rename(files.upload.path, './tmp/test.png');
+	    //     };
+	    //   });
+	    //
+	    //   response.writeHead(200, {'Content-Type': 'text/html'});
+	    //   response.write('received image: <br/>');
+	    //   response.write("<img src='/show' />");
+	    //   response.end();
+	    //   });
+	    // };
+	    //
+	    // function show(response){
+	    //   console.log('Request handler "show" was called.');
+	    //   response.writeHead(200, {'Content-Type': 'image/png'});
+	    //   fs.createReadStream('./tmp/test.png').pipe(response);
+	    // };
+
+
+
+	    // var form = document.forms.namedItem('fileinfo');
+	    // this.submitForm = function(ev) {
+	    //   var selectedFile = document.getElementById('imgFile').files[0];
+	    //   console.log('SELECTED FILE FROM FORM : ', selectedFile);
+	    //
+	    //   // var x = new Buffer(selectedFile).toString('base64');
+	    //   // console.log('X IS : ', x);
+	    //
+	    //
+	    //   // oData.append('CustomField', 'This is extra data');
+	    //   var headers = {
+	    //     'Content-Type': 'image/jpeg'
+	    //   }
+	    //
+	    //   $http.post(picRoute, headers, selectedFile, status)
+	    //   .success(function(data, status, headers, config) {
+	    //     console.log('ADDED HOUSE FROM ADMIN CTRL');
+	    //   })
+	    //   .error(function(data, status, headers, config) {
+	    //     console.log('ERROR SAVING HOUSE FROM ADMIN CTRL');
+	    //   })
+	    //
+	    //
+	    // }
+
+
 	  }])
 
 
@@ -31337,11 +31621,16 @@
 	        controller: 'GalleryController',
 	        controllerAs: 'galleryCtrl'
 	      })
-	      .when('/info', {
+	      .when('/gallery/:searchParams', {
 	        templateUrl: './info-view.html',
 	        controller: 'GalleryController',
 	        controllerAs: 'galleryCtrl'
 	      })
+	      // .when('/info', {
+	      //   templateUrl: './info-view.html',
+	      //   controller: 'GalleryController',
+	      //   controllerAs: 'galleryCtrl'
+	      // })
 	      .when('/contact', {
 	        templateUrl: './contact-view.html',
 	        controller: 'contactController',

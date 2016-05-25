@@ -11,7 +11,9 @@ var housesSchema = new mongoose.Schema({
   elementary: String,
   ms: String,
   hs: String,
-  status: String
+  status: String,
+  pics: [],
+  mapPics: String
 });
 
 module.exports = mongoose.model('Houses', housesSchema);
