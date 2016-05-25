@@ -23,8 +23,8 @@ angular.module('RouteModule', [require('angular-route')])
       })
       .when('/gallery/:searchParams', {
         templateUrl: './info-view.html',
-        controller: 'GalleryController',
-        controllerAs: 'galleryCtrl'
+        controller: 'InfoController',
+        controllerAs: 'infoCtrl'
       })
       // .when('/info', {
       //   templateUrl: './info-view.html',
