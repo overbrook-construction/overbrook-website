@@ -21,6 +21,7 @@ angular.module('GalleryModule', ['AjaxService'])
   }
 
   this.singleHomeData = {};
+
     this.showInfoView = function() {
       $location.path('/info');
     }
@@ -30,15 +31,10 @@ angular.module('GalleryModule', ['AjaxService'])
       this.singleHouseDataLoader(id);
     }
 
-    // this.runSingleData = this.singleHouseDataLoader(id);
 
 // MAKING CODE THAT DISPLAYS INDIVIUDAL HOME DATA BASED ON ID INSIDE THE OBJECT
 this.singleHouseDataLoader = function(id){
-  console.log('ID SENT FROM VIEW : ', id);
-
-  // data.forEach(function(obj){
-  //   if (obj.)
-  // })
+  console.log('ID SENT FROM VIEW : ', id + ' singleHomeDataLoader is called');
 
   for (var key in data) {
     var obj = data[key]

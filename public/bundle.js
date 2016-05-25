@@ -30953,21 +30953,21 @@
 	angular.module('NavModule', [])
 	  .controller('navController', ['$controller', function($controller) {
 
-	      // this.changeUp = $controller('GalleryController').changeState()
-
-	      var yup = $controller('GalleryController');
-
-	      // console.log(yup.changeState);
-
+	      // // this.changeUp = $controller('GalleryController').changeState()
+	      //
 	      // var yup = $controller('GalleryController');
+	      //
+	      // // console.log(yup.changeState);
+	      //
+	      // // var yup = $controller('GalleryController');
+	      //
+	      // // this.changeUp = $controller('GalleryController').changeState();
+	      // // this.changeUp = yup.changeState();
+	      // // console.log(yup.changeState());
 
-	      // this.changeUp = $controller('GalleryController').changeState();
-	      // this.changeUp = yup.changeState();
-	      // console.log(yup.changeState());
-
-	      this.changeUp = function() {
-	        yup.changeState();
-	      }
+	      // this.changeUp = function() {
+	      //   yup.changeState();
+	      // }
 
 
 
@@ -31007,6 +31007,7 @@
 	  }
 
 	  this.singleHomeData = {};
+
 	    this.showInfoView = function() {
 	      $location.path('/info');
 	    }
@@ -31016,15 +31017,10 @@
 	      this.singleHouseDataLoader(id);
 	    }
 
-	    // this.runSingleData = this.singleHouseDataLoader(id);
 
 	// MAKING CODE THAT DISPLAYS INDIVIUDAL HOME DATA BASED ON ID INSIDE THE OBJECT
 	this.singleHouseDataLoader = function(id){
-	  console.log('ID SENT FROM VIEW : ', id);
-
-	  // data.forEach(function(obj){
-	  //   if (obj.)
-	  // })
+	  console.log('ID SENT FROM VIEW : ', id + ' singleHomeDataLoader is called');
 
 	  for (var key in data) {
 	    var obj = data[key]
@@ -31435,18 +31431,27 @@
 
 /***/ },
 /* 9 */
-/***/ function(module, exports) {
+/***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
 
 	// require(__dirname + '/../../ajax-service/data-service');
 
+	__webpack_require__(4);
+
 	angular.module('InfoModule', ['AjaxService'])
-	  .controller('InfoController', ['ajax', function(ajax) {
-	    //
-	    // this.info = 'dog';
-	    //
-	    // console.log('INFO VIEW AJAX SERVICE DATA : ', ajax.allHomeData);
+	  .controller('InfoController', ['ajax', '$controller', function(ajax, $controller) {
+
+	    console.log('IMPORTING CONTROLLER : ', $controller('GalleryController'));
+
+
+
+	  var lucy = $controller('GalleryController');
+
+	  this.puggle = lucy.singleHomeData
+
+	  this.bookie = lucy.singleHouseDataLoader();
+	  console.log('lucy.singleHomeData : ', lucy.singleHomeData);
 
 	  }])
 
@@ -31616,11 +31621,16 @@
 	        controller: 'GalleryController',
 	        controllerAs: 'galleryCtrl'
 	      })
-	      .when('/info', {
+	      .when('/gallery/:searchParams', {
 	        templateUrl: './info-view.html',
 	        controller: 'GalleryController',
 	        controllerAs: 'galleryCtrl'
 	      })
+	      // .when('/info', {
+	      //   templateUrl: './info-view.html',
+	      //   controller: 'GalleryController',
+	      //   controllerAs: 'galleryCtrl'
+	      // })
 	      .when('/contact', {
 	        templateUrl: './contact-view.html',
 	        controller: 'contactController',

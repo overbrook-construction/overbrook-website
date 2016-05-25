@@ -1,36 +1,42 @@
 <div class="galleryImg" ng-init="galleryCtrl.getData()">
   <nav-directive></nav-directive>
+
+{{galleryCtrl.singleHomeData}}
+
+<!-- WITHOUT USING THE LINKING SYSTEM -->
   <!-- <section class="galleryMasterDiv" ng-hide="galleryCtrl.showInfo == true">
-
-          <img ng-repeat="imgSrc in galleryCtrl.imgSrc" src="{{imgSrc}}" class="thumbnail" id="thumbnail" clickedHome="'one'" ng-click="galleryCtrl.showInfo = true;
-          galleryCtrl.showInfoView();
-          galleryCtrl.showClickedHome(clickedHome)
-          ">
-  </section> -->
-
-  <section class="galleryMasterDiv" ng-hide="galleryCtrl.showInfo == true">
         <img ng-repeat="(eachHome, value) in galleryCtrl.houseData" class="thumbnail" id="thumbnail" src="{{value.pics[0]}}" ng-click=
          "galleryCtrl.showInfo = true;
          galleryCtrl.singleHouseDataLoader(value._id);
         ">
+  </section> -->
+
+
+<!-- TRYING SOMETHING NEW -->
+  <section class="galleryMasterDiv">
+    <a ng-repeat="(eachHome, value) in galleryCtrl.houseData" href="#/gallery/{{value._id}}" ng-click=
+     "galleryCtrl.singleHouseDataLoader(value._id)">
+        <img src="{{value.pics[0]}}" class="thumbnail" id="thumbnail">
+      </a>
   </section>
 
-<!-- <section>
-  <img src="{{galleryCtrl.imgSrc}}">
-</section> -->
 
-
-
-<!-- <section ng-show="galleryCtrl.showInfo == true">
-    <button class="xButton" type="button" ng-click="galleryCtrl.showInfo = false">-x-</button>
+<!-- WORKS MOMENTARILY BUT THEN GOES AWAY -->
+  <!-- <section class="galleryMasterDiv" ng-hide="galleryCtrl.showInfo == true">
+    <a ng-repeat="(eachHome, value) in galleryCtrl.houseData" href="#/gallery/{{value._id}}" ng-click=
+     "galleryCtrl.showInfo = true;
+     galleryCtrl.singleHouseDataLoader(value._id);
+    ">
+        <img src="{{value.pics[0]}}" class="thumbnail" id="thumbnail">
+      </a>
   </section> -->
 
 
 <!-- THIS IS THE CODE FOR DOING THE REPEATER IN THE LINK STYLE WITH ID IN URL -->
 <!-- <section class="galleryMasterDiv">
-      <a href="#/info/{{value._id}}" ng-repeat="(eachHome, value) in galleryCtrl.houseData" class="thumbnail">
+      <a href="#/gallery/{{value._id}}" ng-repeat="(eachHome, value) in galleryCtrl.houseData" class="thumbnail">
           <img src="{{value.pics[0]}}" class="thumbnail" id="thumbnail"
-          ng-click="galleryCtrl.showInfoView()";>
+          ng-click="galleryCtrl.singleHouseDataLoader(value._id)">
       </a>
 </section> -->
 
