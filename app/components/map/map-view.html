@@ -20,9 +20,9 @@
           <p class="addressText">
             {{value.address}}
           </p>
-          <!-- Have this button run the galleryCtrlsingleHouseDataLoader(with the key) -->
-          <!-- <p class="viewDetailsButton" ng-click="mapCtrl.viewChangeToGallery()">View Details</p> -->
-          <button class="viewDetailsButton" ng-click="mapCtrl.viewChangeToGallery(value._id)"></button>
+          <a href="#/gallery/{{value._id}}">
+          <button class="viewDetailsButton" ng-click="mapCtrl.viewChangeToGallery(value._id)">view details</button>
+          </a>
         </div>
       </div>
     </div>

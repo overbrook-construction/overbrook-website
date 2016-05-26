@@ -17,13 +17,26 @@ angular.module('MapModule', ['AjaxService'])
     vm.getData = ajax.getData();
     // THIS INFORMATION IS ONLY AVAILABLE IF AJAX REQUEST HAPPENS PRIOR
 
-
-
     vm.houseData = ajax.allHomeData;
     var data = ajax.allHomeData;
 
     // ARRAY TO HOLD THE ADDRESSES BASED ON CLICKED BUTTON
     vm.clickedAddress = [];
+    vm.geoArray = [];
+
+// POSSIBLE GEOCODING STRATEGY
+var geoFunc = function(objectArray, geoObject) {
+  for (var i = 0; i < 3; i++) {
+    var geocoder = new google.maps.Geocoder();
+    geocoder.geocode({'address': objectArray[0].address}, function(results, status) {
+      results.forEach(function(obj) {
+        geoObject.geoArray.push(obj.geometry.location);
+      })
+      console.log('Completed Homes GEOTAGS : ', geoObject.geoArray);
+    })
+  }
+}
+
 
     // SHOW SIDE BAR ADDRESS STARTING WITH COMPLETE AND THEN CHANGING ON BUTTON PRESS
     // EVENTUALLY HAVE SIDE BAR SHOWING AND MAP SHOW FOR SPECIFIED STATUS HAPPEN ON THE SAME FUNCTION
@@ -34,20 +47,24 @@ angular.module('MapModule', ['AjaxService'])
         var obj = data[key];
           if(obj.status === clickedValue) {
             vm.clickedAddress.push(obj);
-            console.log(vm.clickedAddress);
           }
         }
+        var newObject = {};
+        newObject.name = clickedValue
+        newObject.geoArray = [];
+          geoFunc(vm.clickedAddress, newObject)
     }
 
-    var galleryCtrl = $controller('GalleryController');
-    vm.viewChangeToGallery = function(id) {
-      // galleryCtrl.singleHouseDataLoader(eachHome);
-      // console.log('EACH HOME IN MAP CTRL : ', id);
-      galleryCtrl.runSingleData(id);
-      // galleryCtrl.changeStateTrue();
 
-      $location.path('/gallery');
-    }
+
+
+
+//  PROBABLY DONT NEED THIS
+    // var galleryCtrl = $controller('GalleryController');
+    // vm.viewChangeToGallery = function(id) {
+    //   galleryCtrl.runSingleData(id);
+    //   $location.path('/gallery');
+    // }
 
 
     // this.filterAddresses = [];
