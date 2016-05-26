@@ -185,7 +185,7 @@ var geoFunc = function(objectArray, geoObject) {
 
 
 // WORKING CODE
-    //
+
     // this.sideBar = [];
     // var sideBar = [];
     //
