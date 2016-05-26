@@ -1,7 +1,5 @@
 
-<!-- NON WORKING MAP CODE -->
-
-<div class="mapImg" ng-init="mapCtrl.getData(); mapCtrl.initMap(mapCtrl.comp); mapCtrl.showSideCompleted('Complete')">
+<div class="mapImg" ng-init="mapCtrl.getData(); mapCtrl.initMap(); mapCtrl.showSideCompleted('Complete')">
   <nav-directive></nav-directive>
   <section class="mapPageSection">
 
@@ -20,46 +18,11 @@
           <p class="addressText">
             {{value.address}}
           </p>
-          <!-- Have this button run the galleryCtrlsingleHouseDataLoader(with the key) -->
-          <!-- <p class="viewDetailsButton" ng-click="mapCtrl.viewChangeToGallery()">View Details</p> -->
-          <button class="viewDetailsButton" ng-click="mapCtrl.viewChangeToGallery(value._id)"></button>
+          <a href="#/gallery/{{value._id}}">
+          <button class="viewDetailsButton" ng-click="mapCtrl.viewChangeToGallery(value._id)">view details</button>
+          </a>
         </div>
       </div>
     </div>
-
-
   </section>
 </div>
-
-
-
-
-<!-- WORKING MAP CODE -->
-
- <!-- <div class="mapImg">
-  <nav-directive></nav-directive>
-  <section class="mapPageSection">
-
-    <div id="map" ng-init="mapCtrl.getData(mapCtrl.completedHomes)">
-
-    </div>
-
-    <div class="addressSidebar">
-      <div class="filterButtonDiv">
-        <button class="completed" type="button" ng-click="mapCtrl.getData(mapCtrl.completedHomes)">Completed</button>
-        <button class="current" type="button" ng-click="mapCtrl.getData(mapCtrl.underConstruction)">Current</button>
-        <button class="future" type="button" ng-click="mapCtrl.getData(mapCtrl.underConstruction)">Future</button>
-      </div>
-      <div class="scrollContainer">
-        <div class="addressDiv" ng-repeat="(key, value) in mapCtrl.houseData">
-          <p class="addressText">
-            {{value.address}}
-          </p>
-          <p class="viewDetailsButton" ng-click="mapCtrl.viewChangeToGallery()">View Details</p>
-        </div>
-      </div>
-    </div>
-
-
-  </section>
-</div> -->
