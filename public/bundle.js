@@ -31198,6 +31198,17 @@
 
 	    var vm = this;
 
+
+	    // MAP OBJECT
+
+	    var map = {};
+	    map.mapDiv = document.getElementById('map');
+	    map.googleMap = new google.maps.Map(map.mapDiv, {
+	    center: {lat: 47.629, lng: -122.211},
+	    zoom: 12
+	  });
+
+
 	    // NON WORKING MAP CODE
 
 	    // MAKE AJAX REQUEST ONCE COMING TO PAGE / DOES THIS FILL THE houseData with data right away
@@ -31212,22 +31223,122 @@
 	    vm.clickedAddress = [];
 	    vm.geoArray = [];
 
-	// POSSIBLE GEOCODING STRATEGY
-	var geoFunc = function(objectArray, geoObject) {
-	  for (var i = 0; i < 3; i++) {
+
+
+	//  GEO CODES THE ADDRESSES PASSED IN BY SIDE BAR FUNCTION BASED ON CLICKED VALUE
+
+	var geoFunc = function(objectArray) {
+	  for (var i = 0; i < objectArray.length; i++) {
 	    var geocoder = new google.maps.Geocoder();
-	    geocoder.geocode({'address': objectArray[0].address}, function(results, status) {
+	    var geoArray = [];
+	    geocoder.geocode({'address': objectArray[i].address}, function(results, status) {
 	      results.forEach(function(obj) {
-	        geoObject.geoArray.push(obj.geometry.location);
+	        geoArray.push(obj.geometry.location);
 	      })
-	      console.log('Completed Homes GEOTAGS : ', geoObject.geoArray);
+	      mapObject.clearMarkers();
+	      mapObject.drawMarkers(geoArray);
 	    })
 	  }
 	}
 
 
-	    // SHOW SIDE BAR ADDRESS STARTING WITH COMPLETE AND THEN CHANGING ON BUTTON PRESS
-	    // EVENTUALLY HAVE SIDE BAR SHOWING AND MAP SHOW FOR SPECIFIED STATUS HAPPEN ON THE SAME FUNCTION
+	// MAP FUNCTIONALITY
+	var markers = [];
+	var mapObject = {
+	  drawMarkers: function(geoArray) {
+	    console.log('DRAW MARKERS HAS BEEN HIT 2');
+	    for (var i = 0; i < geoArray.length; i++) {
+	      var marker = new google.maps.Marker({
+	        position: geoArray[i],
+	        title: 'sam'
+	      });
+	      markers.push(marker);
+	      mapObject.setMapOnAll(map.googleMap);
+	    }
+	  },
+	  setMapOnAll: function(map) {
+	  for(var i = 0; i < markers.length; i++) {
+	    markers[i].setMap(map)
+	  }
+	},
+	  clearMarkers: function() {
+	    console.log('CLEAR MARKERS HAS BEEN HIT 1');
+	    mapObject.setMapOnAll(null);
+	    markers = [];
+	  }
+	}
+
+
+	// var map;
+	// var markers = [];
+	//
+	// // Adds a marker to the map and push to the array.
+	// function addMarker(location) {
+	//   var marker = new google.maps.Marker({
+	//     position: location,
+	//     map: map
+	//   });
+	//   markers.push(marker);
+	// }
+	//
+	// // Sets the map on all markers in the array.
+	// function setMapOnAll(map) {
+	//   for (var i = 0; i < markers.length; i++) {
+	//     markers[i].setMap(map);
+	//   }
+	// }
+	//
+	// // Removes the markers from the map, but keeps them in the array.
+	// function clearMarkers() {
+	//   setMapOnAll(null);
+	// }
+	//
+	// // Shows any markers currently in the array.
+	// function showMarkers() {
+	//   setMapOnAll(map);
+	// }
+	//
+	// // Deletes all markers in the array by removing references to them.
+	// function deleteMarkers() {
+	//   clearMarkers();
+	//   markers = [];
+	// }
+
+
+
+
+
+
+
+
+
+
+
+
+
+	// var infowindow = new google.maps.InfoWindow({
+	//   content: '<p>Marker Location: ' + marker.getPosition() + '</p>'
+	// });
+	// function drawMarkers(geoArray) {
+	//   for (var i = 0; i < geoArray.length; i++) {
+	//     var marker = new google.maps.Marker({
+	//       map: map.googleMap,
+	//       position: geoArray[i]
+	//     });
+	//     marker.setMap(null);
+	//     marker.setMap(map.googleMap)
+	//     // var infowindow = new google.maps.InfoWindow({
+	//     //   content: '<p>Marker Location: ' + marker.getPosition() + '</p>'
+	//     // });
+	//   }
+	// }
+
+
+
+
+
+	  // SHOW SIDE BAR ADDRESS STARTING WITH COMPLETE AND THEN CHANGING ON BUTTON PRESS
+	  // EVENTUALLY HAVE SIDE BAR SHOWING AND MAP SHOW FOR SPECIFIED STATUS HAPPEN ON THE SAME FUNCTION
 	    vm.showSideCompleted = function(clickedValue){
 	      // console.log('SHOW COMPLETED SIDE HIT WITH : ', clickedValue);
 	      vm.clickedAddress = [];
@@ -31237,22 +31348,44 @@
 	            vm.clickedAddress.push(obj);
 	          }
 	        }
-	        var newObject = {};
-	        newObject.name = clickedValue
-	        newObject.geoArray = [];
-	          geoFunc(vm.clickedAddress, newObject)
+	          geoFunc(vm.clickedAddress)
 	    }
 
 
+	    // INITIATES THE MAP UPON PAGE LOAD
+	      //    vm.initMap = function() {
+	      //     function map() {
+	      //       map.mapDiv;
+	      //       map.googleMap;
+	      //       // var mapDiv = document.getElementById('map');
+	      //     //   map.googleMap = new google.maps.Map(mapDiv, {
+	      //     //   center: {lat: 47.629, lng: -122.211},
+	      //     //   zoom: 12
+	      //     // });
+	      //   }
+	      //   setTimeout(map, 500)
+	      // }
 
 
 
-	//  PROBABLY DONT NEED THIS
-	    // var galleryCtrl = $controller('GalleryController');
-	    // vm.viewChangeToGallery = function(id) {
-	    //   galleryCtrl.runSingleData(id);
-	    //   $location.path('/gallery');
-	    // }
+	          //   function map() {
+	          //   var mapDiv = document.getElementById('map');
+	          //   var map = new google.maps.Map(mapDiv, {
+	          //     center: {lat: 47.629, lng: -122.211},
+	          //     zoom: 12
+	          //   });
+	          //   for (var j = 0; j < geotags.length; j++){
+	          //     var marker = new google.maps.Marker({
+	          //       map: map,
+	          //       position: geotags[j]
+	          //     });
+	          //     var infowindow = new google.maps.InfoWindow({
+	          //       content: '<p>Marker Location:' + marker.getPosition() + '</p>'
+	          //     });
+	          //   }
+	          // }
+
+
 
 
 	    // this.filterAddresses = [];
