@@ -31198,6 +31198,10 @@
 
 	    var vm = this;
 
+	    vm.completeIcon = './media/complete-home.svg';
+	    vm.constructionIcon = './media/construction-home.svg';
+	    vm.futureIcon = './media/future-home.svg';
+
 	    // MAP OBJECT
 	    var map = {};
 	    map.mapDiv = document.getElementById('map');
@@ -31215,7 +31219,7 @@
 	    vm.geoArray = [];
 
 	  //  GEO CODES THE ADDRESSES PASSED IN BY SIDE BAR FUNCTION BASED ON CLICKED VALUE
-	    var geoFunc = function(objectArray) {
+	    var geoFunc = function(objectArray, iconValue) {
 	      for (var i = 0; i < objectArray.length; i++) {
 	        var geocoder = new google.maps.Geocoder();
 	        var geoArray = [];
@@ -31224,7 +31228,7 @@
 	            geoArray.push(obj.geometry.location);
 	          })
 	          mapObject.clearMarkers();
-	          mapObject.drawMarkers(geoArray);
+	          mapObject.drawMarkers(geoArray, iconValue);
 	        })
 	      }
 	    }
@@ -31232,11 +31236,12 @@
 	    // MAP FUNCTIONALITY
 	    var markers = [];
 	    var mapObject = {
-	      drawMarkers: function(geoArray) {
+	      drawMarkers: function(geoArray, iconValue) {
 	        for (var i = 0; i < geoArray.length; i++) {
 	          var marker = new google.maps.Marker({
 	            position: geoArray[i],
-	            title: 'sam'
+	            title: 'sam',
+	            icon: iconValue
 	          });
 	          markers.push(marker);
 	          mapObject.setMapOnAll(map.googleMap);
@@ -31257,15 +31262,17 @@
 	    //   content: '<p>Marker Location: ' + marker.getPosition() + '</p>'
 	    // });
 
-	    vm.showSideCompleted = function(clickedValue){
+	    vm.showSideCompleted = function(clickedValue, iconValue){
+	      console.log('SHOW SIDE ICON WITH : ', iconValue);
 	      vm.clickedAddress = [];
+	      var icon;
 	      for (var key in data) {
 	        var obj = data[key];
 	        if(obj.status === clickedValue) {
 	          vm.clickedAddress.push(obj);
 	        }
 	      }
-	      geoFunc(vm.clickedAddress)
+	      geoFunc(vm.clickedAddress, iconValue)
 	    }
 
 	  }])
@@ -32846,6 +32853,11 @@
 	angular.module('ContactModule', [])
 	.controller('contactController', ['$http', function($http) {
 	  var emailRoute = 'http://localhost:3000/email'
+
+	  // this.user = {};
+	  // this.emailForm.$setPrestine();
+	  // this.emailForm.$setUntouched();
+
 	  this.sendEmail = function(user) {
 	    console.log('USER FROM FORM IS : ', user);
 	    $http.post(emailRoute, user)
