@@ -30991,51 +30991,79 @@
 	angular.module('GalleryModule', ['AjaxService'])
 	  .controller('GalleryController', ['$location', 'ajax', function($location, ajax) {
 
-	  this.getData = ajax.getData();
+	    var vm = this;
 
-	  this.showInfo = false;
-	  this.houseData = ajax.allHomeData;
+	  vm.getData = ajax.getData();
+
+
+	  vm.showInfo = false;
+
+
+	  vm.houseData = ajax.allHomeData;
+
 	  var data = ajax.allHomeData;
 
-	  this.changeStateFalse = function(){
+
+	  vm.clickedHomePicArray = [];
+	  vm.clickedAddress = [];
+	  // vm.homePicArray = clickedHomePicArray;
+
+
+	  vm.showSideCompleted = function(clickedValue){
+	    vm.clickedHomePicArray = [];
+	    vm.clickedAddress = [];
+	    for (var key in data) {
+	      var obj = data[key];
+	      if(obj.status === clickedValue) {
+	        vm.clickedHomePicArray.push(obj);
+	        vm.clickedAddress.push(obj);
+	      }
+	    }
+	    // geoFunc(vm.clickedAddress, iconValue)
+	  }
+
+
+	  var data = ajax.allHomeData;
+
+	  vm.changeStateFalse = function(){
 	    // console.log('CHANGE STATE IS BEING HIT');
-	    this.showInfo = false;
+	    vm.showInfo = false;
 	  }
 
-	  this.changeStateTrue = function() {
-	    this.showInfo = true;
+	  vm.changeStateTrue = function() {
+	    vm.showInfo = true;
 	  }
 
-	  this.singleHomeData = {};
+	  vm.singleHomeData = {};
 
-	    this.showInfoView = function() {
+	    vm.showInfoView = function() {
 	      $location.path('/info');
 	    }
 
-	    this.runSingleData = function(id) {
+	    vm.runSingleData = function(id) {
 	      console.log('RUN SINLE DATA HIT FROM MAP CTRL WITH : ', id)
-	      this.singleHouseDataLoader(id);
+	      vm.singleHouseDataLoader(id);
 	    }
 
-	    this.singleHouseDataLoader = function(id){
+	    vm.singleHouseDataLoader = function(id){
 	      var singleHomeData = {};
 	      for (var key in data) {
 	        var obj = data[key]
 	        if (data[key]._id == id) {
 	          // console.log('THIS IS THE MATCHING OBJECT', obj);
-	          this.singleHomeData.address = obj.address;
-	          this.singleHomeData.sqft = obj.sqft;
-	          this.singleHomeData.bedrooms = obj.bedrooms;
-	          this.singleHomeData.bathrooms = obj.bathrooms;
-	          this.singleHomeData.lotsize = obj.lotsize;
-	          this.singleHomeData.schooldistrict = obj.schooldistrict;
-	          this.singleHomeData.elementary = obj.elementary;
-	          this.singleHomeData.middle = obj.middle;
-	          this.singleHomeData.hs = obj.hs;
-	          this.singleHomeData.status = obj.status;
-	          this.singleHomeData.pics = obj.pics;
-	          this.singleHomeData.mapPic = obj.pics[obj.pics.length-1];
-	          this.singleHomeData.frontPic = obj.pics[0];
+	          vm.singleHomeData.address = obj.address;
+	          vm.singleHomeData.sqft = obj.sqft;
+	          vm.singleHomeData.bedrooms = obj.bedrooms;
+	          vm.singleHomeData.bathrooms = obj.bathrooms;
+	          vm.singleHomeData.lotsize = obj.lotsize;
+	          vm.singleHomeData.schooldistrict = obj.schooldistrict;
+	          vm.singleHomeData.elementary = obj.elementary;
+	          vm.singleHomeData.middle = obj.middle;
+	          vm.singleHomeData.hs = obj.hs;
+	          vm.singleHomeData.status = obj.status;
+	          vm.singleHomeData.pics = obj.pics;
+	          vm.singleHomeData.mapPic = obj.pics[obj.pics.length-1];
+	          vm.singleHomeData.frontPic = obj.pics[0];
 	        }
 	      }
 	    }
@@ -31238,14 +31266,22 @@
 	    var mapObject = {
 	      drawMarkers: function(geoArray, iconValue) {
 	        for (var i = 0; i < geoArray.length; i++) {
+	          var infowindow = new google.maps.InfoWindow({
+	            // content: '<p>Marker Location: ' + marker.getPosition() + '</p>'
+	            content: 'yo sam'
+	            // position: marker.position
+	          });
 	          var marker = new google.maps.Marker({
 	            position: geoArray[i],
-	            title: 'sam',
+	            title: 'home',
 	            icon: iconValue
 	          });
+	          marker.addListener('click', function() {
+	            infowindow.open(map.googleMap, marker)
+	          })
 	          markers.push(marker);
-	          mapObject.setMapOnAll(map.googleMap);
 	        }
+	        mapObject.setMapOnAll(map.googleMap);
 	      },
 	      setMapOnAll: function(map) {
 	        for(var i = 0; i < markers.length; i++) {
@@ -31258,9 +31294,6 @@
 	      }
 	    }
 
-	    // var infowindow = new google.maps.InfoWindow({
-	    //   content: '<p>Marker Location: ' + marker.getPosition() + '</p>'
-	    // });
 
 	    vm.showSideCompleted = function(clickedValue, iconValue){
 	      console.log('SHOW SIDE ICON WITH : ', iconValue);
@@ -31293,14 +31326,6 @@
 	angular.module('InfoModule', ['AjaxService'])
 	  .controller('InfoController', ['ajax', '$controller', function(ajax, $controller) {
 
-	  // console.log('IMPORTING CONTROLLER : ', $controller('GalleryController'));
-	  // var lucy = $controller('GalleryController');
-	  //
-	  // this.puggle = lucy.singleHomeData
-	  //
-	  // this.bookie = lucy.singleHouseDataLoader();
-	  // console.log('lucy.singleHomeData : ', lucy.singleHomeData);
-
 	  var data = ajax.allHomeData;
 
 	  var string = document.URL
@@ -31313,34 +31338,16 @@
 
 	  this.singleHomeData = {};
 
-	  // USE THE USE ID for the object look up
-
+	  var frontPicture = [];
+	  this.frontPicture = frontPicture
 
 	  this.singleHouseDataLoader = function(useId){
-	    // function doIt(useId) {
 
 	    console.log('DO IT CALLED WITH : ', useId);
 	    var singleHomeData = {};
 	    for (var key in data) {
 	      var obj = data[key]
-	      // if (data[key]._id == useId) {
-	      //   // console.log('THIS IS THE MATCHING OBJECT', obj);
-	      //   this.singleHomeData.address = obj.address;
-	      //   this.singleHomeData.sqft = obj.sqft;
-	      //   this.singleHomeData.bedrooms = obj.bedrooms;
-	      //   this.singleHomeData.bathrooms = obj.bathrooms;
-	      //   this.singleHomeData.lotsize = obj.lotsize;
-	      //   this.singleHomeData.schooldistrict = obj.schooldistrict;
-	      //   this.singleHomeData.elementary = obj.elementary;
-	      //   this.singleHomeData.middle = obj.middle;
-	      //   this.singleHomeData.hs = obj.hs;
-	      //   this.singleHomeData.status = obj.status;
-	      //   this.singleHomeData.pics = obj.pics;
-	      //   this.singleHomeData.mapPic = obj.pics[obj.pics.length-1];
-	      //   this.singleHomeData.frontPic = obj.pics[0];
-	      // }
 	      if (data[key]._id == useId) {
-	        // console.log('THIS IS THE MATCHING OBJECT', obj);
 	        this.singleHomeData.address = obj.address;
 	        this.singleHomeData.sqft = obj.sqft;
 	        this.singleHomeData.bedrooms = obj.bedrooms;
@@ -31353,16 +31360,15 @@
 	        this.singleHomeData.status = obj.status;
 	        this.singleHomeData.pics = obj.pics;
 	        this.singleHomeData.mapPic = obj.pics[obj.pics.length-1];
-	        this.singleHomeData.frontPic = obj.pics[0];
+	        frontPicture.push(obj.pics[0]);
+	        this.singleHomeData.changePic = function(key, value) {
+	          frontPicture.pop();
+	          frontPicture.push(value);
+	        }
 	      }
 	    }
-	  // }
-	  // doIt(useId)
+
 	  }
-	  // PARSE OUT THE ID FROM THE URL AND USE THAT TO COMPARE AND CREAT THE OBJECT NECCESSAY FOR THE DOM RENDERING
-
-
-
 
 	  }])
 

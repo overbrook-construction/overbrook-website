@@ -50,14 +50,22 @@ angular.module('MapModule', ['AjaxService'])
     var mapObject = {
       drawMarkers: function(geoArray, iconValue) {
         for (var i = 0; i < geoArray.length; i++) {
+          var infowindow = new google.maps.InfoWindow({
+            // content: '<p>Marker Location: ' + marker.getPosition() + '</p>'
+            content: 'yo sam'
+            // position: marker.position
+          });
           var marker = new google.maps.Marker({
             position: geoArray[i],
-            title: 'sam',
+            title: 'home',
             icon: iconValue
           });
+          marker.addListener('click', function() {
+            infowindow.open(map.googleMap, marker)
+          })
           markers.push(marker);
-          mapObject.setMapOnAll(map.googleMap);
         }
+        mapObject.setMapOnAll(map.googleMap);
       },
       setMapOnAll: function(map) {
         for(var i = 0; i < markers.length; i++) {
@@ -70,9 +78,6 @@ angular.module('MapModule', ['AjaxService'])
       }
     }
 
-    // var infowindow = new google.maps.InfoWindow({
-    //   content: '<p>Marker Location: ' + marker.getPosition() + '</p>'
-    // });
 
     vm.showSideCompleted = function(clickedValue, iconValue){
       console.log('SHOW SIDE ICON WITH : ', iconValue);

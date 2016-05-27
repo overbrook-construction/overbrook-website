@@ -7,11 +7,13 @@
     <!-- left half -->
     <div class="infoImageContainer">
       <!-- main image -->
-      <img src="{{infoCtrl.singleHomeData.frontPic}}" class="infoMainImage">
+      <!-- <img src="{{infoCtrl.singleHomeData.frontPic}}" class="infoMainImage"> -->
+      <img src="{{infoCtrl.frontPicture[0]}}" class="infoMainImage">
+
       <!-- thumbnail slider container -->
       <div class="infoSliderContainer">
         <!-- repeated image slider -->
-        <img ng-repeat="sliderPic in infoCtrl.singleHomeData.pics" src="{{sliderPic}}" class="infoSliderImage">
+        <img ng-repeat="(key, value) in infoCtrl.singleHomeData.pics" src="{{value}}" class="infoSliderImage" ng-click="infoCtrl.singleHomeData.changePic(key, value)">
 
       </div>
 
