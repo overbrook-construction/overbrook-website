@@ -5,51 +5,79 @@ require(__dirname + '/../../ajax-service/data-service');
 angular.module('GalleryModule', ['AjaxService'])
   .controller('GalleryController', ['$location', 'ajax', function($location, ajax) {
 
-  this.getData = ajax.getData();
+    var vm = this;
 
-  this.showInfo = false;
-  this.houseData = ajax.allHomeData;
+  vm.getData = ajax.getData();
+
+
+  vm.showInfo = false;
+
+
+  vm.houseData = ajax.allHomeData;
+
   var data = ajax.allHomeData;
 
-  this.changeStateFalse = function(){
+
+  vm.clickedHomePicArray = [];
+  vm.clickedAddress = [];
+  // vm.homePicArray = clickedHomePicArray;
+
+
+  vm.showSideCompleted = function(clickedValue){
+    vm.clickedHomePicArray = [];
+    vm.clickedAddress = [];
+    for (var key in data) {
+      var obj = data[key];
+      if(obj.status === clickedValue) {
+        vm.clickedHomePicArray.push(obj);
+        vm.clickedAddress.push(obj);
+      }
+    }
+    // geoFunc(vm.clickedAddress, iconValue)
+  }
+
+
+  var data = ajax.allHomeData;
+
+  vm.changeStateFalse = function(){
     // console.log('CHANGE STATE IS BEING HIT');
-    this.showInfo = false;
+    vm.showInfo = false;
   }
 
-  this.changeStateTrue = function() {
-    this.showInfo = true;
+  vm.changeStateTrue = function() {
+    vm.showInfo = true;
   }
 
-  this.singleHomeData = {};
+  vm.singleHomeData = {};
 
-    this.showInfoView = function() {
+    vm.showInfoView = function() {
       $location.path('/info');
     }
 
-    this.runSingleData = function(id) {
+    vm.runSingleData = function(id) {
       console.log('RUN SINLE DATA HIT FROM MAP CTRL WITH : ', id)
-      this.singleHouseDataLoader(id);
+      vm.singleHouseDataLoader(id);
     }
 
-    this.singleHouseDataLoader = function(id){
+    vm.singleHouseDataLoader = function(id){
       var singleHomeData = {};
       for (var key in data) {
         var obj = data[key]
         if (data[key]._id == id) {
           // console.log('THIS IS THE MATCHING OBJECT', obj);
-          this.singleHomeData.address = obj.address;
-          this.singleHomeData.sqft = obj.sqft;
-          this.singleHomeData.bedrooms = obj.bedrooms;
-          this.singleHomeData.bathrooms = obj.bathrooms;
-          this.singleHomeData.lotsize = obj.lotsize;
-          this.singleHomeData.schooldistrict = obj.schooldistrict;
-          this.singleHomeData.elementary = obj.elementary;
-          this.singleHomeData.middle = obj.middle;
-          this.singleHomeData.hs = obj.hs;
-          this.singleHomeData.status = obj.status;
-          this.singleHomeData.pics = obj.pics;
-          this.singleHomeData.mapPic = obj.pics[obj.pics.length-1];
-          this.singleHomeData.frontPic = obj.pics[0];
+          vm.singleHomeData.address = obj.address;
+          vm.singleHomeData.sqft = obj.sqft;
+          vm.singleHomeData.bedrooms = obj.bedrooms;
+          vm.singleHomeData.bathrooms = obj.bathrooms;
+          vm.singleHomeData.lotsize = obj.lotsize;
+          vm.singleHomeData.schooldistrict = obj.schooldistrict;
+          vm.singleHomeData.elementary = obj.elementary;
+          vm.singleHomeData.middle = obj.middle;
+          vm.singleHomeData.hs = obj.hs;
+          vm.singleHomeData.status = obj.status;
+          vm.singleHomeData.pics = obj.pics;
+          vm.singleHomeData.mapPic = obj.pics[obj.pics.length-1];
+          vm.singleHomeData.frontPic = obj.pics[0];
         }
       }
     }
