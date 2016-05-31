@@ -30989,19 +30989,29 @@
 	__webpack_require__(5);
 
 	angular.module('GalleryModule', ['AjaxService'])
-	  .controller('GalleryController', ['$location', 'ajax', function($location, ajax) {
+	  .controller('GalleryController', ['$location', 'ajax', '$window', function($location, ajax, $window) {
 
 	    var vm = this;
 	    vm.houseData;
+	    // var data = ajax.allHomeData;
+	    var data;
+
 
 	  vm.getData = function() {
+	    if ($window.localStorage){
+	      var yup = JSON.parse($window.localStorage.getItem('allHomeData'));
+	      console.log('YUP IS : ', yup);
+	      data = yup
+	    }
+	    else {
+
 	    ajax.getData();
 	    vm.houseData = ajax.allHomeData;
 	  }
+	}
 
 	  vm.showInfo = false;
 
-	  var data = ajax.allHomeData;
 
 	  vm.clickedHomePicArray = [];
 	  vm.clickedAddress = [];
@@ -31022,7 +31032,6 @@
 	  }
 
 
-	  var data = ajax.allHomeData;
 
 	  vm.changeStateFalse = function(){
 	    // console.log('CHANGE STATE IS BEING HIT');
@@ -31047,6 +31056,7 @@
 	    vm.singleHouseDataLoader = function(id){
 	      var singleHomeData = {};
 	      for (var key in data) {
+	        console.log("SINGLE HOUSE FUNCTION CALLED WITH : ", id);
 	        var obj = data[key]
 	        if (data[key]._id == id) {
 	          // console.log('THIS IS THE MATCHING OBJECT', obj);
@@ -31135,7 +31145,7 @@
 	// }])
 
 	// RETRIEVING DATA FROM THE MLAB DATA BASE THIS IS THE NEW VERSION
-	ajaxService.factory('ajax', ['$http', function($http) {
+	ajaxService.factory('ajax', ['$http', '$window', function($http, $window) {
 
 	  var adminRoute = 'http://localhost:3000/addHomes';
 	  // this.getHouseData = function() {
@@ -31165,6 +31175,7 @@
 	      // console.log('RESPONSE FROM HTTP GET DATA-SERVICE : ', response.data);
 	      obj.allHomeData = response.data;
 	      console.log('ALL HOME DATA FROM SERVICE : ', obj.allHomeData);
+	      $window.localStorage.setItem('allHomeData', JSON.stringify(obj.allHomeData));
 	      // SAVE TO SESSION STORAGE
 
 	    }, function errorCallback(response) {
@@ -31222,7 +31233,14 @@
 	__webpack_require__(5);
 
 	angular.module('MapModule', ['AjaxService'])
-	  .controller('MapController', ['$http', '$location', 'ajax', '$controller', function($http, $location, ajax, $controller) {
+	  .controller('MapController', ['$http', '$location', 'ajax', '$controller', '$window', function($http, $location, ajax, $controller, $window) {
+
+
+	  //   vm.load = function() {
+	  //   var sleep = document.createElement('script');
+	  //   sleep.src = 'https://maps.googleapis.com/maps/api/js?key=AIzaSyBBv4Sc8DwDft9TdcwDmS9d01SBmrCJFXA';
+	  //   document.body.appendChild(sleep);
+	  // }
 
 	    var vm = this;
 
@@ -31232,19 +31250,35 @@
 
 	    // MAP OBJECT
 	    var map = {};
+	    vm.initMap = function() {
 	    map.mapDiv = document.getElementById('map');
 	    map.googleMap = new google.maps.Map(map.mapDiv, {
 	      center: {lat: 47.629, lng: -122.211},
 	      zoom: 12
 	    });
+	  }
+	  // setTimeout(vm.initMap(), 5000);
+
+	    var data;
+
 
 	    vm.getData = function() {
+	      if ($window.localStorage){
+	        var yup = JSON.parse($window.localStorage.getItem('allHomeData'));
+	        console.log('YUP IS : ', yup);
+	        data = yup
+	      }
+	      else {
+
 	      ajax.getData();
 	      vm.houseData = ajax.allHomeData;
+	      data = ajax.allHomeData;
 	    }
-
-
-	    var data = ajax.allHomeData;
+	  }
+	    // vm.getData = function() {
+	    //   ajax.getData();
+	    //   vm.houseData = ajax.allHomeData;
+	    // }
 
 	    vm.clickedAddress = [];
 	    vm.geoArray = [];
@@ -31330,13 +31364,39 @@
 	angular.module('InfoModule', ['AjaxService', 'ngStorage'])
 	  .controller('InfoController', ['ajax', '$controller', '$window', function(ajax, $controller, $window) {
 
-	  var data = ajax.allHomeData;
+	    console.log('AJAX HOME DATA : ', ajax.allHomeData);
+
+	  var data;
+
+
+	  this.getData = function() {
+	    if ($window.localStorage){
+	      var yup = JSON.parse($window.localStorage.getItem('allHomeData'));
+	      console.log('YUP IS : ', yup);
+	      data = yup
+	    }
+	    else {
+
+	    ajax.getData();
+	    data = ajax.allHomeData;
+	  }
+	}
+
+
+	  // this.getData = function(cb){
+	  //   ajax.getData();
+	  //   function cb(newData) {
+	  //     data = newData
+	  //   }
+	  //   cb(ajax.allHomeData)
+	  // }
+	  //
+	  // data = ajax.allHomeData;
 
 	  // PARSING THE ID OUT OF THE URL
 	  var string = document.URL
 	  var newId = url.parse(string).hash
 	  var useId = newId.split('').splice(10, 25).join('');
-	  console.log(useId);
 
 	  this.idUrl = useId;
 
@@ -31345,14 +31405,14 @@
 	  var frontPicture = [];
 	  this.frontPicture = frontPicture
 
-	  console.log('LOCAL STORAGE IS : ' + $window.localStorage);
-
 	  this.singleHouseDataLoader = function(useId){
 
 	    // IF LOCAL STORAGE HAS OBJECT THEN USE THIS OBJECT
 	    // if ($window.localStorage.homeData) {
-	    //   console.log('LOCAL STORAGE DATA : ' + $window.localStorage.homeData);
-	    //   this.singleHomeData = $window.localStorage.homeData
+	    //   var retrievedObj = $window.localStorage.getItem('homeData');
+	    //   JSON.parse(retrievedObj);
+	    //   console.log('OBJECT FROM LOCAL STORAGE IS : ', retrievedObj.address);
+	    //   // this.singleHomeData.address = retrievedObj.address
 	    // }
 	    // else {
 
@@ -31379,12 +31439,16 @@
 	        }
 	      }
 	    }
+	    // var newArray = [];
+	    // newArray.push(this.singleHomeData);
+	    // $window.localStorage.setItem('homeData', JSON.stringify(this.singleHomeData));
+	    // $window.localStorage.setItem('homeData', JSON.stringify(newArray));
+
 	  // }
 	    // // SAVE THIS DATA TO LOCAL STORAGE
 	    //   console.log('LOCAL STORAGE FUNCTION HAS BEEN HIT WITH : ' + homeObj);
 	      // $window.localStorage.homeData = this.singleHomeData;
 	      // $window.localStorage.
-	      $window.localStorage.setItem('homeData', this.singleHomeData);
 
 
 	  }

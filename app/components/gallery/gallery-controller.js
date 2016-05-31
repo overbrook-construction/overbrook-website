@@ -3,19 +3,29 @@
 require(__dirname + '/../../ajax-service/data-service');
 
 angular.module('GalleryModule', ['AjaxService'])
-  .controller('GalleryController', ['$location', 'ajax', function($location, ajax) {
+  .controller('GalleryController', ['$location', 'ajax', '$window', function($location, ajax, $window) {
 
     var vm = this;
     vm.houseData;
+    // var data = ajax.allHomeData;
+    var data;
+
 
   vm.getData = function() {
+    if ($window.localStorage){
+      var yup = JSON.parse($window.localStorage.getItem('allHomeData'));
+      console.log('YUP IS : ', yup);
+      data = yup
+    }
+    else {
+
     ajax.getData();
     vm.houseData = ajax.allHomeData;
   }
+}
 
   vm.showInfo = false;
 
-  var data = ajax.allHomeData;
 
   vm.clickedHomePicArray = [];
   vm.clickedAddress = [];
@@ -36,7 +46,6 @@ angular.module('GalleryModule', ['AjaxService'])
   }
 
 
-  var data = ajax.allHomeData;
 
   vm.changeStateFalse = function(){
     // console.log('CHANGE STATE IS BEING HIT');
@@ -61,6 +70,7 @@ angular.module('GalleryModule', ['AjaxService'])
     vm.singleHouseDataLoader = function(id){
       var singleHomeData = {};
       for (var key in data) {
+        console.log("SINGLE HOUSE FUNCTION CALLED WITH : ", id);
         var obj = data[key]
         if (data[key]._id == id) {
           // console.log('THIS IS THE MATCHING OBJECT', obj);

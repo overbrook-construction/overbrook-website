@@ -10,13 +10,39 @@ require(__dirname + '/../gallery/gallery-controller');
 angular.module('InfoModule', ['AjaxService', 'ngStorage'])
   .controller('InfoController', ['ajax', '$controller', '$window', function(ajax, $controller, $window) {
 
-  var data = ajax.allHomeData;
+    console.log('AJAX HOME DATA : ', ajax.allHomeData);
+
+  var data;
+
+
+  this.getData = function() {
+    if ($window.localStorage){
+      var yup = JSON.parse($window.localStorage.getItem('allHomeData'));
+      console.log('YUP IS : ', yup);
+      data = yup
+    }
+    else {
+
+    ajax.getData();
+    data = ajax.allHomeData;
+  }
+}
+
+
+  // this.getData = function(cb){
+  //   ajax.getData();
+  //   function cb(newData) {
+  //     data = newData
+  //   }
+  //   cb(ajax.allHomeData)
+  // }
+  //
+  // data = ajax.allHomeData;
 
   // PARSING THE ID OUT OF THE URL
   var string = document.URL
   var newId = url.parse(string).hash
   var useId = newId.split('').splice(10, 25).join('');
-  console.log(useId);
 
   this.idUrl = useId;
 
@@ -25,14 +51,14 @@ angular.module('InfoModule', ['AjaxService', 'ngStorage'])
   var frontPicture = [];
   this.frontPicture = frontPicture
 
-  console.log('LOCAL STORAGE IS : ' + $window.localStorage);
-
   this.singleHouseDataLoader = function(useId){
 
     // IF LOCAL STORAGE HAS OBJECT THEN USE THIS OBJECT
     // if ($window.localStorage.homeData) {
-    //   console.log('LOCAL STORAGE DATA : ' + $window.localStorage.homeData);
-    //   this.singleHomeData = $window.localStorage.homeData
+    //   var retrievedObj = $window.localStorage.getItem('homeData');
+    //   JSON.parse(retrievedObj);
+    //   console.log('OBJECT FROM LOCAL STORAGE IS : ', retrievedObj.address);
+    //   // this.singleHomeData.address = retrievedObj.address
     // }
     // else {
 
@@ -59,12 +85,16 @@ angular.module('InfoModule', ['AjaxService', 'ngStorage'])
         }
       }
     }
+    // var newArray = [];
+    // newArray.push(this.singleHomeData);
+    // $window.localStorage.setItem('homeData', JSON.stringify(this.singleHomeData));
+    // $window.localStorage.setItem('homeData', JSON.stringify(newArray));
+
   // }
     // // SAVE THIS DATA TO LOCAL STORAGE
     //   console.log('LOCAL STORAGE FUNCTION HAS BEEN HIT WITH : ' + homeObj);
       // $window.localStorage.homeData = this.singleHomeData;
       // $window.localStorage.
-      $window.localStorage.setItem('homeData', this.singleHomeData);
 
 
   }

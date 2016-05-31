@@ -6,7 +6,14 @@ require(__dirname + '/../gallery/gallery-controller');
 require(__dirname + '/../../ajax-service/data-service');
 
 angular.module('MapModule', ['AjaxService'])
-  .controller('MapController', ['$http', '$location', 'ajax', '$controller', function($http, $location, ajax, $controller) {
+  .controller('MapController', ['$http', '$location', 'ajax', '$controller', '$window', function($http, $location, ajax, $controller, $window) {
+
+
+  //   vm.load = function() {
+  //   var sleep = document.createElement('script');
+  //   sleep.src = 'https://maps.googleapis.com/maps/api/js?key=AIzaSyBBv4Sc8DwDft9TdcwDmS9d01SBmrCJFXA';
+  //   document.body.appendChild(sleep);
+  // }
 
     var vm = this;
 
@@ -16,19 +23,35 @@ angular.module('MapModule', ['AjaxService'])
 
     // MAP OBJECT
     var map = {};
+    vm.initMap = function() {
     map.mapDiv = document.getElementById('map');
     map.googleMap = new google.maps.Map(map.mapDiv, {
       center: {lat: 47.629, lng: -122.211},
       zoom: 12
     });
+  }
+  // setTimeout(vm.initMap(), 5000);
+
+    var data;
+
 
     vm.getData = function() {
+      if ($window.localStorage){
+        var yup = JSON.parse($window.localStorage.getItem('allHomeData'));
+        console.log('YUP IS : ', yup);
+        data = yup
+      }
+      else {
+
       ajax.getData();
       vm.houseData = ajax.allHomeData;
+      data = ajax.allHomeData;
     }
-
-
-    var data = ajax.allHomeData;
+  }
+    // vm.getData = function() {
+    //   ajax.getData();
+    //   vm.houseData = ajax.allHomeData;
+    // }
 
     vm.clickedAddress = [];
     vm.geoArray = [];

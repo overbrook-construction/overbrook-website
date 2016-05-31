@@ -30,7 +30,7 @@ var ajaxService = angular.module('AjaxService', []);
 // }])
 
 // RETRIEVING DATA FROM THE MLAB DATA BASE THIS IS THE NEW VERSION
-ajaxService.factory('ajax', ['$http', function($http) {
+ajaxService.factory('ajax', ['$http', '$window', function($http, $window) {
 
   var adminRoute = 'http://localhost:3000/addHomes';
   // this.getHouseData = function() {
@@ -60,6 +60,7 @@ ajaxService.factory('ajax', ['$http', function($http) {
       // console.log('RESPONSE FROM HTTP GET DATA-SERVICE : ', response.data);
       obj.allHomeData = response.data;
       console.log('ALL HOME DATA FROM SERVICE : ', obj.allHomeData);
+      $window.localStorage.setItem('allHomeData', JSON.stringify(obj.allHomeData));
       // SAVE TO SESSION STORAGE
 
     }, function errorCallback(response) {
