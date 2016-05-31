@@ -6,17 +6,16 @@ angular.module('GalleryModule', ['AjaxService'])
   .controller('GalleryController', ['$location', 'ajax', function($location, ajax) {
 
     var vm = this;
+    vm.houseData;
 
-  vm.getData = ajax.getData();
-
+  vm.getData = function() {
+    ajax.getData();
+    vm.houseData = ajax.allHomeData;
+  }
 
   vm.showInfo = false;
 
-
-  vm.houseData = ajax.allHomeData;
-
   var data = ajax.allHomeData;
-
 
   vm.clickedHomePicArray = [];
   vm.clickedAddress = [];

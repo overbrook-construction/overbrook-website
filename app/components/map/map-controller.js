@@ -22,9 +22,12 @@ angular.module('MapModule', ['AjaxService'])
       zoom: 12
     });
 
-    vm.getData = ajax.getData();
+    vm.getData = function() {
+      ajax.getData();
+      vm.houseData = ajax.allHomeData;
+    }
 
-    vm.houseData = ajax.allHomeData;
+
     var data = ajax.allHomeData;
 
     vm.clickedAddress = [];

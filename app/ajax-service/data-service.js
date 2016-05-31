@@ -59,6 +59,7 @@ ajaxService.factory('ajax', ['$http', function($http) {
     .then(function successCallback(response) {
       // console.log('RESPONSE FROM HTTP GET DATA-SERVICE : ', response.data);
       obj.allHomeData = response.data;
+      console.log('ALL HOME DATA FROM SERVICE : ', obj.allHomeData);
       // SAVE TO SESSION STORAGE
 
     }, function errorCallback(response) {

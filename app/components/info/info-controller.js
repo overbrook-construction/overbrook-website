@@ -1,18 +1,19 @@
 'use strict';
 
 // require(__dirname + '/../../ajax-service/data-service');
+require('ngstorage');
 
 var url = require('url');
 
 require(__dirname + '/../gallery/gallery-controller');
 
-angular.module('InfoModule', ['AjaxService'])
-  .controller('InfoController', ['ajax', '$controller', function(ajax, $controller) {
+angular.module('InfoModule', ['AjaxService', 'ngStorage'])
+  .controller('InfoController', ['ajax', '$controller', '$window', function(ajax, $controller, $window) {
 
   var data = ajax.allHomeData;
 
+  // PARSING THE ID OUT OF THE URL
   var string = document.URL
-
   var newId = url.parse(string).hash
   var useId = newId.split('').splice(10, 25).join('');
   console.log(useId);
@@ -24,10 +25,18 @@ angular.module('InfoModule', ['AjaxService'])
   var frontPicture = [];
   this.frontPicture = frontPicture
 
+  console.log('LOCAL STORAGE IS : ' + $window.localStorage);
+
   this.singleHouseDataLoader = function(useId){
 
-    console.log('DO IT CALLED WITH : ', useId);
-    var singleHomeData = {};
+    // IF LOCAL STORAGE HAS OBJECT THEN USE THIS OBJECT
+    // if ($window.localStorage.homeData) {
+    //   console.log('LOCAL STORAGE DATA : ' + $window.localStorage.homeData);
+    //   this.singleHomeData = $window.localStorage.homeData
+    // }
+    // else {
+
+    // var singleHomeData = {};
     for (var key in data) {
       var obj = data[key]
       if (data[key]._id == useId) {
@@ -50,6 +59,13 @@ angular.module('InfoModule', ['AjaxService'])
         }
       }
     }
+  // }
+    // // SAVE THIS DATA TO LOCAL STORAGE
+    //   console.log('LOCAL STORAGE FUNCTION HAS BEEN HIT WITH : ' + homeObj);
+      // $window.localStorage.homeData = this.singleHomeData;
+      // $window.localStorage.
+      $window.localStorage.setItem('homeData', this.singleHomeData);
+
 
   }
 

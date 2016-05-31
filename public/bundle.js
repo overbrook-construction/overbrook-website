@@ -54,11 +54,11 @@
 	__webpack_require__(8);
 	__webpack_require__(4);
 	__webpack_require__(9);
-	__webpack_require__(17);
-	__webpack_require__(18)
-	__webpack_require__(19);
+	__webpack_require__(18);
+	__webpack_require__(19)
 	__webpack_require__(20);
-	__webpack_require__(23);
+	__webpack_require__(21);
+	__webpack_require__(24);
 
 
 /***/ },
@@ -30992,17 +30992,16 @@
 	  .controller('GalleryController', ['$location', 'ajax', function($location, ajax) {
 
 	    var vm = this;
+	    vm.houseData;
 
-	  vm.getData = ajax.getData();
-
+	  vm.getData = function() {
+	    ajax.getData();
+	    vm.houseData = ajax.allHomeData;
+	  }
 
 	  vm.showInfo = false;
 
-
-	  vm.houseData = ajax.allHomeData;
-
 	  var data = ajax.allHomeData;
-
 
 	  vm.clickedHomePicArray = [];
 	  vm.clickedAddress = [];
@@ -31165,6 +31164,7 @@
 	    .then(function successCallback(response) {
 	      // console.log('RESPONSE FROM HTTP GET DATA-SERVICE : ', response.data);
 	      obj.allHomeData = response.data;
+	      console.log('ALL HOME DATA FROM SERVICE : ', obj.allHomeData);
 	      // SAVE TO SESSION STORAGE
 
 	    }, function errorCallback(response) {
@@ -31238,9 +31238,12 @@
 	      zoom: 12
 	    });
 
-	    vm.getData = ajax.getData();
+	    vm.getData = function() {
+	      ajax.getData();
+	      vm.houseData = ajax.allHomeData;
+	    }
 
-	    vm.houseData = ajax.allHomeData;
+
 	    var data = ajax.allHomeData;
 
 	    vm.clickedAddress = [];
@@ -31318,18 +31321,19 @@
 	'use strict';
 
 	// require(__dirname + '/../../ajax-service/data-service');
+	__webpack_require__(10);
 
-	var url = __webpack_require__(10);
+	var url = __webpack_require__(11);
 
 	__webpack_require__(4);
 
-	angular.module('InfoModule', ['AjaxService'])
-	  .controller('InfoController', ['ajax', '$controller', function(ajax, $controller) {
+	angular.module('InfoModule', ['AjaxService', 'ngStorage'])
+	  .controller('InfoController', ['ajax', '$controller', '$window', function(ajax, $controller, $window) {
 
 	  var data = ajax.allHomeData;
 
+	  // PARSING THE ID OUT OF THE URL
 	  var string = document.URL
-
 	  var newId = url.parse(string).hash
 	  var useId = newId.split('').splice(10, 25).join('');
 	  console.log(useId);
@@ -31341,10 +31345,18 @@
 	  var frontPicture = [];
 	  this.frontPicture = frontPicture
 
+	  console.log('LOCAL STORAGE IS : ' + $window.localStorage);
+
 	  this.singleHouseDataLoader = function(useId){
 
-	    console.log('DO IT CALLED WITH : ', useId);
-	    var singleHomeData = {};
+	    // IF LOCAL STORAGE HAS OBJECT THEN USE THIS OBJECT
+	    // if ($window.localStorage.homeData) {
+	    //   console.log('LOCAL STORAGE DATA : ' + $window.localStorage.homeData);
+	    //   this.singleHomeData = $window.localStorage.homeData
+	    // }
+	    // else {
+
+	    // var singleHomeData = {};
 	    for (var key in data) {
 	      var obj = data[key]
 	      if (data[key]._id == useId) {
@@ -31367,6 +31379,13 @@
 	        }
 	      }
 	    }
+	  // }
+	    // // SAVE THIS DATA TO LOCAL STORAGE
+	    //   console.log('LOCAL STORAGE FUNCTION HAS BEEN HIT WITH : ' + homeObj);
+	      // $window.localStorage.homeData = this.singleHomeData;
+	      // $window.localStorage.
+	      $window.localStorage.setItem('homeData', this.singleHomeData);
+
 
 	  }
 
@@ -31375,6 +31394,233 @@
 
 /***/ },
 /* 10 */
+/***/ function(module, exports, __webpack_require__) {
+
+	var __WEBPACK_AMD_DEFINE_FACTORY__, __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_DEFINE_RESULT__;(function (root, factory) {
+	  'use strict';
+
+	  if (true) {
+	    !(__WEBPACK_AMD_DEFINE_ARRAY__ = [__webpack_require__(1)], __WEBPACK_AMD_DEFINE_FACTORY__ = (factory), __WEBPACK_AMD_DEFINE_RESULT__ = (typeof __WEBPACK_AMD_DEFINE_FACTORY__ === 'function' ? (__WEBPACK_AMD_DEFINE_FACTORY__.apply(exports, __WEBPACK_AMD_DEFINE_ARRAY__)) : __WEBPACK_AMD_DEFINE_FACTORY__), __WEBPACK_AMD_DEFINE_RESULT__ !== undefined && (module.exports = __WEBPACK_AMD_DEFINE_RESULT__));
+	  } else if (root.hasOwnProperty('angular')) {
+	    // Browser globals (root is window), we don't register it.
+	    factory(root.angular);
+	  } else if (typeof exports === 'object') {
+	    module.exports = factory(require('angular'));
+	  }
+	}(this , function (angular) {
+	    'use strict';
+
+	    // In cases where Angular does not get passed or angular is a truthy value
+	    // but misses .module we can fall back to using window.
+	    angular = (angular && angular.module ) ? angular : window.angular;
+
+	    /**
+	     * @ngdoc overview
+	     * @name ngStorage
+	     */
+
+	    return angular.module('ngStorage', [])
+
+	    /**
+	     * @ngdoc object
+	     * @name ngStorage.$localStorage
+	     * @requires $rootScope
+	     * @requires $window
+	     */
+
+	    .provider('$localStorage', _storageProvider('localStorage'))
+
+	    /**
+	     * @ngdoc object
+	     * @name ngStorage.$sessionStorage
+	     * @requires $rootScope
+	     * @requires $window
+	     */
+
+	    .provider('$sessionStorage', _storageProvider('sessionStorage'));
+
+	    function _storageProvider(storageType) {
+	        return function () {
+	          var storageKeyPrefix = 'ngStorage-';
+
+	          this.setKeyPrefix = function (prefix) {
+	            if (typeof prefix !== 'string') {
+	              throw new TypeError('[ngStorage] - ' + storageType + 'Provider.setKeyPrefix() expects a String.');
+	            }
+	            storageKeyPrefix = prefix;
+	          };
+
+	          var serializer = angular.toJson;
+	          var deserializer = angular.fromJson;
+
+	          this.setSerializer = function (s) {
+	            if (typeof s !== 'function') {
+	              throw new TypeError('[ngStorage] - ' + storageType + 'Provider.setSerializer expects a function.');
+	            }
+
+	            serializer = s;
+	          };
+
+	          this.setDeserializer = function (d) {
+	            if (typeof d !== 'function') {
+	              throw new TypeError('[ngStorage] - ' + storageType + 'Provider.setDeserializer expects a function.');
+	            }
+
+	            deserializer = d;
+	          };
+
+	          // Note: This is not very elegant at all.
+	          this.get = function (key) {
+	            return deserializer(window[storageType].getItem(storageKeyPrefix + key));
+	          };
+
+	          // Note: This is not very elegant at all.
+	          this.set = function (key, value) {
+	            return window[storageType].setItem(storageKeyPrefix + key, serializer(value));
+	          };
+
+	          this.$get = [
+	              '$rootScope',
+	              '$window',
+	              '$log',
+	              '$timeout',
+	              '$document',
+
+	              function(
+	                  $rootScope,
+	                  $window,
+	                  $log,
+	                  $timeout,
+	                  $document
+	              ){
+	                function isStorageSupported(storageType) {
+
+	                    // Some installations of IE, for an unknown reason, throw "SCRIPT5: Error: Access is denied"
+	                    // when accessing window.localStorage. This happens before you try to do anything with it. Catch
+	                    // that error and allow execution to continue.
+
+	                    // fix 'SecurityError: DOM Exception 18' exception in Desktop Safari, Mobile Safari
+	                    // when "Block cookies": "Always block" is turned on
+	                    var supported;
+	                    try {
+	                        supported = $window[storageType];
+	                    }
+	                    catch (err) {
+	                        supported = false;
+	                    }
+
+	                    // When Safari (OS X or iOS) is in private browsing mode, it appears as though localStorage
+	                    // is available, but trying to call .setItem throws an exception below:
+	                    // "QUOTA_EXCEEDED_ERR: DOM Exception 22: An attempt was made to add something to storage that exceeded the quota."
+	                    if (supported && storageType === 'localStorage') {
+	                        var key = '__' + Math.round(Math.random() * 1e7);
+
+	                        try {
+	                            localStorage.setItem(key, key);
+	                            localStorage.removeItem(key);
+	                        }
+	                        catch (err) {
+	                            supported = false;
+	                        }
+	                    }
+
+	                    return supported;
+	                }
+
+	                // The magic number 10 is used which only works for some keyPrefixes...
+	                // See https://github.com/gsklee/ngStorage/issues/137
+	                var prefixLength = storageKeyPrefix.length;
+
+	                // #9: Assign a placeholder object if Web Storage is unavailable to prevent breaking the entire AngularJS app
+	                var webStorage = isStorageSupported(storageType) || ($log.warn('This browser does not support Web Storage!'), {setItem: angular.noop, getItem: angular.noop, removeItem: angular.noop}),
+	                    $storage = {
+	                        $default: function(items) {
+	                            for (var k in items) {
+	                                angular.isDefined($storage[k]) || ($storage[k] = angular.copy(items[k]) );
+	                            }
+
+	                            $storage.$sync();
+	                            return $storage;
+	                        },
+	                        $reset: function(items) {
+	                            for (var k in $storage) {
+	                                '$' === k[0] || (delete $storage[k] && webStorage.removeItem(storageKeyPrefix + k));
+	                            }
+
+	                            return $storage.$default(items);
+	                        },
+	                        $sync: function () {
+	                            for (var i = 0, l = webStorage.length, k; i < l; i++) {
+	                                // #8, #10: `webStorage.key(i)` may be an empty string (or throw an exception in IE9 if `webStorage` is empty)
+	                                (k = webStorage.key(i)) && storageKeyPrefix === k.slice(0, prefixLength) && ($storage[k.slice(prefixLength)] = deserializer(webStorage.getItem(k)));
+	                            }
+	                        },
+	                        $apply: function() {
+	                            var temp$storage;
+
+	                            _debounce = null;
+
+	                            if (!angular.equals($storage, _last$storage)) {
+	                                temp$storage = angular.copy(_last$storage);
+	                                angular.forEach($storage, function(v, k) {
+	                                    if (angular.isDefined(v) && '$' !== k[0]) {
+	                                        webStorage.setItem(storageKeyPrefix + k, serializer(v));
+	                                        delete temp$storage[k];
+	                                    }
+	                                });
+
+	                                for (var k in temp$storage) {
+	                                    webStorage.removeItem(storageKeyPrefix + k);
+	                                }
+
+	                                _last$storage = angular.copy($storage);
+	                            }
+	                        }
+	                    },
+	                    _last$storage,
+	                    _debounce;
+
+	                $storage.$sync();
+
+	                _last$storage = angular.copy($storage);
+
+	                $rootScope.$watch(function() {
+	                    _debounce || (_debounce = $timeout($storage.$apply, 100, false));
+	                });
+
+	                // #6: Use `$window.addEventListener` instead of `angular.element` to avoid the jQuery-specific `event.originalEvent`
+	                $window.addEventListener && $window.addEventListener('storage', function(event) {
+	                    if (!event.key) {
+	                      return;
+	                    }
+
+	                    // Reference doc.
+	                    var doc = $document[0];
+
+	                    if ( (!doc.hasFocus || !doc.hasFocus()) && storageKeyPrefix === event.key.slice(0, prefixLength) ) {
+	                        event.newValue ? $storage[event.key.slice(prefixLength)] = deserializer(event.newValue) : delete $storage[event.key.slice(prefixLength)];
+
+	                        _last$storage = angular.copy($storage);
+
+	                        $rootScope.$apply();
+	                    }
+	                });
+
+	                $window.addEventListener && $window.addEventListener('beforeunload', function() {
+	                    $storage.$apply();
+	                });
+
+	                return $storage;
+	              }
+	          ];
+	      };
+	    }
+
+	}));
+
+
+/***/ },
+/* 11 */
 /***/ function(module, exports, __webpack_require__) {
 
 	// Copyright Joyent, Inc. and other Node contributors.
@@ -31400,8 +31646,8 @@
 
 	'use strict';
 
-	var punycode = __webpack_require__(11);
-	var util = __webpack_require__(13);
+	var punycode = __webpack_require__(12);
+	var util = __webpack_require__(14);
 
 	exports.parse = urlParse;
 	exports.resolve = urlResolve;
@@ -31476,7 +31722,7 @@
 	      'gopher:': true,
 	      'file:': true
 	    },
-	    querystring = __webpack_require__(14);
+	    querystring = __webpack_require__(15);
 
 	function urlParse(url, parseQueryString, slashesDenoteHost) {
 	  if (url && util.isObject(url) && url instanceof Url) return url;
@@ -32112,7 +32358,7 @@
 
 
 /***/ },
-/* 11 */
+/* 12 */
 /***/ function(module, exports, __webpack_require__) {
 
 	var __WEBPACK_AMD_DEFINE_RESULT__;/* WEBPACK VAR INJECTION */(function(module, global) {/*! https://mths.be/punycode v1.3.2 by @mathias */
@@ -32644,10 +32890,10 @@
 
 	}(this));
 
-	/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(12)(module), (function() { return this; }())))
+	/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(13)(module), (function() { return this; }())))
 
 /***/ },
-/* 12 */
+/* 13 */
 /***/ function(module, exports) {
 
 	module.exports = function(module) {
@@ -32663,7 +32909,7 @@
 
 
 /***/ },
-/* 13 */
+/* 14 */
 /***/ function(module, exports) {
 
 	'use strict';
@@ -32685,17 +32931,17 @@
 
 
 /***/ },
-/* 14 */
+/* 15 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
 
-	exports.decode = exports.parse = __webpack_require__(15);
-	exports.encode = exports.stringify = __webpack_require__(16);
+	exports.decode = exports.parse = __webpack_require__(16);
+	exports.encode = exports.stringify = __webpack_require__(17);
 
 
 /***/ },
-/* 15 */
+/* 16 */
 /***/ function(module, exports) {
 
 	// Copyright Joyent, Inc. and other Node contributors.
@@ -32781,7 +33027,7 @@
 
 
 /***/ },
-/* 16 */
+/* 17 */
 /***/ function(module, exports) {
 
 	// Copyright Joyent, Inc. and other Node contributors.
@@ -32851,7 +33097,7 @@
 
 
 /***/ },
-/* 17 */
+/* 18 */
 /***/ function(module, exports) {
 
 	'use strict';
@@ -32881,7 +33127,7 @@
 
 
 /***/ },
-/* 18 */
+/* 19 */
 /***/ function(module, exports) {
 
 	'use strict';
@@ -32899,7 +33145,7 @@
 
 
 /***/ },
-/* 19 */
+/* 20 */
 /***/ function(module, exports) {
 
 	'use strict';
@@ -32997,12 +33243,12 @@
 
 
 /***/ },
-/* 20 */
+/* 21 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
 
-	angular.module('RouteModule', [__webpack_require__(21)])
+	angular.module('RouteModule', [__webpack_require__(22)])
 	  .config(['$routeProvider', function(route) {
 	    route
 	      .when('/home', {
@@ -33050,15 +33296,15 @@
 
 
 /***/ },
-/* 21 */
+/* 22 */
 /***/ function(module, exports, __webpack_require__) {
 
-	__webpack_require__(22);
+	__webpack_require__(23);
 	module.exports = 'ngRoute';
 
 
 /***/ },
-/* 22 */
+/* 23 */
 /***/ function(module, exports) {
 
 	/**
@@ -34089,7 +34335,7 @@
 
 
 /***/ },
-/* 23 */
+/* 24 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
