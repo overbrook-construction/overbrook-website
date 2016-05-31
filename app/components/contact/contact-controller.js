@@ -4,9 +4,12 @@ angular.module('ContactModule', [])
 .controller('contactController', ['$http', function($http) {
   var emailRoute = 'http://localhost:3000/email'
 
-  // this.user = {};
-  // this.emailForm.$setPrestine();
-  // this.emailForm.$setUntouched();
+
+  var emailForm = document.getElementsByName('emailForm')[0];
+  this.resetForm = function(){
+    emailForm.reset();
+  }
+
 
   this.sendEmail = function(user) {
     console.log('USER FROM FORM IS : ', user);
