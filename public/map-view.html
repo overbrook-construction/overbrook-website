@@ -10,8 +10,8 @@
     <div class="addressSidebar">
       <div class="filterButtonDiv">
         <button class="completed" type="button" ng-click="mapCtrl.showSideCompleted('Complete', mapCtrl.completeIcon)">Completed</button>
-        <button class="current" type="button" ng-click="mapCtrl.showSideCompleted('Constructing', mapCtrl.constructionIcon)">Current</button>
-        <button class="future" type="button" ng-click="mapCtrl.showSideCompleted('Future', mapCtrl.futureIcon)">Future</button>
+        <button class="current" type="button" ng-click="mapCtrl.showSideCompleted('Constructing', mapCtrl.constructionIcon)">Under Construction</button>
+        <button class="future" type="button" ng-click="mapCtrl.showSideCompleted('Future', mapCtrl.futureIcon)">Building Sites</button>
       </div>
       <div class="scrollContainer">
         <div class="addressDiv" ng-repeat="(eachHome, value) in mapCtrl.clickedAddress">
