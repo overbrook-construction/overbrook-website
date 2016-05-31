@@ -28,7 +28,7 @@
   vertical-align: center;
   margin-top: 16px;
   p {
-    font-family: serif;
+    font-family: 'Tinos', serif;
     font-size: 45px;
     padding-top: 20px;
     margin-top: 0;
@@ -43,7 +43,7 @@
   color: #414042;
   letter-spacing: 2px;
   padding: 0px 40px 0px 40px;
-  font-family: serif;
+  font-family: 'Tinos', serif;
 }
 
 .homeTab {
@@ -72,7 +72,7 @@
   -moz-background-size: cover;
   -o-background-size: cover;
   background-size: cover;
-  height: 750px;
+  height: 100%;
   margin-top: -16px;
 }
 
@@ -86,8 +86,9 @@
     color: white;
     padding: 20px;
     color: white;
-    letter-spacing: 2px;
-    font-family: serif;
+    letter-spacing: 1px;
+    line-height: 30px;
+    font-family: 'Lato', sans-serif;
   }
 }
 
@@ -100,7 +101,7 @@
   -moz-background-size: cover;
   -o-background-size: cover;
   background-size: cover;
-  height: 750px;
+  height: 100%;
   margin-top: -16px;
 }
 
@@ -121,8 +122,12 @@
     padding-bottom: 0px;
     color: white;
     letter-spacing: 2px;
-    font-family: serif;
+    font-family: 'Tinos', serif;
   }
+}
+
+.emailUs, .submitButton {
+  font-family: 'Tinos', serif;
 }
 
 .emailBox {
@@ -152,12 +157,15 @@
     padding: 10px 5px 10px 5px;
     margin: 20px 0px 0px 0px;
     width: 300px;
+    font-family: 'Tinos', serif;
+
   }
   textarea {
     display: block;
     padding: 10px 5px 10px 5px;
     margin: 20px 0px 0px 0px;
     width: 301px;
+    font-family: 'Tinos', serif;
   }
   button {
     width: 312px;
@@ -166,7 +174,6 @@
     background-color: black;
     opacity: .8;
     color: white
-
   }
 }
 
@@ -182,7 +189,7 @@
   -moz-background-size: cover;
   -o-background-size: cover;
   background-size: cover;
-  height: 750px;
+  height: 100%;
   margin-top: -16px;
 }
 
@@ -231,7 +238,7 @@
 }
 
 .infoImageContainer {
-  width: 50%;
+  width: 70%;
 }
 
 .infoMainImage {
@@ -256,12 +263,13 @@
 }
 
 .infoTextContainer {
-  width: 50%;
+  width: 30%;
   padding: 0px 0px 20px 20px;
   // background-color: blue;
 }
 
 .infoText {
+  font-family: 'Tinos', serif;
   font-size: 16px;
   margin: 0px 0 11px 0;
 }
@@ -290,7 +298,7 @@
   -moz-background-size: cover;
   -o-background-size: cover;
   background-size: cover;
-  height: 750px;
+  height: 100%;
   margin-top: -16px;
 }
 
@@ -325,7 +333,7 @@
   // border: none;
   padding-left: 20px;
   padding-bottom: 10px;
-  font-family: serif;
+  font-family: 'Tinos', serif;
   color: #00ADEE;
   text-decoration: none;
 }
@@ -346,7 +354,8 @@
   text-decoration: none;
   display: inline-block;
   font-size: 16px;
-  margin: 0px 5px 0px 43px;
+  font-family: 'Tinos', serif;
+  margin: 0px 5px 0px 0px;
 }
 
 .current {
@@ -358,6 +367,7 @@
   text-decoration: none;
   display: inline-block;
   font-size: 16px;
+  font-family: 'Tinos', serif;
   margin: 0px 5px 0px 5px;
 }
 
@@ -370,6 +380,7 @@
   text-decoration: none;
   display: inline-block;
   font-size: 16px;
+  font-family: 'Tinos', serif;
   margin: 0px 0px 0px 5px;
 }
 
@@ -390,5 +401,7 @@
 }
 
 .footerText:before {
+  font-family: 'Tinos', serif;
+
   content: "\00a9"
 }

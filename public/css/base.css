@@ -25,7 +25,7 @@
   vertical-align: center;
   margin-top: 16px; }
   .logoDiv p {
-    font-family: serif;
+    font-family: 'Tinos', serif;
     font-size: 45px;
     padding-top: 20px;
     margin-top: 0;
@@ -38,7 +38,7 @@
   color: #414042;
   letter-spacing: 2px;
   padding: 0px 40px 0px 40px;
-  font-family: serif; }
+  font-family: 'Tinos', serif; }
 
 .homeTab {
   text-decoration: none;
@@ -62,7 +62,7 @@
   -moz-background-size: cover;
   -o-background-size: cover;
   background-size: cover;
-  height: 750px;
+  height: 100%;
   margin-top: -16px; }
 
 .aboutText {
@@ -75,8 +75,9 @@
     color: white;
     padding: 20px;
     color: white;
-    letter-spacing: 2px;
-    font-family: serif; }
+    letter-spacing: 1px;
+    line-height: 30px;
+    font-family: 'Lato', sans-serif; }
 
 .contactImg {
   background: url("../media/2434-016.jpg") no-repeat center center;
@@ -84,7 +85,7 @@
   -moz-background-size: cover;
   -o-background-size: cover;
   background-size: cover;
-  height: 750px;
+  height: 100%;
   margin-top: -16px; }
 
 .contactPage {
@@ -103,7 +104,10 @@
     padding-bottom: 0px;
     color: white;
     letter-spacing: 2px;
-    font-family: serif; }
+    font-family: 'Tinos', serif; }
+
+.emailUs, .submitButton {
+  font-family: 'Tinos', serif; }
 
 .emailBox {
   display: flex;
@@ -128,12 +132,14 @@
     display: block;
     padding: 10px 5px 10px 5px;
     margin: 20px 0px 0px 0px;
-    width: 300px; }
+    width: 300px;
+    font-family: 'Tinos', serif; }
   .emailForm textarea {
     display: block;
     padding: 10px 5px 10px 5px;
     margin: 20px 0px 0px 0px;
-    width: 301px; }
+    width: 301px;
+    font-family: 'Tinos', serif; }
   .emailForm button {
     width: 312px;
     padding: 10px 5px 10px 5px;
@@ -152,7 +158,7 @@
   -moz-background-size: cover;
   -o-background-size: cover;
   background-size: cover;
-  height: 750px;
+  height: 100%;
   margin-top: -16px; }
 
 .galleryWrapper {
@@ -190,7 +196,7 @@
   align-self: center; }
 
 .infoImageContainer {
-  width: 50%; }
+  width: 70%; }
 
 .infoMainImage {
   width: 100%;
@@ -211,10 +217,11 @@
   display: inline-block; }
 
 .infoTextContainer {
-  width: 50%;
+  width: 30%;
   padding: 0px 0px 20px 20px; }
 
 .infoText {
+  font-family: 'Tinos', serif;
   font-size: 16px;
   margin: 0px 0 11px 0; }
 
@@ -237,7 +244,7 @@
   -moz-background-size: cover;
   -o-background-size: cover;
   background-size: cover;
-  height: 750px;
+  height: 100%;
   margin-top: -16px; }
 
 .addressSidebar {
@@ -266,7 +273,7 @@
   background-color: none;
   padding-left: 20px;
   padding-bottom: 10px;
-  font-family: serif;
+  font-family: 'Tinos', serif;
   color: #00ADEE;
   text-decoration: none; }
 
@@ -286,7 +293,8 @@
   text-decoration: none;
   display: inline-block;
   font-size: 16px;
-  margin: 0px 5px 0px 43px; }
+  font-family: 'Tinos', serif;
+  margin: 0px 5px 0px 0px; }
 
 .current {
   background-color: #1C75BB;
@@ -297,6 +305,7 @@
   text-decoration: none;
   display: inline-block;
   font-size: 16px;
+  font-family: 'Tinos', serif;
   margin: 0px 5px 0px 5px; }
 
 .future {
@@ -308,6 +317,7 @@
   text-decoration: none;
   display: inline-block;
   font-size: 16px;
+  font-family: 'Tinos', serif;
   margin: 0px 0px 0px 5px; }
 
 .footer {
@@ -320,4 +330,5 @@
   background-color: #F0F0F0; }
 
 .footerText:before {
+  font-family: 'Tinos', serif;
   content: "\00a9"; }
