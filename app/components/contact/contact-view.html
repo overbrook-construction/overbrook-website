@@ -35,12 +35,12 @@
 
     <div class="emailBox">
       <form class="emailForm" name="emailForm" ng-submit="contactCtrl.sendEmail(user); contactCtrl.resetForm()">
-        <div><p>Email Us!</p></div>
+        <div><p class="emailUs">Email Us!</p></div>
         <input type="text" placeholder="Your Name" ng-model="user.name" required>
         <input type="email" placeholder="Your Email Address" ng-model="user.email" ng-minlength="5" required>
         <textarea cols="37" rows="10" type="text" placeholder="Your Message" ng-model="user.message" required></textarea>
         <br>
-        <button type="submit">Send Email</button>
+        <button class="submitButton" type="submit">Send Email</button>
       </form>
     </div>
 
