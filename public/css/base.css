@@ -20,7 +20,7 @@
   justify-content: center;
   text-align: center;
   width: 100%;
-  height: 60px;
+  height: auto;
   align-items: center;
   vertical-align: center;
   margin-top: 16px; }
@@ -28,7 +28,9 @@
     font-family: serif;
     font-size: 45px;
     padding-top: 20px;
-    padding-bottom: -5px;
+    margin-top: 0;
+    margin-bottom: 0;
+    padding-bottom: 0px;
     color: #414042; }
 
 .navItem {
@@ -140,6 +142,10 @@
     opacity: .8;
     color: white; }
 
+.contactIcon {
+  width: 30px;
+  height: auto; }
+
 .galleryImg {
   background: url("../media/defaultbg2.jpg") no-repeat center center;
   -webkit-background-size: cover;
@@ -148,6 +154,9 @@
   background-size: cover;
   height: 750px;
   margin-top: -16px; }
+
+.galleryWrapper {
+  display: flex; }
 
 .galleryMasterDiv {
   text-align: center;
@@ -237,7 +246,7 @@
   background-color: white;
   width: 30%;
   max-height: 630px;
-  padding-top: 15px; }
+  padding-top: 0px; }
 
 .scrollContainer {
   overflow: scroll;
@@ -255,11 +264,11 @@
 
 .viewDetailsButton {
   background-color: none;
-  border: none;
   padding-left: 20px;
   padding-bottom: 10px;
   font-family: serif;
-  color: #00ADEE; }
+  color: #00ADEE;
+  text-decoration: none; }
 
 .filterButtonDiv {
   display: inline-flex;
@@ -277,7 +286,7 @@
   text-decoration: none;
   display: inline-block;
   font-size: 16px;
-  margin: 0px 5px 0px 0px; }
+  margin: 0px 5px 0px 43px; }
 
 .current {
   background-color: #1C75BB;
