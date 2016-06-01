@@ -31265,7 +31265,6 @@
 	    vm.getData = function() {
 	      if ($window.localStorage){
 	        var yup = JSON.parse($window.localStorage.getItem('allHomeData'));
-	        console.log('YUP IS : ', yup);
 	        data = yup
 	      }
 	      else {
@@ -31284,31 +31283,49 @@
 	    vm.geoArray = [];
 	    vm.clickedPics = [];
 
+
+
+
+	//     var promiseArray = objectArray.map(function(value, index) {
+	// return new Promise(geocoding stuff)
+	// })
+
+	// Promise.all(promiseArray)
+	// .then(clearmarkers, drawmarkers)
+	// .catch(handleErrorSomehow)
+
+
 	  //  GEO CODES THE ADDRESSES PASSED IN BY SIDE BAR FUNCTION BASED ON CLICKED VALUE
-	  var geoFunc = function(objectArray, iconValue, callback) {
-	    for (var i = 0; i < objectArray.length; i++) {
+	  var geoFunc = function(objectArray, iconValue) {
+	    var geoArray = [];
+
+	    var promiseArray = objectArray.map(function(value, index) {
 	      var geocoder = new google.maps.Geocoder();
-	      var geoArray = [];
-	      geocoder.geocode({'address': objectArray[i].address}, function(results, status) {
-	        if(status === google.maps.GeocoderStatus.OK) {
-	          geoArray.push(results[0].geometry.location)
-	          callback();
-	        }
 
-	        // results.forEach(function(obj, i) {
-	        // })
+	      return new Promise(function(resolve, reject){
 
-	        // INSERT A PROMISE HERE
-	        // returns a promise when all the promises in the iterable have finished
+	          geocoder.geocode({'address': value.address}, function(results, status) {
+	            if(status === google.maps.GeocoderStatus.OK) {
+	              // console.log('RESULTS FROM NEW PROMISE : ', results[0].geometry.location);
+	              // geoArray.push(results[0].geometry.location)
+	              // console.log(results[0].geometry.location);
+	              resolve(results[0].geometry.location);
+	            }
+	          })
 
-
-
-	        console.log('GEO ARRAY : ', geoArray);
-	        mapObject.clearMarkers();
-	        mapObject.drawMarkers(geoArray, iconValue, objectArray);
+	        })
 	      })
-	    }
+	      Promise.all(promiseArray)
+	      .then(function(result) {
+	        console.log('THEN RESULT : ', result);
+	        mapObject.clearMarkers();
+	        mapObject.drawMarkers(result, iconValue, objectArray);
+	      })
+	      .catch(function(error){
+	        console.log(error);
+	      })
 	  }
+
 
 	    var contentFig = 'sam Gruse';
 	    var homePic;
@@ -31320,7 +31337,11 @@
 	      drawMarkers: function(geoArray, iconValue, objectArray) {
 	        for (var i = 0; i < geoArray.length; i++) {
 
-	          var setContent = '<div><img class="popPic" src=' + objectArray[i].pics[0] + ' /></div>';
+	          var setContent = '<div>\
+	          <img class="popPic" src=' + objectArray[i].pics[0] + ' />\
+	          <p class="popAddress">' + objectArray[i].address + '</p>\
+	          <a href="#/gallery/'+ objectArray[i]._id +'" class="viewDetailsButton" ng-click="mapCtrl.sayName()">view detail</a>\
+	          </div>';
 
 	          var infowindow = new google.maps.InfoWindow({
 	            // content: setContent

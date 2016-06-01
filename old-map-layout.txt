@@ -147,7 +147,7 @@ OLD INFO PAGE
 
 OLD GEOCODE FUNCTIONALITY BEFORE promises
 
-var geoFunc = function(objectArray, iconValue) {
+ver r geoFunc = function(objectArray, iconValue) {
   for (var i = 0; i < objectArray.length; i++) {
     var geocoder = new google.maps.Geocoder();
     var geoArray = [];
