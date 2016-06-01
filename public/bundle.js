@@ -31317,12 +31317,10 @@
 	      })
 	      Promise.all(promiseArray)
 	      .then(function(result) {
-	        console.log('THEN RESULT : ', result);
 	        mapObject.clearMarkers();
 	        mapObject.drawMarkers(result, iconValue, objectArray);
 	      })
 	      .catch(function(error){
-	        console.log(error);
 	      })
 	  }
 
@@ -31332,19 +31330,17 @@
 
 	    // MAP FUNCTIONALITY
 	    var markers = [];
-	    var fake = ['Sam', 'dave', 'hilda']
 	    var mapObject = {
 	      drawMarkers: function(geoArray, iconValue, objectArray) {
 	        for (var i = 0; i < geoArray.length; i++) {
 
-	          var setContent = '<div>\
+	          var setContent = '<div id="popDiv">\
 	          <img class="popPic" src=' + objectArray[i].pics[0] + ' />\
 	          <p class="popAddress">' + objectArray[i].address + '</p>\
 	          <a href="#/gallery/'+ objectArray[i]._id +'" class="viewDetailsButton" ng-click="mapCtrl.sayName()">view detail</a>\
 	          </div>';
 
 	          var infowindow = new google.maps.InfoWindow({
-	            // content: setContent
 	            content: setContent
 	          });
 
@@ -31354,8 +31350,18 @@
 	            icon: iconValue
 	          });
 
+
+	          function closeInfo () {
+	            console.log('CLOSE INFO HAS BEEN HIT');
+	            infowindow.close();
+	          }
+
 	          (function(marker, infowindow) {
 	            marker.addListener('click', function() {
+	              if(infowindow) {
+	                closeInfo();
+	              }
+	              closeInfo();
 	              infowindow.open(map.googleMap, marker)
 	            })
 	          })(marker, infowindow);
