@@ -55,40 +55,63 @@ angular.module('MapModule', ['AjaxService'])
 
     vm.clickedAddress = [];
     vm.geoArray = [];
+    vm.clickedPics = [];
 
   //  GEO CODES THE ADDRESSES PASSED IN BY SIDE BAR FUNCTION BASED ON CLICKED VALUE
-    var geoFunc = function(objectArray, iconValue) {
-      for (var i = 0; i < objectArray.length; i++) {
-        var geocoder = new google.maps.Geocoder();
-        var geoArray = [];
-        geocoder.geocode({'address': objectArray[i].address}, function(results, status) {
-          results.forEach(function(obj) {
-            geoArray.push(obj.geometry.location);
-          })
-          mapObject.clearMarkers();
-          mapObject.drawMarkers(geoArray, iconValue);
-        })
-      }
+  var geoFunc = function(objectArray, iconValue, callback) {
+    for (var i = 0; i < objectArray.length; i++) {
+      var geocoder = new google.maps.Geocoder();
+      var geoArray = [];
+      geocoder.geocode({'address': objectArray[i].address}, function(results, status) {
+        if(status === google.maps.GeocoderStatus.OK) {
+          geoArray.push(results[0].geometry.location)
+          callback();
+        }
+
+        // results.forEach(function(obj, i) {
+        // })
+
+        // INSERT A PROMISE HERE
+        // returns a promise when all the promises in the iterable have finished
+
+
+
+        console.log('GEO ARRAY : ', geoArray);
+        mapObject.clearMarkers();
+        mapObject.drawMarkers(geoArray, iconValue, objectArray);
+      })
     }
+  }
+
+    var contentFig = 'sam Gruse';
+    var homePic;
 
     // MAP FUNCTIONALITY
     var markers = [];
+    var fake = ['Sam', 'dave', 'hilda']
     var mapObject = {
-      drawMarkers: function(geoArray, iconValue) {
+      drawMarkers: function(geoArray, iconValue, objectArray) {
         for (var i = 0; i < geoArray.length; i++) {
+
+          var setContent = '<div><img class="popPic" src=' + objectArray[i].pics[0] + ' /></div>';
+
           var infowindow = new google.maps.InfoWindow({
-            // content: '<p>Marker Location: ' + marker.getPosition() + '</p>'
-            content: 'yo sam'
-            // position: marker.position
+            // content: setContent
+            content: setContent
           });
+
           var marker = new google.maps.Marker({
             position: geoArray[i],
-            title: 'home',
+            title: objectArray[i].address,
             icon: iconValue
           });
-          marker.addListener('click', function() {
-            infowindow.open(map.googleMap, marker)
-          })
+
+          (function(marker, infowindow) {
+            marker.addListener('click', function() {
+              infowindow.open(map.googleMap, marker)
+            })
+          })(marker, infowindow);
+
           markers.push(marker);
         }
         mapObject.setMapOnAll(map.googleMap);
@@ -106,16 +129,16 @@ angular.module('MapModule', ['AjaxService'])
 
 
     vm.showSideCompleted = function(clickedValue, iconValue){
-      console.log('SHOW SIDE ICON WITH : ', iconValue);
       vm.clickedAddress = [];
       var icon;
       for (var key in data) {
         var obj = data[key];
         if(obj.status === clickedValue) {
           vm.clickedAddress.push(obj);
+          // vm.clickedPics.push(obj.pics[0]);
         }
       }
-      geoFunc(vm.clickedAddress, iconValue)
+      geoFunc(vm.clickedAddress, iconValue, function(){});
     }
 
   }])
