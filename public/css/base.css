@@ -239,6 +239,11 @@
 .mapPageSection {
   display: flex; }
 
+#map {
+  width: 70%;
+  height: 630px;
+  border: none; }
+
 .mapImg {
   background: url("../media/mapbg.jpg") no-repeat center center;
   -webkit-background-size: cover;
