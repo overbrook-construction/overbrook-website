@@ -1,22 +1,13 @@
 <div class="galleryImg">
   <nav-directive></nav-directive>
   <section class="galleryInfoMasterSection" ng-init="infoCtrl.getData(cb); infoCtrl.singleHouseDataLoader(infoCtrl.idUrl)">
-    <!-- <section class="galleryInfoMasterSection" ng-init="infoCtrl.singleHouseDataLoader({{idUrl}})"> -->
-
-  <section class="infoContainer">
-    <!-- left half -->
-    <div class="infoImageContainer">
-      <!-- main image -->
-      <!-- <img src="{{infoCtrl.singleHomeData.frontPic}}" class="infoMainImage"> -->
-      <img src="{{infoCtrl.frontPicture[0]}}" class="infoMainImage">
-
-      <!-- thumbnail slider container -->
-      <div class="infoSliderContainer">
-        <!-- repeated image slider -->
-        <img ng-repeat="(key, value) in infoCtrl.singleHomeData.pics" src="{{value}}" class="infoSliderImage" ng-click="infoCtrl.singleHomeData.changePic(key, value)">
-
+    <section class="infoContainer">
+      <div class="infoImageContainer">
+        <img src="{{infoCtrl.frontPicture[0]}}" class="infoMainImage">
+          <div class="infoSliderContainer">
+            <img ng-repeat="(key, value) in infoCtrl.singleHomeData.pics" src="{{value}}" class="infoSliderImage" ng-click="infoCtrl.singleHomeData.changePic(key, value)">
+          </div>
       </div>
-
     </div>
 
 
@@ -48,5 +39,4 @@
 </section>
 
 </section>
-
 </div>
