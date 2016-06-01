@@ -2,6 +2,10 @@
   "name": "overbrook-website",
   "version": "1.0.0",
   "description": "A website for a residential home building company. Featuring the Goggle Maps API to show houses on a google map interface.",
+  "engines": {
+    "node": "4.3.1",
+    "npm": "3.9.3"
+  },
   "main": "client-server.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
