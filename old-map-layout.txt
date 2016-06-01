@@ -136,3 +136,34 @@ OLD INFO PAGE
     </section>
 
   </div>
+
+
+
+
+
+
+
+
+
+OLD GEOCODE FUNCTIONALITY BEFORE promises
+
+ver r geoFunc = function(objectArray, iconValue) {
+  for (var i = 0; i < objectArray.length; i++) {
+    var geocoder = new google.maps.Geocoder();
+    var geoArray = [];
+    geocoder.geocode({'address': objectArray[i].address}, function(results, status) {
+      results.forEach(function(obj, i) {
+        geoArray[i] = obj.geometry.location;
+      })
+
+      // INSERT A PROMISE HERE
+      // returns a promise when all the promises in the iterable have finished
+
+
+
+
+      mapObject.clearMarkers();
+      mapObject.drawMarkers(geoArray, iconValue, objectArray);
+    })
+  }
+}

@@ -321,6 +321,10 @@
   font-family: 'Tinos', serif;
   margin: 0px 0px 0px 5px; }
 
+.popPic {
+  max-width: 100px;
+  height: 100px; }
+
 .footer {
   position: fixed;
   right: 0;
