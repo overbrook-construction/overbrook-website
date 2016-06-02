@@ -6,6 +6,7 @@ var AWS = require('aws-sdk');
 var User = require(__dirname + '/../models/user');
 var basicHTTP = require(__dirname + '/../lib/basic_http')
 var jwtAuth = require(__dirname + '/../lib/jwt_auth');
+var House = require(__dirname + '/../models/house-models');
 
 var fs = require('fs'),
     S3FS = require('s3fs'),
@@ -14,9 +15,6 @@ var fs = require('fs'),
       secretAccessKe: process.env.AWS_SECRET_ACCESS_KEY
     })
 
-var House = require(__dirname + '/../models/house-models');
-
-// FOR POSTING TO MLAB
 module.exports = (apiRouter) => {
   apiRouter.route('/userLogin')
   .get(basicHTTP, (req, res) => {
@@ -66,57 +64,48 @@ module.exports = (apiRouter) => {
   })
 
   apiRouter.route('/addHomes/:id')
-    .put((req, res) => {
-      console.log('ADD HOMES PUT ROUTE HIT WITH : ', req.body);
-      House.findByIdAndUpdate({_id: req.params.id}, req.body, (err, person) => {
-        if (err) throw err;
-        res.json(req.body);
+  .put((req, res) => {
+    console.log('ADD HOMES PUT ROUTE HIT WITH : ', req.body);
+    House.findByIdAndUpdate({_id: req.params.id}, req.body, (err, person) => {
+      if (err) throw err;
+      res.json(req.body);
+    })
+  })
+  .delete((req, res) => {
+    console.log('BACKEND HIT WITH : ', req.params.id);
+    House.findById(req.params.id, (err, house) => {
+      if (err) throw err;
+      house.remove((err, house) => {
+        res.json(house);
       })
     })
-    .delete((req, res) => {
-      console.log('BACKEND HIT WITH : ', req.params.id);
-      House.findById(req.params.id, (err, house) => {
-        if (err) throw err;
-          house.remove((err, house) => {
-            res.json(house);
-          })
-      })
-    })
+  })
 
   apiRouter.route('/addPics')
-    .post((req, res) => {
-      var body = [];
-      req.on('data', function(chunk) {
-        body.push(chunk)
-      }).on('end', function() {
-        console.log('JSON STRINGIFY BODY : ', JSON.stringify(body));
-        body = Buffer.concat(body).toString();
-        console.log('BODY IS : ', body);
+  .post((req, res) => {
+    var body = [];
+    req.on('data', function(chunk) {
+      body.push(chunk)
+    }).on('end', function() {
+      console.log('JSON STRINGIFY BODY : ', JSON.stringify(body));
+      body = Buffer.concat(body).toString();
+      console.log('BODY IS : ', body);
 
 
-            var s3 = new AWS.S3();
-            var params = {
-              Bucket: 'overbrook-images',
-              // Key: process.env.AWS_ACCESS_KEY_ID,
-              Key: 'h2432/testObjec',
-              ACL: 'public-read-write',
-              Body: JSON.stringify(body)
-            }
+      var s3 = new AWS.S3();
+      var params = {
+        Bucket: 'overbrook-images',
+        // Key: process.env.AWS_ACCESS_KEY_ID,
+        Key: 'h2432/testObjec',
+        ACL: 'public-read-write',
+        Body: JSON.stringify(body)
+      }
 
-            s3.putObject(params, function(err, data) {
-              if (err) console.log(err, err.stack);
-              else     console.log('POSTING TO S3 WITH THIS DATA', data);
-              res.json(data);
-            });
-
-
-
-
-
-
-
-      })
-
+      s3.putObject(params, function(err, data) {
+        if (err) console.log(err, err.stack);
+        else     console.log('POSTING TO S3 WITH THIS DATA', data);
+        res.json(data);
+      });
     })
-
+  })
 }
