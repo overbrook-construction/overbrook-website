@@ -2,7 +2,7 @@
 
 angular.module('ContactModule', [])
 .controller('contactController', ['$http', function($http) {
-  var emailRoute = 'http://overbrook-construction.herokuapp.com/email'
+  var emailRoute = 'https://overbrook-construction.herokuapp.com/email'
 
 
   var emailForm = document.getElementsByName('emailForm')[0];

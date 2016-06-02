@@ -1,7 +1,7 @@
 module.exports = function(app) {
   app.factory('AuthService', ['$http', '$window', function($http, $window) {
     var token;
-    var url = 'http://overbrook-construction.herokuapp.com';
+    var url = 'https://overbrook-construction.herokuapp.com';
     var auth = {
       createUser(user, cb) {
         cb || function() {};

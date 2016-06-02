@@ -31302,7 +31302,7 @@
 	// RETRIEVING DATA FROM THE MLAB DATA BASE THIS IS THE NEW VERSION
 	ajaxService.factory('ajax', ['$http', '$window', function($http, $window) {
 
-	  var adminRoute = 'http://overbrook-construction.herokuapp.com/addHomes';
+	  var adminRoute = 'https://overbrook-construction.herokuapp.com/addHomes';
 	  // this.getHouseData = function() {
 	  //   console.log('GET REQUEST HAS BEEN RECEIVED');
 	  //   $http.get(adminRoute)
@@ -33374,7 +33374,7 @@
 
 	angular.module('ContactModule', [])
 	.controller('contactController', ['$http', function($http) {
-	  var emailRoute = 'http://overbrook-construction.herokuapp.com/email'
+	  var emailRoute = 'https://overbrook-construction.herokuapp.com/email'
 
 
 	  var emailForm = document.getElementsByName('emailForm')[0];
@@ -33428,12 +33428,12 @@
 	    var vm = this;
 
 	    var token;
-	    var adminRoute = 'http://overbrook-construction.herokuapp.com/addHomes';
-	    var addUser = 'http://overbrook-construction.herokuapp.com/addUser';
+	    var adminRoute = 'https://overbrook-construction.herokuapp.com/addHomes';
+	    var addUser = 'https://overbrook-construction.herokuapp.com/addUser';
 
-	    var getUser = 'http://overbrook-construction.herokuapp.com/userLogin';
+	    var getUser = 'https://overbrook-construction.herokuapp.com/userLogin';
 
-	    var picRoute = 'http://overbrook-construction.herokuapp.com/addPics';
+	    var picRoute = 'https://overbrook-construction.herokuapp.com/addPics';
 
 	    vm.admin = false;
 

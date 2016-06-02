@@ -8,12 +8,12 @@ angular.module('AdminModule', [])
     var vm = this;
 
     var token;
-    var adminRoute = 'http://overbrook-construction.herokuapp.com/addHomes';
-    var addUser = 'http://overbrook-construction.herokuapp.com/addUser';
+    var adminRoute = 'https://overbrook-construction.herokuapp.com/addHomes';
+    var addUser = 'https://overbrook-construction.herokuapp.com/addUser';
 
-    var getUser = 'http://overbrook-construction.herokuapp.com/userLogin';
+    var getUser = 'https://overbrook-construction.herokuapp.com/userLogin';
 
-    var picRoute = 'http://overbrook-construction.herokuapp.com/addPics';
+    var picRoute = 'https://overbrook-construction.herokuapp.com/addPics';
 
     vm.admin = false;
 
