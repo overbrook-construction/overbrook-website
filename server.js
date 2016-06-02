@@ -7,7 +7,7 @@ var bodyParser = require('body-parser');
 var mongoose = require('mongoose');
 var mongoURI = process.env.MONGOLAB_URI;
 
-require('dotenv').config();
+//require('dotenv').config();
 
 mongoose.connect(process.env.MONGOLAB_URI);
 
