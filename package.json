@@ -42,6 +42,7 @@
     "dotenv": "^2.0.0",
     "dropzone": "^4.3.0",
     "express": "^4.13.4",
+    "foreman": "1.4.1",
     "formidable": "^1.0.17",
     "fs": "0.0.2",
     "jsonwebtoken": "^7.0.0",
