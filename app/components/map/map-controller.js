@@ -84,6 +84,7 @@ angular.module('MapModule', ['AjaxService'])
               // console.log(results[0].geometry.location);
               resolve(results[0].geometry.location);
             }
+
           })
 
         })

@@ -2,15 +2,12 @@
 var express = require('express');
 var app = express();
 var apiRouter = express.Router();
+var adminRouter = express.Router();
 var bodyParser = require('body-parser');
 var mongoose = require('mongoose');
 var mongoURI = process.env.MONGOLAB_URI;
-// var multer = require('multer');
-// var upload = multer()
-require('dotenv').config();
 
-// var multiparty = require('connect-multiparty'),
-//     multipartyMiddleware = multiparty();
+require('dotenv').config();
 
 mongoose.connect(process.env.MONGOLAB_URI);
 
@@ -25,9 +22,8 @@ app.use((req, res, next) => {
 });
 
 app.use(bodyParser.json());
-// app.use('/', multipartyMiddleware, apiRouter);
-// app.use('/', multer({dest:'./uploads/'}).single('singleInputFileName'), apiRouter);
 app.use('/', apiRouter);
+
 
 
 app.listen(process.env.PORT || 3000, function() {
