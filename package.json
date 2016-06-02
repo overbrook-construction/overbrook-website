@@ -9,7 +9,9 @@
   "main": "client-server.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "start": "node realserver.js"
+    "start": "node realserver.js",
+    "postinstall": "./node_modules/gulp/bin/gulp",
+    "heroku-prebuild": "npm install"
   },
   "repository": {
     "type": "git",
