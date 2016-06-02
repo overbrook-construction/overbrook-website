@@ -32,7 +32,7 @@ var ajaxService = angular.module('AjaxService', []);
 // RETRIEVING DATA FROM THE MLAB DATA BASE THIS IS THE NEW VERSION
 ajaxService.factory('ajax', ['$http', '$window', function($http, $window) {
 
-  var adminRoute = 'http://localhost:3000/addHomes';
+  var adminRoute = 'http://overbrook-construction.herokuapp.com/addHomes';
   // this.getHouseData = function() {
   //   console.log('GET REQUEST HAS BEEN RECEIVED');
   //   $http.get(adminRoute)
