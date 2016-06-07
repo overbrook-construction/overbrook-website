@@ -63,7 +63,7 @@ angular.module('GalleryModule', ['AjaxService'])
     }
 
     vm.runSingleData = function(id) {
-      console.log('RUN SINLE DATA HIT FROM MAP CTRL WITH : ', id)
+      console.log('SEEING IF CHANGES MADE TO CLIENT SERVER ARE PERSISTING')
       vm.singleHouseDataLoader(id);
     }
 
