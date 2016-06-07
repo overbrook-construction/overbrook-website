@@ -63,7 +63,7 @@ angular.module('GalleryModule', ['AjaxService'])
     }
 
     vm.runSingleData = function(id) {
-      console.log('MAKING CHANGES TO CLIENT SERVER !!!!!!!!!!')
+      console.log('MOTHER MARY MOTHERLY MARY')
       vm.singleHouseDataLoader(id);
     }
 
